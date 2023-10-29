@@ -95,7 +95,7 @@
     
     <script>
         // SAMPLE LANG
-
+        // SAMPLE LANG RIN
         document.getElementById("searchButton").addEventListener("click", function () {
             // Hide the search box
             document.querySelector(".search-box").style.display = "none";
