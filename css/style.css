@@ -1,0 +1,1211 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 78px); /* Subtract the height of the navbar */
+    /*max-height: 50vh;*/
+    background-color: #2B65E2;
+}
+
+/* index.php */
+.parent {
+    height: 570px; 
+}
+
+.container {
+    position: relative;
+    width: 99%; 
+    height: calc(100vh - 78px); /* Subtract the height of the navbar */
+    margin: 0 auto;
+    padding: 0;
+    background-color: white;
+    border-radius: 15px;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide any overflow beyond the container */
+}
+
+.background-container {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/PESOLogo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.10;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    overflow-y: auto; /* Add vertical scroll when content overflows */
+    max-height: 100%; /* Set a maximum height to trigger scrolling */
+    z-index: 1;
+}
+
+/*index.php*/
+.content1 {
+    width: 100%;
+    overflow-y: auto;
+    max-height: 100%;
+    z-index: 1;
+}
+
+.search-results {
+    display: none;
+}
+
+/* Search Styles */
+.search-box1 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1300px;
+    padding: 20px;
+    background-color: white;
+}
+
+.search-wrapper1 {
+    position: relative;
+    display: flex;
+}
+
+.search-wrapper1 i {
+    position: absolute;
+    padding: 10px;
+    font-size: 24px;
+    background-color: transparent;
+    color: black;
+    border: none;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.search-box1 input[type="search"] {
+    padding: 12px 100px 12px 60px;
+    font-size: 17px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+.search-box1 input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+.search-box1 button[type="submit"] {
+    position: absolute;
+    top: 50%;
+    right: 0.5%;
+    transform: translateY(-50%);
+    padding: 11px 25px;
+    font-size: 16px;
+    background-color: #2B65E2;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* Grid container for filters and results */
+.flex-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    grid-gap: 20px; /* Gap between elements */
+    margin: 10px;
+    padding-top: 90px; /* Add padding to the top */
+}
+
+/* Filters Box Styles */
+.filters-box {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    height: 180px; /* Set a specific height in pixels */
+    width: 100%; /* Make it 100% wide to fill the container */
+}
+
+/* Responsive layout for tablets and larger screens */
+@media (min-width: 768px) {
+    .flex-container {
+        grid-template-columns: 20% 75%; /* Two columns on larger screens */
+    }
+}
+
+.job-result-item {
+    display: flex;
+    align-items: center; /* Vertically align content */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.job-result-item img {
+    margin-right: 20px; /* Add margin to the right of the image */
+    max-width: 90px; /* Limit the maximum width of the image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.job-result {
+    flex: 1; /* Allow content to take up remaining space */
+    display: flex; /* Make the content stack in a column */
+    flex-direction: column; /* Stack elements in a column */
+}
+
+/* Additional styling for other elements */
+.job-result-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.job-result-description {
+    color: #333;
+}
+
+.job-result-company {
+    color: #2B65E2;
+    margin-top: 10px;
+}
+
+
+/* Search Styles */
+.search-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 500px; /* Set a maximum width to avoid stretching on large screens */
+    padding: 20px; /* Add some padding for spacing */
+}
+
+.search-box h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+}
+
+.search-wrapper i {
+    position: absolute;
+    padding: 10px;
+    font-size: 24px;
+    background-color: transparent;
+    color: black;
+    border: none;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.search-box input[type="search"] {
+    padding: 12px 100px 12px 60px; /* Adjust padding for icon */
+    font-size: 17px;
+    width: 100%;
+    max-width: 100%; /* Ensure the input doesn't exceed container width */
+    border-radius: 12px;
+}
+
+/* Disable the clear (x) button in the search input */
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+.search-box button[type="submit"] {
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    transform: translateY(-50%);
+    padding: 11px 13px;
+    font-size: 16px;
+    background-color: #2B65E2;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* Media Queries for Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        width: 97%;
+    }
+
+    .search-box {
+        padding: 10px; /* Reduce padding on smaller screens */
+    }
+
+    .search-box h2 {
+        font-size: 16px; /* Decrease font size */
+    }
+
+    .search-box input[type="search"] {
+        font-size: 14px; /* Decrease font size */
+    }
+
+    .search-box button[type="submit"] {
+        padding: 10px 10px; /* Decrease padding */
+        font-size: 12px; /* Decrease font size */
+    }
+}
+
+@media (max-width: 368px) {
+    
+    .search-box h2 {
+        font-size: 14px; /* Decrease font size */
+    }
+
+    .search-box input[type="search"] {
+        font-size: 12px; /* Decrease font size */
+        padding: 12px 65px 12px 45px; /* Adjust padding for icon */
+    }
+
+    .search-wrapper i {
+        left: 2px;
+    }
+
+    .search-box button[type="submit"] {
+        right: 4px;
+    }
+}
+
+@media (max-width: 260px) {
+    .container {
+        margin-top: 7px;
+    }
+}
+
+@media (max-width: 210px) {
+    .container {
+        margin-top: 25px;
+    }
+}
+
+/* login.php */
+.left-section {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    text-align: center;
+    margin: auto;
+}
+
+.left-section h1 {
+    text-align: center;
+    font-size: 50px;
+    color: #45b1e8;
+    margin: 10px;
+    z-index: 1;
+}
+
+.input-box {
+    position: relative;
+    text-align: center;
+}
+
+/*.input-box input  {
+    padding: 10px 42px 10px 42px;
+    font-size: 16px;
+    border-radius: 12px;
+    margin-top: 15px;
+}*/
+
+/* Style the input icons */
+.input-icon {
+    position: absolute;
+    font-size: 20px;
+    color: #45b1e8;
+    margin-left: 13px;
+    margin-top: 25px;
+    z-index: 1;
+}
+
+/* Apply styles to input elements with type="text" and type="password" */
+.input-box input[type="text"],
+.input-box input[type="email"],
+.input-box input[type="password"] {
+    padding: 10px 42px 10px 42px;
+    font-size: 16px;
+    border-radius: 12px;
+    margin-top: 15px;
+    border: 1px solid black;
+    width: 55vh;
+    height: 40px; 
+    position: relative; /* Add relative positioning to the input */
+    outline: none; /* Remove the default input focus outline */
+}
+
+.input-box input[type="password"] {
+    padding: 10px 42px 10px 42px;
+    font-size: 16px;
+    border-radius: 12px;
+    margin-top: 15px;
+    vertical-align: top; /* Add this line to set vertical alignment to top */
+}
+
+.error {
+    display: block;
+    color: red;
+    font-size: 0.8em; /* Adjust the font size as needed */
+    text-align: left; /* Center-align the error message */
+    padding-left: 10px;
+}
+
+.left-section a.forgot-password {
+    margin-right: 8px; 
+    color: black;
+    text-decoration: none;
+} 
+
+.left-section a.forgot-password:hover {
+    border-bottom: 1px solid black;
+} 
+
+.link {
+    color: #45b1e8;
+    text-decoration: none;
+}
+
+.input-box button {
+    width: 70%;
+    height: 50px;
+    margin: 22px;
+    padding: 2px 6px 2px 6px;
+    font-size: 22px;
+    background-color: #45b1e8;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+    border-radius: 12px;
+   
+}
+
+.vertical-line {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 98.5%;
+    background-color: gray;
+}
+
+.right-section {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-section img {
+    max-height: 100%;
+    max-width: 98%;
+    border-radius: 8px;
+    border: 1px solid gray;
+    margin: auto;
+}
+
+.image-top,
+.image-bottom {
+    text-align: center;
+    width: 100%; /* Ensure images take full width */
+}
+
+.image-top img {
+    height: 150px;
+    max-height: 25%; /* Set the max-height for the top image to 25% */
+    width: 400px;
+}
+
+.image-bottom img {
+    height: 410px;
+    width: 900px;
+    max-height: 75%; /* Set the max-height for the bottom image to 75% */
+}
+
+/* Media Queries for Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Further reduce the font size for very small screens */
+    }
+
+    .left-section {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .left-section h1 {
+        font-size: 40px;
+    }
+
+    /* Adjust input-box styles */
+    .input-box {
+        width: 95%; /* Set the input box width to 100% to prevent shrinking */
+        max-width: 350px;
+        margin: 0 auto; /* Center the input box */
+    }
+
+    .input-box input[type="text"],
+    .input-box input[type="email"],
+    .input-box input[type="password"] {
+        width: 100%; 
+        font-size: 12px; 
+    }
+
+    .input-box button {
+        width: 60%;
+        font-size: 18px;
+    }
+
+    .right-section img {
+        max-width: 93%;
+    }
+}
+
+@media (max-width: 450px) {
+    /* Hide the vertical-line and right-section on smaller screens */
+    .vertical-line,
+    .right-section {
+        display: none;
+    }
+
+    /* Adjust the styles for the left-section on smaller screens */
+    .left-section {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    /* Adjust input-box styles */
+    .input-box {
+        max-width: 250px;
+        margin: 0 auto; /* Center the input box */
+    }
+
+    .input-box input[type="text"],
+    .input-box input[type="email"],
+    .input-box input[type="password"] {
+        width: 100%; /* Set the input width to 100% to prevent shrinking */
+        max-width: none; /* Remove max-width to allow full width */
+    }
+}
+
+/* forgot password.php */
+.forgotlink {
+    color: black;
+    text-decoration: none;
+}
+
+.forgotButtons {
+    position: relative; /* Add relative positioning to the input */
+    width: 300px;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+.code-inputs input[type="text"] {
+    background-color: transparent;
+    width: 10%;
+    padding: 5px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid black;
+    outline: none;
+    
+}
+
+.code-inputs input:focus {
+    border-bottom: 4px solid black;
+}
+
+.inputs {
+    margin-top: 25px;
+}
+
+@media (max-width: 610px) {
+    .forgotButtons {
+        width: 260px; /* Adjust the width for better responsiveness */
+        margin-left: -10px;
+    }
+
+    .code-inputs input[type="text"] {
+        width: 20%; /* Adjust the input width for better display on mobile */
+        font-size: 18px; /* Adjust font size */
+    }
+}
+
+/*applicantHome.php*/
+
+.form-container {
+    width: 100%;
+    height: calc(100vh - 90px); /* Subtract the height of the navbar */
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 14px;
+    margin: 10px;
+    z-index: 1;
+    overflow: auto; /* Set overflow to auto to enable scrolling */
+    display: none; /* Hide the forms by default */
+}
+
+.active {
+    display: block; /* Show the active form */
+}
+
+.profile-info {
+    margin-top: 4%;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.profile-info-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.profile-info-item i {
+    padding: 0 20px;
+}
+
+/* Create a flex container for the buttons */
+.butcon {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Submit Button */
+input[type="button"],
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    /* Adjust the width and padding to fit within the available space */
+    width: 135px; /* Let the content determine the width */
+    padding: 10px 12px; /* Adjust padding for better appearance */
+    margin-right: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 101;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal h2, h3 {
+    margin-bottom: 20px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 0 auto; /* Center horizontally */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    position: relative; /* Make sure it's relative to the modal */
+    top: 50%; /* Move the modal down by 50% of its own height */
+    transform: translateY(-50%); /* Move the modal up by 50% of its own height */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style for the input fields and labels */
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333; /* Label text color */
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="password"],
+.form-field input[type="number"],
+.form-field textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none; /* Remove the default input focus outline */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus, 
+input[type="password"]:focus,
+textarea#feedback-text:focus {
+    border-color: #007BFF; /* Change border color on input focus */
+}
+
+/* Style the button */
+.butcon button {
+    background-color: #4CAF50;
+    color: white;
+    width: 100px;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.butcon button:hover {
+    background-color: #45a049; /* Change background color on hover */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4%;
+}
+
+table td, th {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/*applicantInfo.php*/
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    /*text-transform: uppercase*/
+}
+
+.form-container input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Style the last row*/
+.form-container table tr:last-child td {
+    border: none;
+}
+
+
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#unemployed,
+#employedOpt input[type="radio"],
+#unemployedOpt input[type="radio"] {
+    margin-left: 40px;
+    margin-bottom: 15px;
+}
+
+#yes1, #no1, #no2, #no3 {
+    margin-left: 25px;
+}
+
+#yes2, #yes3 {
+    margin-left: 66px;
+}
+
+#yes3 {
+    margin-left: 82px;
+}
+
+#looking, #when, #id4ps, #country, #others4, #others1 {
+    background-color: transparent;
+    border: none; /* Remove all borders */
+    border-bottom: 1px solid black; /* Add a bottom border */
+    padding: 8px; /* Add some padding for spacing */
+    width: 25%;
+    border-radius: 0px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    box-sizing: border-box;
+}
+
+.custom-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    padding: 20px;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #888;
+}
+
+#popup-close {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    /* Adjust the width and padding to fit within the available space */
+    width: 90px; /* Let the content determine the width */
+    padding: 8px 8px; /* Adjust padding for better appearance */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 768px) {
+/* Adjust form container width and remove borders for smaller screens */
+body {
+font-size: 12px;
+}
+
+.form-container {
+width: 100%;
+border: none;
+}
+
+/* Make table cells display as block elements for smaller screens */
+/*table td {
+display: block;
+width: 100%;
+box-sizing: border-box;
+}*/
+
+/* Adjust button width for smaller screens */
+input[type="button"],
+input[type="submit"] {
+width: 100%;
+}
+
+/* Add some margin to buttons for smaller screens */
+.butcon {
+margin-top: 10px;
+}
+}
+
+
+
+/*sidebars*/
+
+.sidebar {
+      background-color: transparent;
+      width: 300px;
+      height: 100%; /* Set the sidebar height to 100% of the viewport */
+      padding: 16px;
+      color: black;
+      z-index: 2;
+      border-radius: 14px 0 0 14px;
+      border-right: 2px solid black;
+      overflow-y: auto; /* Allow horizontal overflow */
+      -ms-overflow-style: none; /* Hide scrollbar for IE, Edge, and Firefox */
+      scrollbar-width: none; /* Firefox */
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .sidebar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-top: 15px;
+      font-size: 17px;
+    }
+
+    .sidebar-item a {
+      display: flex;
+      align-items: center;
+      color: black;
+      text-decoration: none;
+      transition: background-color 0.3s; /* Add transition for smooth hover effect */
+      padding: 5px; /* Add padding to create space for hover color */
+    }
+
+    .sidebar-item a:hover::before,
+    .selected-item::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%; /* Center the pseudo-element horizontally */
+      transform: translateX(-50%); /* Center the pseudo-element horizontally */
+      width: 100%;
+      height: 3px;
+      background-color: black;
+    }
+
+    .sidebar-item i {
+      margin-right: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .side-header {
+      margin-top: 25px;
+      margin-bottom: 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .side-header img {
+      width: 50%;
+      margin-bottom: 10px;
+      border-radius: 50%;
+    }
+
+    .selected-item {
+      border-bottom: 3px solid black; /* Adjust the styling as needed */
+      width: 100%;
+    }
+
+    .sidebar.hide {
+      width: 80px; 
+      min-width: 65px; /* Set a minimum width for the hidden sidebar */
+      overflow: visible;
+    }
+
+    .sidebar.hide .sidebar-item i {
+      padding-left: 2px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar.hide .sidebar-item {
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Reset the .icon-text element's styles when the sidebar is visible */
+    .sidebar .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding-left: 5px; /* Adjust as needed */
+    }
+
+
+    .sidebar.hide .side-header img {
+      width: 100%;
+      margin-bottom: 10px;
+      border-radius: 50%;
+    }
+
+    /* Add a button to toggle the sidebar */
+    .toggle-button {
+      display: none;
+    }
+
+    /* Style the button */
+    .toggle-button-label {
+      background-color: white;
+      color: black;
+      border: none;
+      border-radius: 0 14px 14px 0;
+      cursor: pointer;
+      padding: 10px 15px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    /* Hide icon-text elements in the hidden sidebar by default */
+    .sidebar.hide .icon-text {
+      display: none;
+      background-color: lightblue;
+      z-index: 10;
+      overflow: visible;
+    }
+
+      /* Show icon-text elements on hover */
+    .sidebar.hide .sidebar-item:hover .icon-text {
+      display: block;
+      white-space: nowrap;
+    }
+
+      /* Show icon-text elements on hover */
+      .sidebar.hide .sidebar-item:hover {
+      display: block;
+      white-space: nowrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+        /* Media query for screens smaller than 768px */
+    @media (max-width: 768px) {
+      
+      .sidebar {
+        font-size: 12px; /* Decrease the font size for smaller screens */
+            
+      }
+
+      .sidebar-item {
+        flex-wrap: wrap;
+        font-size: 12px; /* Decrease the font size for smaller screens */
+        font-weight: bold;
+      }
+    }
+
+    /*applicantReq.php*/
+
+    /*#emp-form input[type="text"],
+    #emp-form input[type="email"],
+    #emp-form select, 
+    #emp-form textarea  {
+        padding: 8px 25px;
+        font-size: 15px;
+        border-radius: 10px;
+        margin: 13px;
+    }
+
+    #emp-form .butcon {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    #emp-form input[type="text"],
+    #emp-form input[type="email"],
+    #emp-form select {
+        border: 1px solid black;
+        width: 65vh;
+        height: 6.5vh;
+        position: relative;
+    }
+
+    #emp-form textarea {
+        border: 1px solid black;
+        position: relative;
+        width: 95%;
+    }
+
+    #emp-form label {
+        font-weight: bold;
+    }*/
+
+    #emp-form {
+        display: block;
+    }
+
+    .reqDiv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Add these styles to your CSS */
+    .requirements-box {
+        display: flex;
+        max-width: 600px;
+        min-width: 100px;
+        border: 4px solid pink;
+        margin-top: 20px;
+        padding: 10px;
+        padding-left: 30px;
+        z-index: 100;
+    }
+
+    .requirements li {
+        padding: 4px; /* Adjust the padding as needed (top and bottom padding, left and right padding) */
+    }
+
+    .requirements ul {
+        padding-left: 60px;
+    }
+
+    #emp-form h2, .direction {
+        text-align: center;
+    }
+
+    .direction {
+        color: #007BFF;
+    }
+
+    h4 {
+        margin-top: 10px;
+    }
+
+    /*employerHome.php*/
+
+    .active {
+        display: block; /* Show the active form */
+    }
+
+    .dashboard {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 35px;
+    }
+
+    .stat-card {
+        flex-basis: calc(25% - 25px);
+        background-color: skyblue;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px;
+        text-align: center;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .fa-icon {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .stat-value {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .stat-label, .popup-content p {
+        font-size: 16px;
+        color: black;
+    }
+
+    
+    /**adminHome.php/
+/* Style for the "Edit" button */
+.admin-table .edit-button {
+    padding: 5px 10px;
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none;
+    cursor: pointer;
+}
+
+.admin-table .edit-button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+/* Style for the "Delete" button */
+.admin-table .delete-button {
+    padding: 5px 10px;
+    background-color: #ff0000; /* Red background color */
+    color: #fff; /* White text color */
+    border: none;
+    cursor: pointer;
+}
+
+.admin-table .delete-button:hover {
+    background-color: #cc0000; /* Darker red color on hover */
+}
+
+/* Add this CSS class definition */
+.hidden-success-message {
+    display: none;
+}
+
+/* Define a class to show the success message */
+.show-success-message {
+    color: green;
+    display: block;
+}
+
+
