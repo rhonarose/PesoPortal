@@ -94,6 +94,8 @@
     </div>
     
     <script>
+        // SAMPLE LANG
+
         document.getElementById("searchButton").addEventListener("click", function () {
             // Hide the search box
             document.querySelector(".search-box").style.display = "none";
