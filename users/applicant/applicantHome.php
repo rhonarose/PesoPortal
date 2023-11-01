@@ -1,5 +1,11 @@
 <?php
+include '../../config/dbconnect.php';
 session_start(); // Start the session
+
+if(isset($_SESSION['applicant_id'])){
+    $applicant_id = $_SESSION['applicant_id'];
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,18 +31,25 @@ session_start(); // Start the session
                 <!-- My Profile Section -->
                 <h2>MY PROFILE</h2>
 
+                <?php          
+                    $select_profile = $conn->prepare("SELECT * FROM `personal_info` WHERE applicant_id = ?");
+                    $select_profile->execute([$applicant_id]);
+                    if($select_profile->rowCount() > 0){
+                    $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+                ?>
+
                 <div class="profile-info">
                     <div class="profile-info-item">
-                        <h2>RHONA ROSE C. CORTEZ</h2>
+                        <h2><?= $fetch_profile["first_name"]; ?> <?= $fetch_profile["middle_name"]; ?> <?= $fetch_profile["surname"]; ?></h2>
                     </div>
                     <div class="profile-info-item">
-                        <i class="fas fa-phone"></i> 0912-345-6789
+                        <i class="fas fa-phone"></i><?= $fetch_profile["cellphone_number"]; ?>
                     </div>
                     <div class="profile-info-item">
-                        <i class="fas fa-envelope"></i> rrcc@gmail.com
+                        <i class="fas fa-envelope"></i> <?= $fetch_profile["email"]; ?>
                     </div>
                     <div class="profile-info-item">
-                        <i class="fas fa-map-marker-alt"></i> San Jose Del Monte Bulacan
+                        <i class="fas fa-map-marker-alt"></i> <?= $fetch_profile["municipality_city"]; ?>
                     </div>
                     <div class="profile-info-item">
                         <i class="fas fa-cogs"></i> Web Development, Design
@@ -45,6 +58,14 @@ session_start(); // Start the session
                         <i class="fas fa-file-pdf"></i> <a href="path_to_resume.pdf" target="_blank">View Resume</a>
                     </div>
                 </div>
+
+                <?php
+                    }else{
+                ?>
+                    <p>please login or register first!</p>
+                <?php
+                    }
+                ?>    
 
                 <div class="butcon">
                     <input type="button" value="EDIT PROFILE" onclick="openEditProfileModal()">
@@ -56,9 +77,13 @@ session_start(); // Start the session
                     <span class="close" onclick="closeEditProfileModal()">&times;</span>
                     <h2>Edit Profile</h2>
                     <form>
-                        <div class="form-field">
-                            <label for="editedName">Name:</label>
-                            <input type="text" id="editedName" placeholder="Enter your name">
+                        <div class="form-field" style=" display:flex " >
+                            <label for="editedName">First Name:</label>
+                            <input type="text" id="editedName" placeholder="Enter your First name">
+                            <label for="editedName">Middle Name:</label>
+                            <input type="text" id="editedName" placeholder="Enter your Middle name">
+                            <label for="editedName">Surname:</label>
+                            <input type="text" id="editedName" placeholder="Enter your Surname">
                         </div>
                         <div class="form-field">
                             <label for="editedPhone">Phone:</label>
@@ -76,6 +101,10 @@ session_start(); // Start the session
                             <label for="editedSkill">Skill:</label>
                             <input type="text" id="editedSkill" placeholder="Enter your skill">
                         </div>
+                        <div class="form-field">
+                            <label for="Resume">Resume:</label>
+                            <input type="file" id="editedSkill" placeholder="Enter your skill">
+                        </div>
                         <!-- Add other fields as needed -->
                         <div class="butcon">
                             <button type="button" onclick="saveEditedProfile()">Save</button>
@@ -83,7 +112,6 @@ session_start(); // Start the session
                     </form>
                 </div>
             </div>
-
 
         
             <div class="form-container" id="referral">
@@ -204,15 +232,6 @@ session_start(); // Start the session
         function openEditProfileModal() {
             const modal = document.getElementById('editProfileModal');
             modal.style.display = 'block';
-
-            // Populate the modal fields with the current profile data for editing
-            const nameElement = document.querySelector('.profile-info-item h2');
-            const phoneElement = document.querySelector('.profile-info-item i.fa-phone');
-            const emailElement = document.querySelector('.profile-info-item i.fa-envelope');
-
-            document.getElementById('editedName').value = nameElement.textContent;
-            document.getElementById('editedPhone').value = phoneElement.textContent;
-            document.getElementById('editedEmail').value = emailElement.textContent;
         }
 
         function closeEditProfileModal() {
@@ -240,8 +259,7 @@ session_start(); // Start the session
 
             // You can also send the edited data to the server for saving (similar to previous examples)
         }
-
-
     </script>
+
 </body>
 </html>
