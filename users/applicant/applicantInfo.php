@@ -341,12 +341,14 @@ session_start(); // Start the session
                                 <label for="prefoccu1">1.</label>
                             </td>
                             <td>
-                                <input type="text" id="prefoccu1" name="prefoccu1" placeholder="PREFERRED OCCUPATION">
+                                <input type="text" id="prefoccu1" name="prefoccu1" placeholder="PREFERRED OCCUPATION" required>
                             </td>
                             <td colspan="2">
+                                <input type="radio" id="prefloclocal" name="prefloclocal" value="Local" required>   
                                 <label for="prefloclocal">LOCAL, specify cities/municipalities:</label>
                             </td>
-                            <td colspan="2">   
+                            <td colspan="2"> 
+                                <input type="radio" id="preflocover" name="preflocover" value="Overseas" required>   
                                 <label for="preflocover">OVERSEAS, specify countries:</label>
                             </td>
                         </tr>
@@ -361,13 +363,13 @@ session_start(); // Start the session
                                 <label for="prefloclocal1">1.</label>
                             </td>
                             <td>
-                                <input type="text" id="prefloclocal1" name="prefloclocal1" class="local" placeholder="LOCAL">
+                                <input type="text" id="prefloclocal1" name="prefloclocal1" placeholder="LOCAL" required>
                             </td>
                             <td>
                                 <label for="preflocover1">1.</label>
                             </td>
                             <td>
-                                <input type="text" id="preflocover1" name="preflocover1" class="overseas" placeholder="OVERSEAS">
+                                <input type="text" id="preflocover1" name="preflocover1" placeholder="OVERSEAS" required>
                             </td>
                         </tr>
                         <tr>
@@ -381,13 +383,13 @@ session_start(); // Start the session
                                 <label for="prefloclocal2">2.</label>
                             </td>
                             <td>
-                                <input type="text" id="prefloclocal2" name="prefloclocal2" class="local" placeholder="LOCAL">
+                                <input type="text" id="prefloclocal2" name="prefloclocal2" placeholder="LOCAL">
                             </td>
                             <td>
                                 <label for="preflocover2">2.</label>
                             </td>
                             <td>
-                                <input type="text" id="preflocover2" name="preflocover2"  class="overseas" placeholder="OVERSEAS">
+                                <input type="text" id="preflocover2" name="preflocover2" placeholder="OVERSEAS">
                             </td>
                         </tr>
                         <tr>
@@ -401,13 +403,13 @@ session_start(); // Start the session
                                 <label for="prefloclocal3">3.</label>
                             </td>
                             <td>
-                                <input type="text" id="prefloclocal3" name="prefloclocal3" class="local" placeholder="LOCAL">
+                                <input type="text" id="prefloclocal3" name="prefloclocal3" placeholder="LOCAL">
                             </td>
                             <td>
                                 <label for="preflocover3">3.</label>
                             </td>
                             <td>
-                                <input type="text" id="preflocover3" name="preflocover3" class="overseas" placeholder="OVERSEAS">
+                                <input type="text" id="preflocover3" name="preflocover3" placeholder="OVERSEAS">
                             </td>
                         </tr>
                         <tr>
@@ -1522,6 +1524,11 @@ session_start(); // Start the session
                         formData[checkbox.name] = checkbox.checked;
                     });
                 } else if (form.getAttribute('data-form-type') === 'skill') {
+                    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                    checkboxes.forEach(checkbox => {
+                        formData[checkbox.name] = checkbox.checked;
+                    });
+                } else if (form.getAttribute('data-form-type') === 'preference') {
                     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                     checkboxes.forEach(checkbox => {
                         formData[checkbox.name] = checkbox.checked;

@@ -151,9 +151,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             isset($jsonData['prefoccu2']) &&
                             isset($jsonData['prefoccu3']) &&
                             isset($jsonData['prefoccu4']) &&
+                            isset($jsonData['prefloclocal']) &&
                             isset($jsonData['prefloclocal1']) &&
                             isset($jsonData['prefloclocal2']) &&
                             isset($jsonData['prefloclocal3']) &&
+                            isset($jsonData['preflocover']) &&
                             isset($jsonData['preflocover1']) &&
                             isset($jsonData['preflocover2']) &&
                             isset($jsonData['preflocover3']) &&
@@ -165,9 +167,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $preferred_occupation2 = filter_var($jsonData['prefoccu2'], FILTER_SANITIZE_STRING);
                             $preferred_occupation3 = filter_var($jsonData['prefoccu3'], FILTER_SANITIZE_STRING);
                             $preferred_occupation4 = filter_var($jsonData['prefoccu4'], FILTER_SANITIZE_STRING);
+                            $preferred_location1 = filter_var($jsonData['prefloclocal'], FILTER_SANITIZE_STRING);
                             $local_location1 = filter_var($jsonData['prefloclocal1'], FILTER_SANITIZE_STRING);
                             $local_location2 = filter_var($jsonData['prefloclocal2'], FILTER_SANITIZE_STRING);
                             $local_location3 = filter_var($jsonData['prefloclocal3'], FILTER_SANITIZE_STRING);
+                            $preferred_location2 = filter_var($jsonData['preflocover'], FILTER_SANITIZE_STRING);
                             $overseas_location1 = filter_var($jsonData['preflocover1'], FILTER_SANITIZE_STRING);
                             $overseas_location2 = filter_var($jsonData['preflocover2'], FILTER_SANITIZE_STRING);
                             $overseas_location3 = filter_var($jsonData['preflocover3'], FILTER_SANITIZE_STRING);
@@ -177,8 +181,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
                             // Insert data into the preference table
                             // Prepare SQL statement
-                            $stmt = $conn->prepare("INSERT INTO preference (applicant_id, preferred_occupation1, preferred_occupation2, preferred_occupation3, preferred_occupation4, local_location1, local_location2, local_location3, overseas_location1, overseas_location2, overseas_location3, expected_salary, passport_number, passport_expiry_date) 
-                            VALUES (:applicant_id, :preferred_occupation1, :preferred_occupation2, :preferred_occupation3, :preferred_occupation4, :local_location1, :local_location2, :local_location3, :overseas_location1, :overseas_location2, :overseas_location3, :expected_salary, :passport_number, :passport_expiry_date)");
+                            $stmt = $conn->prepare("INSERT INTO preference (applicant_id, preferred_occupation1, preferred_occupation2, preferred_occupation3, preferred_occupation4, preferred_location1, local_location1, local_location2, local_location3, preferred_location2, overseas_location1, overseas_location2, overseas_location3, expected_salary, passport_number, passport_expiry_date) 
+                            VALUES (:applicant_id, :preferred_occupation1, :preferred_occupation2, :preferred_occupation3, :preferred_occupation4, :preferred_location1, :local_location1, :local_location2, :local_location3, :preferred_location2, :overseas_location1, :overseas_location2, :overseas_location3, :expected_salary, :passport_number, :passport_expiry_date)");
                             
                             
                             // Bind parameters
@@ -187,9 +191,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $stmt->bindParam(":preferred_occupation2", $preferred_occupation2);
                             $stmt->bindParam(":preferred_occupation3", $preferred_occupation3);
                             $stmt->bindParam(":preferred_occupation4", $preferred_occupation4);
+                            $stmt->bindParam(":preferred_location1", $preferred_location1);
                             $stmt->bindParam(":local_location1", $local_location1);
                             $stmt->bindParam(":local_location2", $local_location2);
                             $stmt->bindParam(":local_location3", $local_location3);
+                            $stmt->bindParam(":preferred_location2", $preferred_location2);
                             $stmt->bindParam(":overseas_location1", $overseas_location1);
                             $stmt->bindParam(":overseas_location2", $overseas_location2);
                             $stmt->bindParam(":overseas_location3", $overseas_location3);
