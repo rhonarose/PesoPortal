@@ -109,9 +109,9 @@ session_start(); // Start the session
                             <div class="form-field">
                                 <label for="newAdminPassword">Password:</label>
                                 <input type="password" id="newAdminPassword" name="adminpass" placeholder="Enter password" required>
-                                <a class="inputpass" onclick="togglePasswordVisibility('newAdminPassword', 'passicon7')" style="position: absolute; right: 15px; top: 66%; transform: translateY(-50%); cursor: pointer; font-size: 14px;">
-                                                <i class="fa fa-eye-slash" id="passicon7"></i>
-                                            </a>
+                                    <a class="inputpass" onclick="togglePasswordVisibility('newAdminPassword', 'passicon7')" style="position: absolute; right: 15px; top: 66%; transform: translateY(-50%); cursor: pointer; font-size: 14px;">
+                                        <i class="fa fa-eye-slash" id="passicon7"></i>
+                                    </a>
                             </div>
                         </div>
                      
@@ -167,6 +167,8 @@ session_start(); // Start the session
             <div class="form-container" id="applicant">
                 <!-- Eligibility Form -->
                 <h2>APPLICANTS</h2>
+
+                
                
             </div>
 
