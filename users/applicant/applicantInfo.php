@@ -24,7 +24,7 @@ session_start(); // Start the session
             <div class="form-container" id="personalInfoForm">
                 <!-- Personal Information Form -->
                 <h2>PERSONAL INFORMATION</h2>
-                <form id="personalinfo" class="form-step" data-form-type="personal_info">
+                <form id="personalinfo" name="form1" class="form-step" data-form-type="personal_info">
                 
                     <table>
                         <tr>
@@ -1369,6 +1369,12 @@ session_start(); // Start the session
             var nextForm = document.getElementById(nextFormId);
 
             // Validate current form fields here if needed
+            var x = document.forms["form1"]["sname","fname","mname","bdate","bplace","sex","religion","civilstat","height","houseno","brgy","cpno","tin","gsis/sss","pagibig","philhealth"].value;
+            if (x == "") {
+                alert("Please fill out all the required fields");
+                validateForm(currentForm);
+                return false;
+            }
 
             currentForm.style.display = 'none';
             nextForm.style.display = 'block';
