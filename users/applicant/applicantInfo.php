@@ -344,11 +344,11 @@ session_start(); // Start the session
                                 <input type="text" id="prefoccu1" name="prefoccu1" placeholder="PREFERRED OCCUPATION" required>
                             </td>
                             <td colspan="2">
-                                <input type="radio" id="prefloclocal" name="prefloclocal" value="Local" required>   
+                                <input type="checkbox" id="prefloclocal" name="prefloclocal" value="Local" required>   
                                 <label for="prefloclocal">LOCAL, specify cities/municipalities:</label>
                             </td>
                             <td colspan="2"> 
-                                <input type="radio" id="preflocover" name="preflocover" value="Overseas" required>   
+                                <input type="checkbox" id="preflocover" name="preflocover" value="Overseas" required>   
                                 <label for="preflocover">OVERSEAS, specify countries:</label>
                             </td>
                         </tr>
