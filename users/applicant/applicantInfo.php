@@ -14,6 +14,35 @@ session_start(); // Start the session
     <link rel="shortcut icon" href="../../img/PESOIcon.png">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+
+        ul {
+            display: block;
+            margin-bottom: 10px;
+            list-style: none; /* Remove bullets */
+            padding: 0; /* Remove default padding */
+        }
+        ul {
+            border: 1px solid #ccc; /* Add a border to separate added and search results */
+            max-height: 150px; /* Set a max height to make the list scrollable if it exceeds this height */
+            overflow-y: auto; /* Enable vertical scrolling for the list */
+        }
+        li {
+            cursor: pointer; /* Add pointer cursor for clickable items */
+            margin: 5px; /* Add margin between items */
+            padding: 5px; /* Add padding to improve visual separation */
+            background-color: #f0f0f0; /* Add a background color to make items stand out */
+        }
+        .added-skill {
+            background-color: #3498db; /* Blue background color for added skills */
+            color: #fff; /* White text color for added skills */
+        }
+        .remove-skill {
+            float: right; /* Align the remove button to the right */
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <?php require_once '../userNavbar.php'; ?>
@@ -43,7 +72,8 @@ session_start(); // Start the session
                             <td>
                                 <label for="suffix">SUFFIX:</label>
                                 <select id="suffix" name="suffix">
-                                    <option value="" disabled selected hidden>Select</option>
+                                    <option value="" disabled selected hidden>(Ex: Sr.., Jr., III, etc.)</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Jr">Jr</option>
                                     <option value="Sr">Sr</option>
                                     <option value="II">II</option>
@@ -226,16 +256,24 @@ session_start(); // Start the session
                         <tr>
                             <td colspan="4">
                                 <label for="disability">DISABILITY:</label>
-                                <select id="disability" name="disability">
-                                    <option value="" disabled selected hidden>Select</option>
-                                    <option value="Visual">Visual</option>
-                                    <option value="Hearing">Hearing</option>
-                                    <option value="Speech">Speech</option>
-                                    <option value="Physical">Physical</option>
-                                    <option value="Others">Others</option>
-                                </select>
+                                <input type="checkbox" class="disability-checkbox" name="disability" value="Visual">
+                                <label for="visual">Visual</label>
+
+                                <input type="checkbox" class="disability-checkbox" name="disability" value="Hearing">
+                                <label for="hearing">Hearing</label>
+
+                                <input type="checkbox" class="disability-checkbox" name="disability" value="Speech">
+                                <label for="speech">Speech</label>
+
+                                <input type="checkbox" class="disability-checkbox" name="disability" value="Physical">
+                                <label for="physical">Physical</label>
+
+                                <input type="checkbox" class="disability-checkbox" name="disability" value="Others">
+                                <label for="others5">Others, specify</label>
+                                <input type="text" id="others5" name="others5"><br>
                             </td>
                         </tr>
+
                         <tr >
                             <td rowspan="3">
                                 <label for="empstat">EMPLOYMENT<br>STATUS / TYPE:</label>
@@ -1225,100 +1263,22 @@ session_start(); // Start the session
                 <!-- Skills Form -->
                 <h2>OTHER SKILLS ACQUIRED WITHOUT FORMAL TRAINING</h2>
                 <form id="skillS" class="form-step" data-form-type="skill">
-                <table>
-                    <tr>
-                        <td>
-                            <input type="checkbox" id="automec" name="automec" value="Auto Mechanic">
-                            <label for="automec"> AUTO MECHANIC</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="electrician" name="electrician" value="Electrician">
-                            <label for="electrician"> ELECTRICIAN</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="photography" name="photography" value="Photography">
-                            <label for="photography"> PHOTOGRAPHY</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" id="beautician" name="beautician" value="Beautician">
-                            <label for="beautician"> BEAUTICIAN</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="embroidery" name="embroidery" value="Embroidery">
-                            <label for="embroidery"> EMBROIDERY</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="plumbing" name="plumbing" value="Plumbing">
-                            <label for="plumbing"> PLUMBING</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" id="carpentry" name="carpentry" value="Carpentry Works">
-                            <label for="carpentry"> CARPENTRY WORK</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="gardening" name="gardening" value="Gardening">
-                            <label for="gardening"> GARDENING</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="sewing" name="sewing" value="Sewing Dresses">
-                            <label for="sewing"> SEWING DRESSES</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" id="comlit" name="comlit" value="Computer Literate">
-                            <label for="comlit">  COMPUTER LITERATE</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="masonry" name="masonry" value="Masonry">
-                            <label for="masonry"> MASONRY</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="stenography" name="stenography" value="Stenography">
-                            <label for="stenography"> STENOGRAPHY</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" id="domestic" name="domestic" value="Domestic">
-                            <label for="domestic"> DOMESTIC CHORES</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="artist" name="artist" value="Painter/Artist">
-                            <label for="artist"> PAINTER/ARTIST</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="tailoring" name="tailoring" value="Tailoring">
-                            <label for="tailoring"> TAILORING</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" id="driver" name="driver" value="Driver">
-                            <label for="driver"> DRIVER</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="painting" name="painting" value="Painting Jobs">
-                            <label for="painting"> PAINTING JOBS</label>
-                        </td>
-                        <td>
-                            <input type="checkbox" id="otherskill" name="otherskill" value="Others">
-                            <label for="otherskill"> OTHERS</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <div class="butcon">
-                                <input type="button" value="PREVIOUS" onclick="showPreviousForm('skillsForm', 'workExpForm')">
-                                <input type="submit" value="SUBMIT">
-                            </div>
-                        </td>
-                    </tr>
-                    </table>
+             
+                        <label for="addSkills">Add Skills:</label>
+                        <input type="text" id="addSkills" placeholder="Search and add skills">
+                        
+                        <ul id="searchResults"></ul>
+
+                        <label for="addedSkills">Added Skills:</label>
+                        <ul id="addedSkills">
+                            <input type="hidden" id="selectedSkills" name="selectedSkills">
+                        </ul>
+                    
+                                <div class="butcon">
+                                    <input type="button" value="PREVIOUS" onclick="showPreviousForm('skillsForm', 'workExpForm')">
+                                    <input type="submit" value="SUBMIT">
+                                </div>
+                 
                 </form>
             </div>
             <div id="custom-popup" class="custom-popup">
@@ -1472,6 +1432,837 @@ session_start(); // Start the session
         populateSelect("gradyeargrad");
         populateSelect("gradyearattended");
 
+
+
+        const skillsList = [
+            "Wiring Installation",
+            "Electrical Troubleshooting",
+            "Circuit Design",
+            "Electrical Maintenance",
+            "Safety Protocol",
+            "Renewable Energy Installation",
+            "Home Automation",
+            "PLC Programming",
+            "Energy Efficiency Analysis",
+            "Electronics Repair",
+            "Electrical Engineering",
+            "Solar Panel Installation",
+            "Industrial Automation",
+            "Electrician",
+            "Electrical Sales and Service",
+            "Lighting Specialist",
+            "Electrical Maintenance Supervisor",
+            "Bricklaying",
+            "Block Laying",
+            "Plastering",
+            "Tile Setting",
+            "Concrete Mixing",
+            "Stone Masonry",
+            "Tiling",
+            "Masonry Restoration",
+            "Carpentry",
+            "Construction Management",
+            "Structural Engineering",
+            "Landscaping",
+            "Masonry Supervisor",
+            "Welding",
+            "Metal Fabrication",
+            "Steel Cutting",
+            "Blueprint Reading",
+            "Structural Steel Installation",
+            "Stainless Steel Welding",
+            "CNC Plasma Cutting",
+            "Sheet Metal Work",
+            "Shipbuilding",
+            "Metalworking",
+            "Structural Engineering",
+            "Industrial Design",
+            "Pipefitting",
+            "Structural Steel Technician",
+            "Steelworks Foreman",
+            "Scaffold assembly",
+            "Safety procedures",
+            "Load calculation",
+            "Scaffold inspection",
+            "Fall protection",
+            "Advanced rigging",
+            "Confined space work",
+            "Scaffold design",
+            "Rope access",
+            "Construction safety",
+            "Rope access technician",
+            "Industrial rigging",
+            "Safety management",
+            "Scaffolding Supervisor",
+            "Safety Officer (with scaffolding expertise)",
+            "Construction Site Coordinator (with scaffolding responsibilities)",
+            "Food preparation",
+            "Table service",
+            "Menu planning",
+            "Customer service",
+            "Sommelier skills",
+            "Cocktail mixing",
+            "Pastry baking",
+            "Food styling",
+            "Event catering",
+            "Culinary arts",
+            "Hospitality management",
+            "Event planning",
+            "Restaurant management",
+            "Troubleshooting and repairing mechatronic systems",
+            "Reading and interpreting technical drawings and manuals",
+            "Programming and configuring automation systems",
+            "Maintaining and calibrating sensors and actuators",
+            "Electrical and electronic circuit analysis",
+            "Robotics programming and control",
+            "PLC (Programmable Logic Controller) programming",
+            "Advanced 3D modeling and design",
+            "Industrial automation integration",
+            "Mechatronic project management",
+            "Electronics troubleshooting",
+            "Mechanical engineering",
+            "Automation engineering",
+            "Control systems engineering",
+            "Industrial maintenance",
+            "Mechatronics Technician",
+            "Crop planting and cultivation",
+            "Soil preparation and fertilization",
+            "Pest and disease management in crops",
+            "Harvesting and post-harvest handling",
+            "Farm safety and equipment operation",
+            "Sustainable agriculture practices",
+            "Organic farming techniques",
+            "Irrigation system management",
+            "Crop rotation and diversification",
+            "Soil analysis and improvement",
+            "Horticulture",
+            "Agronomy",
+            "Farm management",
+            "Sustainable agriculture",
+            "Crop science",
+            "Agricultural Technician",
+            "Farm Supervisor",
+            "Diagnosing and repairing vehicle engines",
+            "Brake system maintenance and repair",
+            "Electrical system troubleshooting",
+            "Auto body repair and painting",
+            "Wheel alignment and balancing",
+            "Advanced engine diagnostics",
+            "Hybrid and electric vehicle maintenance",
+            "Automotive air conditioning servicing",
+            "Performance tuning and modification",
+            "Vehicle safety inspection",
+            "Auto mechanics",
+            "Automotive engineering",
+            "Auto detailing",
+            "Vehicle electronics",
+            "Auto collision repair",
+            "Automotive Service Advisor",
+            "Mixing and serving cocktails and drinks",
+            "Customer service and communication",
+            "Knowledge of bar equipment and tools",
+            "Inventory management and stock control",
+            "Responsible alcohol service",
+            "Flair bartending (showmanship)",
+            "Craft cocktail creation",
+            "Bar management and operation",
+            "Wine and beer knowledge",
+            "Menu design and pricing",
+            "Hospitality management",
+            "Beverage management",
+            "Customer relations",
+            "Event planning",
+            "Barista skills",
+            "Cocktail Server",
+            "Personal care for the elderly and disabled",
+            "Medication administration",
+            "First aid and emergency response",
+            "Assisting with daily living activities",
+            "Communication and empathy",
+            "Dementia care",
+            "Palliative care",
+            "Pediatric caregiving",
+            "Specialized medical equipment operation",
+            "Care plan development",
+            "Nursing skills",
+            "Home healthcare",
+            "Gerontology",
+            "Elderly care",
+            "Medical terminology",
+            "Troubleshooting and repairing mechatronic systems",
+            "Reading and interpreting technical diagrams and schematics",
+            "Programming and configuring automated systems",
+            "Maintaining industrial robots and automated machinery",
+            "Safety protocols for working with mechatronic equipment",
+            "Designing mechatronic systems",
+            "PLC (Programmable Logic Controller) programming",
+            "Electrical and electronic circuit analysis",
+            "Mechatronic system integration",
+            "Computer-aided design (CAD) for mechatronics",
+            "Electronics troubleshooting",
+            "Automation engineering",
+            "Robotics programming",
+            "Industrial maintenance",
+            "Quality control in manufacturing",
+            "Calibrating and maintaining control instruments",
+            "Analyzing and interpreting data from sensors",
+            "Programming and configuring control systems",
+            "Troubleshooting control system issues",
+            "Following safety procedures for working with instrumentation",
+            "Process control system design",
+            "PLC programming for industrial automation",
+            "SCADA (Supervisory Control and Data Acquisition) operation",
+            "Calibration and tuning of control loops",
+            "HMI (Human-Machine Interface) design",
+            "Industrial automation",
+            "Electronics troubleshooting",
+            "Chemical process control",
+            "Electrical circuit analysis",
+            "Quality assurance in manufacturing",
+            "Basic facial and skincare treatments",
+            "Makeup application",
+            "Nail care and manicure/pedicure",
+            "Hair styling and cutting",
+            "Client consultation and communication",
+            "Spa and wellness treatments",
+            "Bridal and special occasion makeup",
+            "Hair coloring and chemical treatments",
+            "Product sales and marketing",
+            "Salon management",
+            "Esthetician skills",
+            "Hairdressing skills",
+            "Customer service",
+            "Product knowledge",
+            "Health and safety practices",
+            "Financial record-keeping",
+            "Double-entry bookkeeping",
+            "Preparation of financial statements",
+            "Tax compliance",
+            "Budgeting and financial analysis",
+            "Auditing",
+            "Payroll management",
+            "Financial software proficiency",
+            "Financial reporting",
+            "Business taxation",
+            "Accounting principles",
+            "Data analysis",
+            "QuickBooks or other accounting software",
+            "Attention to detail",
+            "Time management",
+            "Bread and pastry preparation",
+            "Baking techniques",
+            "Dough making",
+            "Pastry decoration",
+            "Food safety and hygiene",
+            "Specialty baking (e.g., artisan bread)",
+            "Cake decoration",
+            "Recipe development",
+            "Inventory management",
+            "Entrepreneurship in baking",
+            "Culinary arts",
+            "Food presentation",
+            "Ingredient knowledge",
+            "Kitchen safety",
+            "Customer service",
+            "Carpentry tools and equipment operation",
+            "Woodworking and joinery",
+            "Blueprint reading",
+            "Construction and installation",
+            "Safety procedures in carpentry",
+            "Furniture making",
+            "Cabinet making",
+            "Framing and structural carpentry",
+            "Project management",
+            "Green building practices",
+            "Woodworking skills",
+            "Construction knowledge",
+            "Measurement and math skills",
+            "Problem-solving in carpentry",
+            "Knowledge of building materials",
+            "Sterilization techniques and equipment operation",
+            "Infection control and prevention protocols",
+            "Instrument handling and packaging",
+            "Inventory management of sterile supplies",
+            "Knowledge of medical terminology",
+            "Teamwork and collaboration with healthcare professionals",
+            "Quality assurance in sterilization processes",
+            "Compliance with industry regulations and standards",
+            "Troubleshooting sterilization equipment",
+            "Record-keeping and documentation",
+            "Surgical technology",
+            "Medical equipment maintenance",
+            "Healthcare administration",
+            "Infection control specialist",
+            "Hospital supply chain management",
+            "Cleaning and decontamination of medical instruments",
+            "Sterilization methods and equipment",
+            "Inventory management and distribution of sterile supplies",
+            "Compliance with safety and hygiene standards",
+            "Record-keeping and documentation",
+            "Customer service and communication with healthcare staff",
+            "Quality control and assurance",
+            "Troubleshooting equipment issues",
+            "Infection control protocols",
+            "Team coordination in a healthcare setting",
+            "Sterile processing technician",
+            "Healthcare logistics",
+            "Infection control specialist",
+            "Healthcare facility management",
+            "Medical equipment maintenance",
+            "Hardware and software troubleshooting",
+            "Operating system installation and configuration",
+            "Network setup and maintenance",
+            "Computer assembly and disassembly",
+            "Basic programming and scripting",
+            "IT customer support and helpdesk services",
+            "Data recovery and backup procedures",
+            "Cybersecurity awareness and basic defense",
+            "Basic web development and content management",
+            "Hardware maintenance and repair",
+            "Network administration",
+            "IT support specialist",
+            "System administration",
+            "Computer repair technician",
+            "Software development",
+            "Surface preparation for painting",
+            "Proper use of painting tools and equipment",
+            "Mixing and matching paint colors",
+            "Applying various painting techniques",
+            "Safety precautions in painting",
+            "Wall and surface texture application",
+            "Wallpaper installation",
+            "Decorative painting and faux finishes",
+            "Maintenance and repainting in construction projects",
+            "Estimation of paint and material requirements",
+            "Residential or commercial painting",
+            "Interior design and decorating",
+            "Construction project management",
+            "Industrial painting and coating",
+            "Environmental safety and compliance",
+            "Customer service and communication skills",
+            "Handling customer inquiries and complaints",
+            "Use of contact center software and tools",
+            "Product or service knowledge",
+            "Multitasking and time management",
+            "Sales and upselling techniques",
+            "Script adherence and call handling protocols",
+            "Problem-solving and conflict resolution",
+            "Data entry and record-keeping",
+            "Multilingual support and language proficiency",
+            "Customer support representative",
+            "Telemarketing and sales",
+            "Call center management",
+            "CRM software operation",
+            "Business process outsourcing (BPO) services",
+            "Food preparation and cooking techniques",
+            "Food safety and sanitation",
+            "Menu planning and costing",
+            "Culinary knife skills",
+            "Presentation of dishes",
+            "Pastry and baking",
+            "International cuisine knowledge",
+            "Dietary and nutrition understanding",
+            "Catering and large-scale food production",
+            "Kitchen management",
+            "Hospitality management",
+            "Culinary arts",
+            "Restaurant management",
+            "Nutrition and dietetics",
+            "Food and beverage service",
+            "Cook",
+            "Chef",
+            "Sous Chef",
+            "Customer communication and interaction",
+            "Problem-solving and conflict resolution",
+            "Handling customer complaints",
+            "Product knowledge and information",
+            "Time management",
+            "Sales and upselling techniques",
+            "Multilingual customer support",
+            "CRM (Customer Relationship Management) software usage",
+            "Social media customer service",
+            "Market research and analysis",
+            "Retail management",
+            "Sales and marketing",
+            "Call center operations",
+            "Public relations",
+            "Communication skills",
+            "Customer Service Associate",
+            "Customer Support Representative",
+            "Service Desk Operator",
+            "Pattern making and cutting",
+            "Sewing and stitching techniques",
+            "Fabric selection and handling",
+            "Garment fitting and alteration",
+            "Fashion design principles",
+            "Couture and high-end fashion",
+            "Costume design",
+            "Fashion illustration",
+            "Textile design",
+            "Clothing customization",
+            "Fashion design",
+            "Tailoring",
+            "Textile technology",
+            "Clothing production",
+            "Fashion merchandising",
+            "Dressmaker",
+            "Vehicle operation and control",
+            "Road safety and traffic rules compliance",
+            "Defensive driving techniques",
+            "Vehicle maintenance and troubleshooting",
+            "Emergency response",
+            "Commercial driving (e.g., truck or bus)",
+            "Advanced driving (e.g., racing or off-road)",
+            "Vehicle fleet management",
+            "Eco-friendly driving practices",
+            "Ride-sharing or taxi services",
+            "Automotive mechanics",
+            "Transportation logistics",
+            "Fleet management",
+            "Traffic management",
+            "Emergency response and first aid",
+            "Professional Driver",
+            "Chauffeur",
+            "Event planning and coordination",
+            "Budgeting and financial management",
+            "Vendor and supplier negotiation",
+            "Risk assessment and management",
+            "Marketing and promotion",
+            "Wedding planning",
+            "Conference and trade show management",
+            "Exhibition design",
+            "Event technology and AV management",
+            "Sustainable event management",
+            "Hospitality management",
+            "Public relations and marketing",
+            "Project management",
+            "Event design and decor",
+            "Entertainment industry",
+            "Teamwork and collaboration",
+            "Food Server",
+            "Restaurant Host/Hostess",
+            "Food Attendant",
+            "Managing hotel reservations and check-ins",
+            "Handling guest inquiries and requests",
+            "Using reservation and front office software",
+            "Cash handling and accounting",
+            "Concierge services",
+            "Guest relations and problem-solving",
+            "Event coordination and planning",
+            "Sales and marketing for hotel services",
+            "Multilingual communication",
+            "Crisis management",
+            "Customer service",
+            "Organization and time management",
+            "Computer skills",
+            "Adaptability",
+            "Conflict resolution",
+            "TIG welding using various metals",
+            "Reading and interpreting welding blueprints",
+            "Weld joint preparation and fitting",
+            "Weld quality inspection and testing",
+            "Welding safety practices",
+            "Welding automation and robotics",
+            "Weld procedure development",
+            "Non-destructive testing techniques",
+            "Metallurgy and material properties",
+            "Pipe welding and specialized welding techniques",
+            "Precision and attention to detail",
+            "Hand-eye coordination",
+            "Welding equipment operation and maintenance",
+            "Problem-solving in welding applications",
+            "Occupational safety",
+            "Welder",
+            "Welding Inspector",
+            "Welding Supervisor",
+            "Patient care and bedside manners",
+            "Vital sign monitoring",
+            "Medication administration",
+            "Medical record keeping",
+            "Infection control and hygiene",
+            "Nursing assessments",
+            "Emergency response and CPR",
+            "Patient education",
+            "Medical terminology",
+            "Geriatric or pediatric care",
+            "Empathy and compassion",
+            "Critical thinking and decision-making",
+            "Teamwork and collaboration",
+            "Communication with patients and medical staff",
+            "Stress management",
+            "Healthcare Assistant",
+            "Nursing Aide",
+            "Patient Care Technician",
+            "Operating forklift machinery safely and efficiently",
+            "Load and unload materials using a forklift",
+            "Inspection and maintenance of forklift equipment",
+            "Understanding weight distribution and load handling",
+            "Adhering to safety regulations",
+            "Operating other heavy equipment (e.g., cranes, bulldozers)",
+            "Material handling and logistics",
+            "Warehouse management",
+            "Inventory control",
+            "Forklift maintenance and repair",
+            "Spatial awareness",
+            "Equipment maintenance",
+            "Attention to detail",
+            "Safety consciousness",
+            "Communication with coworkers and supervisors",
+            "Forklift Operator",
+            "Warehouse Operator",
+            "Material Handling Specialist",
+            "Operating a rigid on-highway dump truck safely",
+            "Loading and unloading materials efficiently",
+            "Properly maintaining and inspecting the vehicle",
+            "Following safety regulations and procedures",
+            "Maneuvering the truck on different terrains",
+            "Basic vehicle maintenance and repair",
+            "Understanding load distribution and weight limits",
+            "Effective communication with site personnel",
+            "Time management for efficient transport",
+            "Basic navigation and route planning",
+            "Heavy equipment operation (e.g., excavators, bulldozers)",
+            "Construction site safety and protocols",
+            "Material handling and logistics",
+            "Environmental awareness and conservation",
+            "Equipment maintenance and troubleshooting",
+            "Dump Truck Operator",
+            "Construction Hauler",
+            "Operating a wheel loader effectively",
+            "Loading and unloading materials with precision",
+            "Vehicle inspection and maintenance",
+            "Safety compliance while working",
+            "Understanding and following construction plans",
+            "Equipment maintenance and repair",
+            "Efficient material stockpiling and management",
+            "Communication with site supervisors and workers",
+            "Navigation and terrain assessment",
+            "Operating other heavy equipment if required",
+            "Heavy equipment operation (e.g., backhoes, cranes)",
+            "Construction site management and coordination",
+            "Material handling and logistics",
+            "Site safety and emergency procedures",
+            "Environmental considerations and sustainable practices",
+            "Providing traditional Hilot massages",
+            "Assessing clients’ physical conditions",
+            "Applying appropriate massage techniques",
+            "Promoting relaxation and wellness",
+            "Maintaining hygiene and sanitation",
+            "Additional massage therapies (e.g., Swedish, Thai)",
+            "Customer service and client interaction",
+            "Business management for a wellness center",
+            "Herbal medicine knowledge",
+            "Yoga and meditation techniques",
+            "Spa and wellness industry practices",
+            "Anatomy and physiology",
+            "Holistic health and wellness concepts",
+            "Aromatherapy and essential oils",
+            "First aid and CPR training",
+            "Cleaning and maintaining rooms and common areas",
+            "Making beds and arranging furniture",
+            "Proper waste disposal and recycling",
+            "Using cleaning tools and chemicals safely",
+            "Responding to guest requests efficiently",
+            "Laundry and fabric care",
+            "Inventory management for cleaning supplies",
+            "Team coordination in a hotel or facility",
+            "Basic plumbing and electrical maintenance",
+            "Guest service and communication",
+            "Hospitality industry knowledge",
+            "Sanitation and hygiene regulations",
+            "Interior design and aesthetics",
+            "Customer service and etiquette",
+            "Facility management and safety protocols",
+            "Housekeeper",
+            "Room Attendant",
+            "Cleaning Supervisor",
+            "Basic proficiency in Japanese language (N4 level)",
+            "Reading and writing in Hiragana and Katakana",
+            "Understanding everyday conversations",
+            "Cultural awareness and etiquette",
+            "Basic travel-related language skills",
+            "Advanced Japanese language proficiency",
+            "Translation and interpretation",
+            "Teaching Japanese as a foreign language",
+            "Business Japanese communication",
+            "In-depth cultural studies",
+            "Japanese history and art",
+            "Japanese cuisine and cooking",
+            "Business culture and practices in Japan",
+            "Japanese calligraphy and traditional arts",
+            "Travel planning and tourism in Japan",
+            "Translator/Interpreter",
+            "Basic Japanese vocabulary and grammar",
+            "Ability to introduce oneself and have simple conversations",
+            "Understanding of hiragana and katakana scripts",
+            "Reading and writing basic Japanese characters",
+            "Knowledge of Japanese customs and culture at a beginner level",
+            "Improved language proficiency to N3 or higher",
+            "Increased fluency in spoken Japanese",
+            "Advanced reading and writing skills in Japanese",
+            "Deeper understanding of Japanese culture and etiquette",
+            "Ability to work or study in Japan",
+            "Translation and interpretation",
+            "Teaching Japanese as a foreign language",
+            "International business and trade",
+            "Tourism and hospitality in Japan",
+            "Localization for Japanese markets",
+            "Language Proficiency Tester",
+            "Cultural Exchange Coordinator",
+            "Foreign Language Instructor",
+            "Financial analysis and risk assessment",
+            "Loan management and disbursement",
+            "Use of microfinance software and technology",
+            "Client relationship management",
+            "Financial literacy training",
+            "Advanced financial analysis and modeling",
+            "Market research and expansion strategies",
+            "Development of financial products and services",
+            "Regulatory compliance and reporting",
+            "Microfinance institution management",
+            "Financial technology (FinTech) development",
+            "Banking and financial services",
+            "Social entrepreneurship",
+            "Impact assessment and evaluation",
+            "Economic development and poverty alleviation",
+            "Microfinance Specialist",
+            "Loan Officer",
+            "Financial Services Representative",
+            "Dispensing prescription medications accurately",
+            "Patient counseling on medication use",
+            "Drug inventory management",
+            "Compounding and preparing pharmaceuticals",
+            "Knowledge of pharmaceutical laws and regulations",
+            "Clinical pharmacy and patient care",
+            "Specialization in specific disease management",
+            "Research and development of new drugs",
+            "Pharmaceutical quality control",
+            "Pharmacy business management",
+            "Pharmaceutical research",
+            "Hospital pharmacy practice",
+            "Regulatory affairs in the pharmaceutical industry",
+            "Pharmacovigilance and drug safety",
+            "Healthcare management",
+            "Pharmacy Technician",
+            "Pharmacy Assistant",
+            "Dispensary Manager",
+            "Installation and maintenance of plumbing systems",
+            "Pipefitting and soldering",
+            "Reading blueprints and technical drawings",
+            "Basic knowledge of water supply and drainage systems",
+            "Plumbing safety procedures",
+            "Advanced plumbing techniques (e.g., HVAC systems)",
+            "Water conservation and sustainable plumbing",
+            "Specialized gas fitting and piping skills",
+            "Plumbing system design and planning",
+            "Supervision of plumbing projects",
+            "HVAC (Heating, Ventilation, and Air Conditioning)",
+            "Environmental sustainability in plumbing",
+            "Construction project management",
+            "Building codes and regulations",
+            "Facilities management",
+            "Apprentice Plumber",
+            "Plumbing Assistant",
+            "Pipe Installation Helper",
+            "Installation and repair of plumbing systems",
+            "Pipe fitting and threading",
+            "Leak detection and repair",
+            "Knowledge of plumbing codes and regulations",
+            "Pipe soldering and welding",
+            "Gas fitting for appliances",
+            "Septic system installation and maintenance",
+            "Water heater installation and repair",
+            "Plumbing system design",
+            "Backflow prevention system installation and testing",
+            "Carpentry (for building support structures)",
+            "Electrical work (for water heater connections)",
+            "Project management (for overseeing plumbing projects)",
+            "Installation and maintenance of domestic refrigeration and air conditioning systems",
+            "Refrigerant handling and recovery",
+            "Troubleshooting and repair of cooling systems",
+            "Electrical and electronic control systems for RAC",
+            "Understanding of safety practices in RAC servicing",
+            "Commercial HVAC system servicing",
+            "Energy-efficient RAC system installation",
+            "Home automation integration with RAC",
+            "Solar-powered RAC systems",
+            "Environmental-friendly refrigerants usage",
+            "Electrical wiring and troubleshooting",
+            "Environmental regulations compliance",
+            "Customer service and communication",
+            "Precision air conditioning and computer room environmental control systems servicing",
+            "Chilled water system maintenance",
+            "Environmental monitoring and control",
+            "Advanced diagnostics for specialized cooling systems",
+            "System optimization for data centers and clean rooms",
+            "Data center design and setup",
+            "Fire suppression systems for data centers",
+            "Advanced HVAC system control programming",
+            "Energy-efficient cooling solutions",
+            "Emergency backup power systems for RAC",
+            "IT infrastructure knowledge",
+            "Building management systems",
+            "Disaster recovery planning",
+            "HVAC Engineer",
+            "Refrigeration System Designer",
+            "HVAC Project Manager",
+            "Scaffolding setup and dismantling",
+            "Safety procedures for working at heights",
+            "Proper use of scaffold materials and tools",
+            "Load distribution and weight calculations",
+            "Scaffold inspection and maintenance",
+            "Advanced scaffold design",
+            "Suspended scaffolding systems",
+            "Rigging and hoisting",
+            "Fall protection techniques",
+            "Specialized scaffolding for industrial applications",
+            "Construction site management",
+            "Occupational safety and health",
+            "Civil engineering principles",
+            "Scaffolder",
+            "Scaffold Supervisor",
+            "Scaffold Safety Inspector",
+            "SMAW equipment setup and operation",
+            "Welding of fillet and groove joints",
+            "Interpretation of welding symbols and blueprints",
+            "Welding safety practices",
+            "Metal preparation and cleaning for welding",
+            "Welding of different materials (e.g., stainless steel, aluminum)",
+            "Pipe welding",
+            "Welding certifications (e.g., AWS)",
+            "Welding for structural fabrication",
+            "Welding automation and robotics",
+            "Metallurgy and material science",
+            "Blueprint reading and interpretation",
+            "Non-destructive testing (NDT)",
+            "Welder",
+            "Welding Apprentice",
+            "Welding Helper",
+            "Welding using shielded metal arc welding (SMAW) equipment",
+            "Proper electrode selection and handling",
+            "Welding various joint configurations and positions",
+            "Visual inspection of weld quality",
+            "Safety protocols for welding",
+            "Welding different types of metals (steel, aluminum, etc.)",
+            "Interpretation of welding symbols and blueprints",
+            "Welding for structural fabrication",
+            "Maintenance and repair welding",
+            "Welding in challenging environments (underwater, confined spaces)",
+            "Gas Metal Arc Welding (GMAW) and Gas Tungsten Arc Welding (GTAW) skills",
+            "Knowledge of metallurgy and material properties",
+            "Heat treatment techniques",
+            "Non-destructive testing methods (ultrasonic testing, X-rays)",
+            "Welding equipment maintenance and troubleshooting",
+            "Certified Welder",
+            "Welding Inspector",
+            "Welding Supervisor",
+            "Tile layout and design",
+            "Cutting and shaping tiles",
+            "Preparing and leveling surfaces for tile installation",
+            "Proper mixing and application of adhesives and grout",
+            "Setting tiles in different patterns (herringbone, diagonal, etc.)",
+            "Tile installation on walls and floors",
+            "Installation of mosaic and decorative tiles",
+            "Precision cutting for intricate tile designs",
+            "Tile repair and replacement",
+            "Sealing and finishing tile installations",
+            "Knowledge of different types of tiles (ceramic, porcelain, glass, etc.)",
+            "Grouting techniques and color selection",
+            "Waterproofing for wet areas (bathrooms, kitchens)",
+            "Understanding of underlayment materials",
+            "Estimation and cost calculation for tile projects",
+            "Flooring Specialist",
+            "Training needs assessment",
+            "Lesson planning and instructional design",
+            "Effective communication and presentation skills",
+            "Facilitation of group discussions and activities",
+            "Assessment and evaluation of learners",
+            "Use of multimedia and technology in training",
+            "Managing a diverse group of learners",
+            "Adapting training methods to different learning styles",
+            "Classroom management and time management",
+            "Creating training materials (handouts, slides)",
+            "Adult learning principles and theories",
+            "Training program evaluation and improvement",
+            "Conflict resolution and problem-solving in a training context",
+            "Cultural sensitivity and inclusion in training",
+            "Legal and ethical considerations in training and education",
+            "Learning and Development Specialist",
+            "Training Coordinator"
+            
+            
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let selectedDisabilities = [];
+
+            const disabilityCheckboxes = document.querySelectorAll('.disability-checkbox');
+            const disabilityOthersInput = document.getElementById('others5');
+
+            disabilityCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    updateSelectedDisabilities();
+                });
+            });
+
+            function updateSelectedDisabilities() {
+                selectedDisabilities = [];
+                disabilityCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        if (checkbox.value === 'Others') {
+                            selectedDisabilities.push(disabilityOthersInput.value);
+                        } else {
+                            selectedDisabilities.push(checkbox.value);
+                        }
+                    }
+                });
+            }
+
+
+        const addSkillsInput = document.getElementById("addSkills");
+        const addedSkillsList = document.getElementById("addedSkills");
+        const searchResultsList = document.getElementById("searchResults");
+
+        addSkillsInput.addEventListener("input", () => {
+            const search = addSkillsInput.value.toLowerCase();
+            const filteredSkills = search
+                ? skillsList.filter(skill => skill.toLowerCase().includes(search))
+                : [];
+            displaySkills(filteredSkills, searchResultsList);
+        });
+
+        function displaySkills(skills, targetList) {
+            targetList.innerHTML = "";
+            skills.forEach(skill => {
+                const li = document.createElement("li");
+                li.textContent = skill;
+                li.addEventListener("click", () => {
+                    if (!isSkillAlreadyAdded(skill)) {
+                        // Add the clicked skill to the added skills list
+                        const addedSkill = document.createElement("li");
+                        addedSkill.textContent = skill;
+                        addedSkill.classList.add("added-skill");
+                        addedSkill.setAttribute("data-skill", skill);
+                        const removeButton = document.createElement("span");
+                        removeButton.textContent = "x";
+                        removeButton.classList.add("remove-skill");
+                        removeButton.addEventListener("click", () => {
+                            // Remove the added skill when the X button is clicked
+                            addedSkillsList.removeChild(addedSkill);
+                        });
+                        addedSkill.appendChild(removeButton);
+                        addedSkillsList.appendChild(addedSkill);
+                    }
+                });
+                targetList.appendChild(li);
+            });
+        }
+
+        function isSkillAlreadyAdded(skill) {
+            const addedSkills = [...addedSkillsList.getElementsByClassName("added-skill")];
+            return addedSkills.some(li => li.getAttribute("data-skill") === skill);
+        }
+
         function displayCustomPopup(redirectURL) {
             const popup = document.getElementById('custom-popup');
             const popupClose = document.getElementById('popup-close');
@@ -1524,7 +2315,7 @@ session_start(); // Start the session
                     formData[field.name] = field.value;
                 });
 
-                if (['language', 'preference', 'skill'].includes(form.getAttribute('data-form-type'))) {
+                if (['personal_info', 'language', 'preference'].includes(form.getAttribute('data-form-type'))) {
                     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
                     checkboxes.forEach(checkbox => {
                         formData[checkbox.name] = checkbox.checked;
@@ -1533,6 +2324,14 @@ session_start(); // Start the session
 
                 formData['form_types'].push(form.getAttribute('data-form-type'));
             });
+
+            // Collect the added skills and add them to formData
+            const addedSkills = Array.from(addedSkillsList.getElementsByClassName("added-skill")).map(li => li.getAttribute("data-skill"));
+            formData['selectedSkills'] = addedSkills;
+
+            // Collect selected disabilities
+            updateSelectedDisabilities();
+            formData['selectedDisabilities'] = selectedDisabilities;
 
             console.log('Form Types Array:', formData['form_types']);
 
@@ -1566,11 +2365,13 @@ session_start(); // Start the session
             });
         }
 
+
         const submitButton = document.querySelector('#skillS input[type="submit"]');
         submitButton.addEventListener('click', function(event) {
             event.preventDefault();
             submitForm();
         });
+    });
 
 
 

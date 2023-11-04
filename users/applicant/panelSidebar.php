@@ -1,3 +1,12 @@
+<?php
+include '../../config/dbconnect.php';
+
+if(isset($_SESSION['applicant_id'])){
+    $applicant_id = $_SESSION['applicant_id'];
+}
+
+
+?>
 <!DOCTYPE html> 
 <html>
 <head>
@@ -16,8 +25,24 @@
             <input type="file" id="profile-picture" accept="image/*" style="display: none;">
             <a href="#" onclick="uploadProfilePicture()">
                  <img src="../../img/ProfileIcon.png" alt="Applicant Icon" class="profilepic" id="profile-picture-display">
+                 
             </a>
-            <h2>WELCOME, <br><b style="color: #2B65E2;"><?php echo $_SESSION['applicant_name']; ?></b></h2>
+
+                <?php          
+                    $select_profile = $conn->prepare("SELECT * FROM `personal_info` WHERE applicant_id = ?");
+                    $select_profile->execute([$applicant_id]);
+                    if ($select_profile->rowCount() > 0) {
+                    $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+                ?>
+            <h2>WELCOME, <br><b style="color: #2B65E2;"><?= $fetch_profile["first_name"]; ?></b></h2>
+
+            <?php
+                    }else{
+                ?>
+                    <p>please login or register first!</p>
+                <?php
+                    }
+                ?> 
         </div>
         <div>
             <div class="sidebar-item">
@@ -39,22 +64,6 @@
     </div>
 
     <script>
-        function uploadProfilePicture() {
-            // Trigger the hidden file input element
-            const profilePictureInput = document.getElementById("profile-picture");
-            profilePictureInput.click();
-
-            // Listen for file selection
-            profilePictureInput.addEventListener("change", function() {
-                const selectedFile = profilePictureInput.files[0];
-                if (selectedFile) {
-                    // Display the selected image
-                    const profilePictureDisplay = document.getElementById("profile-picture-display");
-                    profilePictureDisplay.src = URL.createObjectURL(selectedFile);
-                }
-            });
-        }
-
         // JavaScript to toggle the sidebar and h2 element
         const toggleButton = document.getElementById('toggle-sidebar');
         const sidebar = document.getElementById('mySidebar');

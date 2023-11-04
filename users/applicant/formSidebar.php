@@ -1,3 +1,12 @@
+<?php
+include '../../config/dbconnect.php';
+
+if(isset($_SESSION['applicant_id'])){
+    $applicant_id = $_SESSION['applicant_id'];
+}
+
+?>
+
 <!DOCTYPE html> 
 <html>
 <head>
@@ -14,7 +23,21 @@
   <div class="sidebar-content">
     <div class="side-header">
       <img src="../../img/ProfileIcon.png" alt="Applicant Icon">
-      <h2>WELCOME, <br><b style="color: #2B65E2;"><?php echo $_SESSION['username']; ?></b></h2>
+                <?php          
+                    $select_profile = $conn->prepare("SELECT * FROM `applicants` WHERE id = ?");
+                    $select_profile->execute([$applicant_id]);
+                    if($select_profile->rowCount() > 0){
+                    $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
+                ?>
+            <h2>WELCOME, <br><b style="color: #2B65E2;"><?= $fetch_profile["username"]; ?></b></h2>
+
+            <?php
+                    }else{
+                ?>
+                    <p>please login or register first!</p>
+                <?php
+                    }
+                ?> 
     </div>
     <div>
       <div class="sidebar-item">
