@@ -1,5 +1,32 @@
 <?php
 session_start(); // Start the session
+
+    // Include your database connection file
+    require_once "../../config/dbconnect.php";
+
+    $id="";
+    $name="";
+    $email="";
+    $password="";
+
+    if(isset($_GET['editid'])) {
+        try {
+            $sql="SELECT * FROM admin WHERE md5(id)=?";
+            $data = array($_GET['editid']);
+            $stmt=$conn->prepare($sql);
+            $stmt->execute($data);
+            $row=$stmt->fetch();
+            $id=$row['id'];
+            $name=$row['name'];
+            $email=$row['email'];
+            $password=$row['password'];
+
+        } catch(\Throwable $th) {
+            //throw $th
+        }
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +47,8 @@ session_start(); // Start the session
         <div class="container">
             <div class="background-container"></div>
             <?php require_once 'panelSidebar.php'; ?>
+
+            
             <div class="form-container dashboard1" id="dashboard">
                 <!-- Preference Form -->
                 <h2>ADMIN DASHBOARD</h2>
@@ -72,7 +101,8 @@ session_start(); // Start the session
                                         echo "<tr>";
                                         echo "<td>" . $row['name'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
-                                        echo "<td><button class='edit-button' onclick='editAdminAccount(" . $row['id'] . ")'>Edit</button></td>";
+                                        $idenc=md5($row['id']);
+                                        echo "<td> <button class='edit-button' onclick='openEditAdminModal(" . $row['id'] . ")'>Edit</button></td>";
                                         echo "<td><button class='delete-button' onclick='deleteAdminAccount(" . $row['id'] . ")'>Delete</button></td>";
                                         echo "</tr>";
                                     }
@@ -87,11 +117,10 @@ session_start(); // Start the session
                             </div>
                         </table>
                     </div>
-
-                    
                 </div>
             </div>
 
+            <!-- ADD ADMIN ACCOUNT -->
             <div id="addAdminModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeAddAdminModal()">&times;</span>
@@ -123,6 +152,46 @@ session_start(); // Start the session
                 </div>
             </div>
 
+            <!-- EDIT ADMIN ACCOUNT -->
+            <div id="editAdminModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeEditAdminModal()">&times;</span>
+                    <h2>Edit Admin Account</h2>
+                    <form id="editAdminForm" action="" method="POST">
+                        <div class="form-field">
+                            <label for="editAdminName">Edit Admin Name:</label>
+                            <input type="text" id="editAdminName" placeholder="Enter new admin name" value="<?=$name?>" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="newAdminEmail">Edit Email:</label>
+                            <input type="text" id="editAdminEmail" placeholder="Enter new email address" value="<?=$email?>" required>
+                        </div>
+                        <div style="position: relative;"> <!-- Wrap password input and toggle icon in a container -->
+                            <div class="form-field">
+                                <label for="oldAdminPassword">Enter Old Password:</label>
+                                <input type="password" id="oldAdminPassword" name="adminOldPass" placeholder="Enter old password" required>
+                                    <a class="inputpass" onclick="togglePasswordVisibility('oldAdminPassword', 'passicon8')" style="position: absolute; right: 15px; top: 66%; transform: translateY(-50%); cursor: pointer; font-size: 14px;">
+                                        <i class="fa fa-eye-slash" id="passicon8"></i>
+                                    </a>
+                            </div>
+                        </div>
+                        <div style="position: relative;"> <!-- Wrap password input and toggle icon in a container -->
+                            <div class="form-field">
+                                <label for="newAdminPass">Enter New Password:</label>
+                                <input type="password" id="newAdminPass" name="adminNewPass" placeholder="Enter new password" required>
+                                    <a class="inputpass" onclick="togglePasswordVisibility('newAdminPass', 'passicon9')" style="position: absolute; right: 15px; top: 66%; transform: translateY(-50%); cursor: pointer; font-size: 14px;">
+                                        <i class="fa fa-eye-slash" id="passicon9"></i>
+                                    </a>
+                            </div>
+                        </div>
+                     
+                        <!-- Edit Button -->
+                        <div class="butcon">
+                            <button type="button" onclick="editAdminAccount()">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <div class="form-container" id="activejob">
                 <!-- Job Posting Form -->
@@ -166,10 +235,58 @@ session_start(); // Start the session
 
             <div class="form-container" id="applicant">
                 <!-- Eligibility Form -->
-                <h2>APPLICANTS</h2>
+                <div class="profile-info-item">
+                    <h2>APPLICANTS</h2>
+                </div>
+                <div class="profile-info">
+                    <div class="admin-table">
+                        <h3>Applicant Accounts</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Middle Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone No.</th>
+                                    <th>City/Municipality</th>
+                                    <th>Barangay</th>
+                                    <th>Experience/Skills</th>
+                                    <th>View NSRP Form</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Include your PDO database connection
+                                require_once '../../config/dbconnect.php';
 
-                
-               
+                                try {
+                                    // Query to get admin accounts
+                                    $select_applicant_info = "SELECT personal_info.*, skills.* FROM personal_info JOIN skills ON personal_info.applicant_id = skills.applicant_id";
+                                    $stmt_applicant_info = $conn->query($select_applicant_info);
+                                   
+                                    // Fetch and display admin accounts as table rows
+                                    while ($row = $stmt_applicant_info->fetch(PDO::FETCH_ASSOC)) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['first_name'] . "</td>";
+                                        echo "<td>" . $row['middle_name'] . "</td>";
+                                        echo "<td>" . $row['surname'] . "</td>";
+                                        echo "<td>" . $row['cellphone_number'] . "</td>";
+                                        echo "<td>" . $row['municipality_city'] . "</td>";
+                                        echo "<td>" . $row['barangay'] . "</td>";
+                                        echo "<td>" . $row['skills'] . "</td>";
+                                        echo "<td><button class='edit-button' onclick='deleteAdminAccount(" . $row['applicant_id'] . ")'>View NSRP Form</button></td>";
+                                        echo "</tr>";
+                                    }
+                                } catch (PDOException $e) {
+                                    // Handle the error if there is a problem with the database connection or query
+                                    echo "Error: " . $e->getMessage();
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
 
             <div class="form-container" id="employer">
@@ -234,6 +351,17 @@ session_start(); // Start the session
             modal.style.display = "none";
         }
 
+        // Function to open the "Edit Admin Account" modal
+        function openEditAdminModal() {
+            var modal = document.getElementById("editAdminModal");
+            modal.style.display = "block";
+        }
+        // Function to close the "Edit Admin Account" modal
+        function closeEditAdminModal() {
+            var modal = document.getElementById("editAdminModal");
+            modal.style.display = "none";
+        }
+
 
 // Function to add an admin account
 function addAdminAccount() {
@@ -272,6 +400,20 @@ function addAdminAccount() {
         }
     };
     xhr.send(formData);
+}
+
+// Function to add a newly added admin to the HTML table
+function addAdminToTable(newAdmin) {
+    // Update the HTML table with the new data
+    const tableBody = document.querySelector('.admin-table tbody');
+    tableBody.innerHTML += `
+        <tr>
+            <td>${editAdmin.name}</td>
+            <td>${editAdmin.email}</td>
+            <td><button class="edit-button" onclick="editAdminAccount(${newAdmin.id})">Edit</button></td>
+            <td><button class="delete-button" onclick="deleteAdminAccount(${newAdmin.id})">Delete</button></td>
+        </tr>
+    `;
 }
 
 // Function to add a newly added admin to the HTML table
