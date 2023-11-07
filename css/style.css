@@ -769,9 +769,47 @@ table td, th {
     margin-bottom: 10px;
 }
 
+#format input[type="text"],
+#format input[type="date"]{
+    width: 70%;
+}
+
+#format1 input[type="text"],
+#format1 input[type="date"] {
+    width: 50%;
+}
+
+#format2 input[type="text"], 
+#format2 input[type="date"] {
+    width: 40%;
+}
+
 /* Style the last row*/
-.form-container table tr:last-child td {
+#infotable table tr:last-child td {
     border: none;
+}
+
+#nsrp table {
+    margin-top: 0%;
+    background: white;
+}
+
+#nsrp label {
+    font-weight: bold;
+}
+
+#nsrp input {
+    border: none;
+    outline: none;
+    font-size: medium;
+}
+
+#nsrp td {
+    white-space: normal;
+}
+
+.formlabel {
+    text-align: center;
 }
 
 
@@ -809,6 +847,10 @@ input[type="submit"]:hover {
     margin-top: 3px;
     margin-bottom: 3px;
     box-sizing: border-box;
+}
+
+.disability-checkbox {
+    margin-left: 30px;
 }
 
 .custom-popup {

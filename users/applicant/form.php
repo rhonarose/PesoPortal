@@ -56,11 +56,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $gsis_sss_id = filter_var($jsonData['gsis/sss'], FILTER_SANITIZE_STRING);
                         $pagibig_no = filter_var($jsonData['pagibig'], FILTER_SANITIZE_STRING);
                         $philhealth_no = filter_var($jsonData['philhealth'], FILTER_SANITIZE_STRING);
+
                 
-                        // Handle the selectedDisabilities array
+                        // Assuming you have the selected disabilities in $jsonData['selectedDisabilities']
                         $selectedDisabilities = $jsonData['selectedDisabilities'];
-                        $disability = json_encode($selectedDisabilities);
-                
+
+                        // Sanitize each selected disability
+                        $cleanedDisabilities = array_map('htmlspecialchars', $selectedDisabilities);
+
+                        // Implode the sanitized disabilities into a comma-separated string
+                        $disability = implode(', ', $cleanedDisabilities);
+
                         $employment_status = filter_var($jsonData['empstat'], FILTER_SANITIZE_STRING);
                         $employment_type = '';
                 
