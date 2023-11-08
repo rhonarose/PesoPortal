@@ -58,13 +58,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $philhealth_no = filter_var($jsonData['philhealth'], FILTER_SANITIZE_STRING);
                 
                          // Assuming you have the selected disabilities in $jsonData['selectedDisabilities']
-                         $selectedDisabilities = $jsonData['selectedDisabilities'];
+                        $selectedDisabilities = $jsonData['selectedDisabilities'];
 
-                         // Sanitize each selected disability
-                         $cleanedDisabilities = array_map('htmlspecialchars', $selectedDisabilities);
- 
-                         // Implode the sanitized disabilities into a comma-separated string
-                         $disability = implode(', ', $cleanedDisabilities);
+                        // Sanitize each selected disability
+                        $cleanedDisabilities = array_map('htmlspecialchars', $selectedDisabilities);
+
+                        // Implode the sanitized disabilities into a comma-separated string
+                        $disability = implode(', ', $cleanedDisabilities);
                 
                         $employment_status = filter_var($jsonData['empstat'], FILTER_SANITIZE_STRING);
                         $employment_type = '';

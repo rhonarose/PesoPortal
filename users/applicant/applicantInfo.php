@@ -2245,8 +2245,8 @@ session_start(); // Start the session
         ];
 
         function capitalizeFirstLetter(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             let selectedDisabilities = [];
