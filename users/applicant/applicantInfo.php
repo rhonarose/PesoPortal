@@ -47,7 +47,7 @@ session_start(); // Start the session
 <body>
     <?php require_once '../userNavbar.php'; ?>
     <div class="parent">
-        <div class="container">
+        <div class="container" id="infotable">
             <div class="background-container"></div>
             <?php require_once 'formSidebar.php'; ?>
             <div class="form-container" id="personalInfoForm">
@@ -374,7 +374,7 @@ session_start(); // Start the session
             <div class="form-container" id="preferenceForm">
                 <!-- Preference Form -->
                 <h2>PREFERENCE</h2>
-                <form id="preferences" class="form-step" data-form-type="preference">
+                <form id="preferences" name="form2" class="form-step" data-form-type="preference">
                     <table>
                         <tr class="formlabel">
                             <td colspan="2">
@@ -565,7 +565,7 @@ session_start(); // Start the session
                         <td colspan="5">
                             <div class="butcon">
                                 <input type="button" value="PREVIOUS" onclick="showPreviousForm('languageForm', 'preferenceForm')">
-                                <input type="button" value="NEXT" onclick="showNextForm('languageForm', 'eduBackgroundForm')">
+                                <input type="button" value="NEXT" onclick="if (validateLanguageForm()) showNextForm('languageForm', 'eduBackgroundForm')">
                             </div>
                         </td>
                     </tr>
@@ -622,6 +622,7 @@ session_start(); // Start the session
                             <td>
                                 <select id="elemlevel" name="elemlevel">
                                     <option value="" disabled selected hidden>LEVEL</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Grade 1">GRADE 1</option>
                                     <option value="Grade 2">GRADE 2</option>
                                     <option value="Grade 3">GRADE 3</option>
@@ -654,6 +655,7 @@ session_start(); // Start the session
                             <td>
                                 <select id="seclevel" name="seclevel">
                                     <option value="" disabled selected hidden>LEVEL</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Grade 7">GRADE 7</option>
                                     <option value="Grade 8">GRADE 8</option>
                                     <option value="Grade 9">GRADE 9</option>
@@ -680,6 +682,7 @@ session_start(); // Start the session
                             <td>
                                 <select id="tercourse" name="tercourse">
                                     <option value="" disabled selected hidden>COURSE</option>
+                                    <option value="N/A">N/A</option>
                                     <!-- Bachelor of Science (BS) -->
                                     <optgroup label="Bachelor of Science (BS)">
                                         <option value="BS in Accounting">BS IN ACCOUNTING</option>
@@ -851,6 +854,7 @@ session_start(); // Start the session
                             <td>
                                 <select id="terlevel" name="terlevel">
                                     <option value="" disabled selected hidden>LEVEL</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="First Year">FIRST YEAR</option>
                                     <option value="Second Year">SECOND YEAR</option>
                                     <option value="Third Year">THIRD YEAR</option>
@@ -877,6 +881,7 @@ session_start(); // Start the session
                             <td>
                                 <select id="gradcourse" name="gradcourse">
                                     <option value="" disabled selected hidden>COURSE</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Master of Arts (MA)">MASTER OF ARTS (MA)</option>
                                     <option value="Master of Science (MS)">MASTER OF SCIENCE (MS)</option>
                                     <option value="Master of Business Administration (MBA)">MASTER OF BUSINESS ADMINISTRATION (MBA)</option>
@@ -925,6 +930,7 @@ session_start(); // Start the session
                             <td>
                                 <select id="gradlevel" name="gradlevel">
                                     <option value="" disabled selected hidden>LEVEL</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="First Year">FIRST YEAR</option>
                                     <option value="Second Year">SECOND YEAR</option>
                                     <option value="Third Year">THIRD YEAR</option>
@@ -962,7 +968,7 @@ session_start(); // Start the session
                             <label for="tvcourse">TRAINING/VOCATIONAL COURSE</label>
                             </td>
                             <td>
-                                <label for="duration">DURATION<br>(dd/mm/yyyy to dd/mm/yyyy)</label>
+                                <label for="duration">DURATION<br>(mm/dd/yyyy to mm/dd/yyyy)</label>
                             </td>
                             <td>
                                 <label for="traininst">TRAINING INSTITUTION</label>
@@ -1157,6 +1163,7 @@ session_start(); // Start the session
                             <td> 
                                 <select id="workstat1" name="workstat1">
                                     <option value="" disabled selected hidden>STATUS</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Permanent">PERMANENT</option>
                                     <option value="Contractual">CONTRACTUAL</option>
                                     <option value="Part-time">PART-TIME</option>
@@ -1181,6 +1188,7 @@ session_start(); // Start the session
                             <td> 
                                 <select id="workstat2" name="workstat2">
                                     <option value="" disabled selected hidden>STATUS</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Permanent">PERMANENT</option>
                                     <option value="Contractual">CONTRACTUAL</option>
                                     <option value="Part-time">PART-TIME</option>
@@ -1205,6 +1213,7 @@ session_start(); // Start the session
                             <td> 
                                 <select id="workstat3" name="workstat3">
                                     <option value="" disabled selected hidden>STATUS</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Permanent">PERMANENT</option>
                                     <option value="Contractual">CONTRACTUAL</option>
                                     <option value="Part-time">PART-TIME</option>
@@ -1229,6 +1238,7 @@ session_start(); // Start the session
                             <td> 
                                 <select id="workstat4" name="workstat4">
                                     <option value="" disabled selected hidden>STATUS</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Permanent">PERMANENT</option>
                                     <option value="Contractual">CONTRACTUAL</option>
                                     <option value="Part-time">PART-TIME</option>
@@ -1253,6 +1263,7 @@ session_start(); // Start the session
                             <td> 
                                 <select id="workstat5" name="workstat5">
                                     <option value="" disabled selected hidden>STATUS</option>
+                                    <option value="N/A">N/A</option>
                                     <option value="Permanent">PERMANENT</option>
                                     <option value="Contractual">CONTRACTUAL</option>
                                     <option value="Part-time">PART-TIME</option>
@@ -1275,22 +1286,32 @@ session_start(); // Start the session
                 <!-- Skills Form -->
                 <h2>OTHER SKILLS ACQUIRED WITHOUT FORMAL TRAINING</h2>
                 <form id="skillS" class="form-step" data-form-type="skill">
-             
-                        <label for="addSkills">Add Skills:</label>
-                        <input type="text" id="addSkills" placeholder="Search and add skills">
-                        
-                        <ul id="searchResults"></ul>
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="addSkills">ADD SKILLS:</label>
+                                <input type="text" id="addSkills" placeholder="Search and add skills">
 
-                        <label for="addedSkills">Added Skills:</label>
-                        <ul id="addedSkills">
-                            <input type="hidden" id="selectedSkills" name="selectedSkills">
-                        </ul>
-                    
+                                <ul id="searchResults"></ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="addedSkills">ADDED SKILLS:</label>
+                                <ul id="addedSkills">
+                                    <input type="hidden" id="selectedSkills" name="selectedSkills">
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
                                 <div class="butcon">
                                     <input type="button" value="PREVIOUS" onclick="showPreviousForm('skillsForm', 'workExpForm')">
                                     <input type="submit" value="SUBMIT">
                                 </div>
-                 
+                            </td>
+                        </tr>
+                    </table>
                 </form>
             </div>
             <div id="custom-popup" class="custom-popup">
@@ -1354,6 +1375,29 @@ session_start(); // Start the session
             updateSidebarSelection(nextFormId);
         }
 
+        function validateForm(form) {
+            const requiredFields = form.querySelectorAll('[required]');
+            let firstEmptyField = null;
+
+            for (const field of requiredFields) {
+                if (field.value.trim() === '') {
+                    field.style.borderColor = 'red'; // Highlight empty fields in red
+                    if (!firstEmptyField) {
+                        firstEmptyField = field;
+                    }
+                } else {
+                    field.style.borderColor = ''; // Reset border color for non-empty fields
+                }
+            }
+
+            if (firstEmptyField) {
+                firstEmptyField.focus(); // Focus on the first empty required field
+                return false; // Prevent form submission
+            }
+
+            return true; // Form is valid
+        }
+
         function showPreviousForm(currentFormId, previousFormId) {
             var currentForm = document.getElementById(currentFormId);
             var previousForm = document.getElementById(previousFormId);
@@ -1398,10 +1442,31 @@ session_start(); // Start the session
         // Call the function to disable navbar elements
         disableNavbarElements();
 
-    // Define a shared array of date options
-    const dateOptions = [
+        function validateLanguageForm() {
+            // List of language checkboxes
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             
-            "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969",
+            // Check if at least one checkbox is checked
+            let atLeastOneChecked = false;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    atLeastOneChecked = true;
+                }
+            });
+            
+            if (!atLeastOneChecked) {
+                alert("Please select at least one language proficiency.");
+                return false; // Prevent the form from moving to the next step
+            }
+            
+            return true; // Proceed to the next step
+        }  
+
+        // Define a shared array of date options
+        const dateOptions = [
+            
+            "N/A","1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969",
             "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979",
             "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989",
             "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999",
@@ -2220,6 +2285,7 @@ session_start(); // Start the session
             
         ];
 
+
         document.addEventListener('DOMContentLoaded', function() {
             let selectedDisabilities = [];
 
@@ -2246,157 +2312,134 @@ session_start(); // Start the session
             }
 
 
-        const addSkillsInput = document.getElementById("addSkills");
-        const addedSkillsList = document.getElementById("addedSkills");
-        const searchResultsList = document.getElementById("searchResults");
+            const addSkillsInput = document.getElementById("addSkills");
+            const addedSkillsList = document.getElementById("addedSkills");
+            const searchResultsList = document.getElementById("searchResults");
 
-        addSkillsInput.addEventListener("input", () => {
-            const search = addSkillsInput.value.toLowerCase();
-            const filteredSkills = search
-                ? skillsList.filter(skill => skill.toLowerCase().includes(search))
-                : [];
-            displaySkills(filteredSkills, searchResultsList);
-        });
-
-        function displaySkills(skills, targetList) {
-            targetList.innerHTML = "";
-            skills.forEach(skill => {
-                const li = document.createElement("li");
-                li.textContent = skill;
-                li.addEventListener("click", () => {
-                    if (!isSkillAlreadyAdded(skill)) {
-                        // Add the clicked skill to the added skills list
-                        const addedSkill = document.createElement("li");
-                        addedSkill.textContent = skill;
-                        addedSkill.classList.add("added-skill");
-                        addedSkill.setAttribute("data-skill", skill);
-                        const removeButton = document.createElement("span");
-                        removeButton.textContent = "x";
-                        removeButton.classList.add("remove-skill");
-                        removeButton.addEventListener("click", () => {
-                            // Remove the added skill when the X button is clicked
-                            addedSkillsList.removeChild(addedSkill);
-                        });
-                        addedSkill.appendChild(removeButton);
-                        addedSkillsList.appendChild(addedSkill);
-                    }
-                });
-                targetList.appendChild(li);
+            addSkillsInput.addEventListener("input", () => {
+                const search = addSkillsInput.value.toLowerCase();
+                const filteredSkills = search
+                    ? skillsList.filter(skill => skill.toLowerCase().includes(search))
+                    : [];
+                displaySkills(filteredSkills, searchResultsList);
             });
-        }
 
-        function isSkillAlreadyAdded(skill) {
-            const addedSkills = [...addedSkillsList.getElementsByClassName("added-skill")];
-            return addedSkills.some(li => li.getAttribute("data-skill") === skill);
-        }
-
-        function displayCustomPopup(redirectURL) {
-            const popup = document.getElementById('custom-popup');
-            const popupClose = document.getElementById('popup-close');
-
-            popup.style.display = 'block';
-
-            popupClose.addEventListener('click', function () {
-                popup.style.display = 'none';
-
-                if (redirectURL) {
-                    window.location.href = redirectURL; // Redirect to the specified URL
-                }
-            });
-        }
-        
-        let currentForm = 0;
-        const forms = document.querySelectorAll('.form-step');
-        let formData = {};
-
-        function validateForm(form) {
-            const requiredFields = form.querySelectorAll('[required]');
-            let firstEmptyField = null;
-
-            for (const field of requiredFields) {
-                if (field.value.trim() === '') {
-                    field.style.borderColor = 'red'; // Highlight empty fields in red
-                    if (!firstEmptyField) {
-                        firstEmptyField = field;
-                    }
-                } else {
-                    field.style.borderColor = ''; // Reset border color for non-empty fields
-                }
-            }
-
-            if (firstEmptyField) {
-                firstEmptyField.focus(); // Focus on the first empty required field
-                return false; // Prevent form submission
-            }
-
-            return true; // Form is valid
-        }
-
-        function submitForm() {
-            formData = {};
-            formData['form_types'] = [];
-
-            forms.forEach((form, index) => {
-                const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], input[type="radio"]:checked, select');
-                formFields.forEach(field => {
-                    formData[field.name] = field.value;
-                });
-
-                if (['personal_info', 'language', 'preference'].includes(form.getAttribute('data-form-type'))) {
-                    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
-                    checkboxes.forEach(checkbox => {
-                        formData[checkbox.name] = checkbox.checked;
+            function displaySkills(skills, targetList) {
+                targetList.innerHTML = "";
+                skills.forEach(skill => {
+                    const li = document.createElement("li");
+                    li.textContent = skill;
+                    li.addEventListener("click", () => {
+                        if (!isSkillAlreadyAdded(skill)) {
+                            // Add the clicked skill to the added skills list
+                            const addedSkill = document.createElement("li");
+                            addedSkill.textContent = skill;
+                            addedSkill.classList.add("added-skill");
+                            addedSkill.setAttribute("data-skill", skill);
+                            const removeButton = document.createElement("span");
+                            removeButton.textContent = "x";
+                            removeButton.classList.add("remove-skill");
+                            removeButton.addEventListener("click", () => {
+                                // Remove the added skill when the X button is clicked
+                                addedSkillsList.removeChild(addedSkill);
+                            });
+                            addedSkill.appendChild(removeButton);
+                            addedSkillsList.appendChild(addedSkill);
+                        }
                     });
-                }
-
-                formData['form_types'].push(form.getAttribute('data-form-type'));
-            });
-
-            // Collect the added skills and add them to formData
-            const addedSkills = Array.from(addedSkillsList.getElementsByClassName("added-skill")).map(li => li.getAttribute("data-skill"));
-            formData['selectedSkills'] = addedSkills;
-
-            // Collect selected disabilities
-            updateSelectedDisabilities();
-            formData['selectedDisabilities'] = selectedDisabilities;
-
-            console.log('Form Types Array:', formData['form_types']);
-
-            const jsonData = JSON.stringify(formData);
-
-            const currentFormElement = forms[currentForm];
-            if (validateForm(currentFormElement) === false) {
-                return;
+                    targetList.appendChild(li);
+                });
             }
 
-            // Display the custom pop-up message
-            displayCustomPopup('applicantHome.php');
+            function isSkillAlreadyAdded(skill) {
+                const addedSkills = [...addedSkillsList.getElementsByClassName("added-skill")];
+                return addedSkills.some(li => li.getAttribute("data-skill") === skill);
+            }
 
-            console.log('Simulating server response');
-            console.log('Form Data:', formData);
+            function displayCustomPopup(redirectURL) {
+                const popup = document.getElementById('custom-popup');
+                const popupClose = document.getElementById('popup-close');
 
-            fetch('form.php', {
-                method: 'POST',
-                body: jsonData,
-                headers: {
-                    'Content-Type': 'application/json'
+                popup.style.display = 'block';
+
+                popupClose.addEventListener('click', function () {
+                    popup.style.display = 'none';
+
+                    if (redirectURL) {
+                        window.location.href = redirectURL; // Redirect to the specified URL
+                    }
+                });
+            }
+            
+            let currentForm = 0;
+            const forms = document.querySelectorAll('.form-step');
+            let formData = {};
+
+            function submitForm() {
+                formData = {};
+                formData['form_types'] = [];
+
+                forms.forEach((form, index) => {
+                    const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], input[type="radio"]:checked, select');
+                    formFields.forEach(field => {
+                        formData[field.name] = field.value;
+                    });
+
+                    if (['personal_info', 'language', 'preference'].includes(form.getAttribute('data-form-type'))) {
+                        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                        checkboxes.forEach(checkbox => {
+                            formData[checkbox.name] = checkbox.checked;
+                        });
+                    }
+
+                    formData['form_types'].push(form.getAttribute('data-form-type'));
+                });
+
+                // Collect the added skills and add them to formData
+                const addedSkills = Array.from(addedSkillsList.getElementsByClassName("added-skill")).map(li => li.getAttribute("data-skill"));
+                formData['selectedSkills'] = addedSkills;
+
+                // Collect selected disabilities
+                updateSelectedDisabilities();
+                formData['selectedDisabilities'] = selectedDisabilities;
+
+                console.log('Form Types Array:', formData['form_types']);
+
+                const jsonData = JSON.stringify(formData);
+
+                const currentFormElement = forms[currentForm];
+                if (validateForm(currentFormElement) === false) {
+                    return;
                 }
-            }).then(response => {
-                if (response.ok) {
-                    console.log('Form submitted successfully');
-                } else {
-                    console.error('Form submission failed');
-                }
-            }).catch(error => {
-                console.error('Network error:', error);
-            });
-        }
+
+                // Display the custom pop-up message
+                displayCustomPopup('applicantHome.php');
+
+                console.log('Simulating server response');
+                console.log('Form Data:', formData);
+
+                fetch('form.php', {
+                    method: 'POST',
+                    body: jsonData,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        console.log('Form submitted successfully');
+                    } else {
+                        console.error('Form submission failed');
+                    }
+                }).catch(error => {
+                    console.error('Network error:', error);
+                });
+            }
 
 
-        const submitButton = document.querySelector('#skillS input[type="submit"]');
-        submitButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            submitForm();
+            const submitButton = document.querySelector('#skillS input[type="submit"]');
+            submitButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                submitForm();
         });
     });
 
