@@ -2244,6 +2244,10 @@ session_start(); // Start the session
             
         ];
 
+        function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
         document.addEventListener('DOMContentLoaded', function() {
             let selectedDisabilities = [];
 
@@ -2338,10 +2342,10 @@ session_start(); // Start the session
             formData['form_types'] = [];
 
             forms.forEach((form, index) => {
-                const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], input[type="radio"]:checked, select');
-                formFields.forEach(field => {
-                    formData[field.name] = field.value;
-                });
+                    const formFields = form.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], input[type="radio"]:checked, select');
+                    formFields.forEach(field => {
+                        formData[field.name] = field.type === 'text' ? capitalizeFirstLetter(field.value) : field.value;
+                    });
 
                 if (['personal_info', 'language', 'preference'].includes(form.getAttribute('data-form-type'))) {
                     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
