@@ -1367,6 +1367,29 @@ session_start(); // Start the session
             updateSidebarSelection(previousFormId);
         }
 
+        function validateForm(form) {
+            const requiredFields = form.querySelectorAll('[required]');
+            let firstEmptyField = null;
+
+            for (const field of requiredFields) {
+                if (field.value.trim() === '') {
+                    field.style.borderColor = 'red'; // Highlight empty fields in red
+                    if (!firstEmptyField) {
+                        firstEmptyField = field;
+                    }
+                } else {
+                    field.style.borderColor = ''; // Reset border color for non-empty fields
+                }
+            }
+
+            if (firstEmptyField) {
+                firstEmptyField.focus(); // Focus on the first empty required field
+                return false; // Prevent form submission
+            }
+
+            return true; // Form is valid
+        }
+
         document.getElementById('cpno').addEventListener('input', function (e) {
             let input = e.target;
             let value = input.value.replace(/\D/g, '').substring(0, 11); // Remove non-numeric characters and limit to 11 characters
@@ -2309,29 +2332,6 @@ session_start(); // Start the session
         let currentForm = 0;
         const forms = document.querySelectorAll('.form-step');
         let formData = {};
-
-        function validateForm(form) {
-            const requiredFields = form.querySelectorAll('[required]');
-            let firstEmptyField = null;
-
-            for (const field of requiredFields) {
-                if (field.value.trim() === '') {
-                    field.style.borderColor = 'red'; // Highlight empty fields in red
-                    if (!firstEmptyField) {
-                        firstEmptyField = field;
-                    }
-                } else {
-                    field.style.borderColor = ''; // Reset border color for non-empty fields
-                }
-            }
-
-            if (firstEmptyField) {
-                firstEmptyField.focus(); // Focus on the first empty required field
-                return false; // Prevent form submission
-            }
-
-            return true; // Form is valid
-        }
 
         function submitForm() {
             formData = {};
