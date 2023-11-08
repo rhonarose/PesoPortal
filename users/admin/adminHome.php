@@ -3,30 +3,6 @@ session_start(); // Start the session
 
     // Include your database connection file
     require_once "../../config/dbconnect.php";
-
-    $id="";
-    $name="";
-    $email="";
-    $password="";
-
-    if(isset($_GET['editid'])) {
-        try {
-            $sql="SELECT * FROM admin WHERE md5(id)=?";
-            $data = array($_GET['editid']);
-            $stmt=$conn->prepare($sql);
-            $stmt->execute($data);
-            $row=$stmt->fetch();
-            $id=$row['id'];
-            $name=$row['name'];
-            $email=$row['email'];
-            $password=$row['password'];
-
-        } catch(\Throwable $th) {
-            //throw $th
-        }
-    }
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -98,10 +74,9 @@ session_start(); // Start the session
 
                                     // Fetch and display admin accounts as table rows
                                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                        echo "<tr>";
+                                        echo "<tr id='" . $row['id'] . "'>";
                                         echo "<td>" . $row['name'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
-                                        $idenc=md5($row['id']);
                                         echo "<td> <button class='edit-button' onclick='openEditAdminModal(" . $row['id'] . ")'>Edit</button></td>";
                                         echo "<td><button class='delete-button' onclick='deleteAdminAccount(" . $row['id'] . ")'>Delete</button></td>";
                                         echo "</tr>";
@@ -160,11 +135,11 @@ session_start(); // Start the session
                     <form id="editAdminForm" action="" method="POST">
                         <div class="form-field">
                             <label for="editAdminName">Edit Admin Name:</label>
-                            <input type="text" id="editAdminName" placeholder="Enter new admin name" value="<?=$name?>" required>
+                            <input type="text" id="editAdminName" placeholder="Enter new admin name" value="" required>
                         </div>
                         <div class="form-field">
-                            <label for="newAdminEmail">Edit Email:</label>
-                            <input type="text" id="editAdminEmail" placeholder="Enter new email address" value="<?=$email?>" required>
+                            <label for="editAdminEmail">Edit Email:</label>
+                            <input type="text" id="editAdminEmail" placeholder="Enter new email address" value="" required>
                         </div>
                         <div style="position: relative;"> <!-- Wrap password input and toggle icon in a container -->
                             <div class="form-field">
@@ -177,8 +152,8 @@ session_start(); // Start the session
                         </div>
                         <div style="position: relative;"> <!-- Wrap password input and toggle icon in a container -->
                             <div class="form-field">
-                                <label for="newAdminPass">Enter New Password:</label>
-                                <input type="password" id="newAdminPass" name="adminNewPass" placeholder="Enter new password" required>
+                                <label for="editAdminPassword">Enter New Password:</label>
+                                <input type="password" id="editAdminPassword" name="adminNewPass" placeholder="Enter new password" required>
                                     <a class="inputpass" onclick="togglePasswordVisibility('newAdminPass', 'passicon9')" style="position: absolute; right: 15px; top: 66%; transform: translateY(-50%); cursor: pointer; font-size: 14px;">
                                         <i class="fa fa-eye-slash" id="passicon9"></i>
                                     </a>
@@ -187,7 +162,7 @@ session_start(); // Start the session
                      
                         <!-- Edit Button -->
                         <div class="butcon">
-                            <button type="button" onclick="editAdminAccount()">Edit</button>
+                            <button type="button" onclick="editAdminAccount(<? $row['id'] ?>)">Edit</button>
                         </div>
                     </form>
                 </div>
@@ -234,7 +209,6 @@ session_start(); // Start the session
             </div>
 
             <div class="form-container" id="applicant">
-                <!-- Eligibility Form -->
                 <div class="profile-info-item">
                     <h2>APPLICANTS</h2>
                 </div>
@@ -248,7 +222,7 @@ session_start(); // Start the session
                                     <th>Middle Name</th>
                                     <th>Last Name</th>
                                     <th>Phone No.</th>
-                                    <th>City/Municipality</th>
+                                    <th>House No./Street/Village</th>
                                     <th>Barangay</th>
                                     <th>Experience/Skills</th>
                                     <th>View NSRP Form</th>
@@ -271,7 +245,59 @@ session_start(); // Start the session
                                         echo "<td>" . $row['middle_name'] . "</td>";
                                         echo "<td>" . $row['surname'] . "</td>";
                                         echo "<td>" . $row['cellphone_number'] . "</td>";
-                                        echo "<td>" . $row['municipality_city'] . "</td>";
+                                        echo "<td>" . $row['house_no_street_village'] . "</td>";
+                                        echo "<td>" . $row['barangay'] . "</td>";
+                                        echo "<td>" . $row['skills'] . "</td>";
+                                        echo "<td><button class='edit-button' onclick='deleteAdminAccount(" . $row['applicant_id'] . ")'>View NSRP Form</button></td>";
+                                        echo "</tr>";
+                                    }
+                                } catch (PDOException $e) {
+                                    // Handle the error if there is a problem with the database connection or query
+                                    echo "Error: " . $e->getMessage();
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container" id="employer">
+            <div class="profile-info-item">
+                    <h2>EMPLOYERS</h2>
+                </div>
+                <div class="profile-info">
+                    <div class="admin-table">
+                        <h3>Employer Accounts</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Employer Name</th>
+                                    <th>Company Name</th>
+                                    <th>Company Address</th>                                    
+                                    <th>Company Email</th>
+                                                            
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Include your PDO database connection
+                                require_once '../../config/dbconnect.php';
+
+                                try {
+                                    // Query to get admin accounts
+                                    $select_applicant_info = "SELECT personal_info.*, skills.* FROM personal_info JOIN skills ON personal_info.applicant_id = skills.applicant_id";
+                                    $stmt_applicant_info = $conn->query($select_applicant_info);
+                                   
+                                    // Fetch and display admin accounts as table rows
+                                    while ($row = $stmt_applicant_info->fetch(PDO::FETCH_ASSOC)) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['first_name'] . "</td>";
+                                        echo "<td>" . $row['middle_name'] . "</td>";
+                                        echo "<td>" . $row['surname'] . "</td>";
+                                        echo "<td>" . $row['cellphone_number'] . "</td>";
+                                        echo "<td>" . $row['house_no_street_village'] . "</td>";
                                         echo "<td>" . $row['barangay'] . "</td>";
                                         echo "<td>" . $row['skills'] . "</td>";
                                         echo "<td><button class='edit-button' onclick='deleteAdminAccount(" . $row['applicant_id'] . ")'>View NSRP Form</button></td>";
@@ -289,14 +315,7 @@ session_start(); // Start the session
 
             </div>
 
-            <div class="form-container" id="employer">
-                <!-- Eligibility Form -->
-                <h2>EMPLOYERS</h2>
-               
-            </div>
-
             <div class="form-container" id="report">
-                <!-- Eligibility Form -->
                 <h2>REPORTS</h2>
                
             </div>
@@ -352,10 +371,37 @@ session_start(); // Start the session
         }
 
         // Function to open the "Edit Admin Account" modal
-        function openEditAdminModal() {
+        function openEditAdminModal(adminId) {
             var modal = document.getElementById("editAdminModal");
+
+            fetch('readAdmin.php', {
+                    method: 'READ',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: adminId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the retrieved data here
+                if (data.name && data.email) {
+                    // Access the admin's name and email
+                    const adminName = data.name;
+                    const adminEmail = data.email;
+                    document.getElementById("editAdminName").value = `${adminName}`;
+                    document.getElementById("editAdminEmail").value = `${adminEmail}`;
+                    // console.log(`Admin Name: ${adminName}`);
+                    // console.log(`Admin Email: ${adminEmail}`);
+                } else {
+                    console.error('Error: Invalid data received from the server.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
             modal.style.display = "block";
         }
+
         // Function to close the "Edit Admin Account" modal
         function closeEditAdminModal() {
             var modal = document.getElementById("editAdminModal");
@@ -363,74 +409,138 @@ session_start(); // Start the session
         }
 
 
-// Function to add an admin account
-function addAdminAccount() {
-    // Retrieve form data
-    const name = document.getElementById('newAdminName').value;
-    const email = document.getElementById('newAdminEmail').value;
-    const password = document.getElementById('newAdminPassword').value;
+        // CREATE ADMIN DATA
+        // Function to add an admin account
+        function addAdminAccount() {
+            // Retrieve form data
+            const name = document.getElementById('newAdminName').value;
+            const email = document.getElementById('newAdminEmail').value;
+            const password = document.getElementById('newAdminPassword').value;
 
-    // Create a FormData object to send the data
-    const formData = new FormData();
-    formData.append('newAdminName', name);
-    formData.append('newAdminEmail', email);
-    formData.append('newAdminPassword', password);
+            // Create a FormData object to send the data
+            const formData = new FormData();
+            formData.append('newAdminName', name);
+            formData.append('newAdminEmail', email);
+            formData.append('newAdminPassword', password);
 
-    // Send an AJAX request to the server to add the admin account
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'adminForm.php', true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            // Parse the JSON response to get the newly added admin account information
-            const newAdmin = JSON.parse(xhr.responseText);
+            // Send an AJAX request to the server to add the admin account
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'adminForm.php', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Parse the JSON response to get the newly added admin account information
+                    const newAdmin = JSON.parse(xhr.responseText);
 
-            // Close the modal after a successful submission
-            closeAddAdminModal();
+                    // Close the modal after a successful submission
+                    closeAddAdminModal();
 
-            // Clear the input fields
-            document.getElementById('newAdminName').value = '';
-            document.getElementById('newAdminEmail').value = '';
-            document.getElementById('newAdminPassword').value = '';
+                    // Clear the input fields
+                    document.getElementById('newAdminName').value = '';
+                    document.getElementById('newAdminEmail').value = '';
+                    document.getElementById('newAdminPassword').value = '';
 
-            // Add the newly added admin account to the HTML table
-            addAdminToTable(newAdmin);
-        } else {
-            // Handle errors here
-            console.error('Error adding admin account.');
+                    // Add the newly added admin account to the HTML table
+                    addAdminToTable(newAdmin);
+                } else {
+                    // Handle errors here
+                    console.error('Error adding admin account.');
+                }
+            };
+            xhr.send(formData);
         }
-    };
-    xhr.send(formData);
-}
 
-// Function to add a newly added admin to the HTML table
-function addAdminToTable(newAdmin) {
-    // Update the HTML table with the new data
-    const tableBody = document.querySelector('.admin-table tbody');
-    tableBody.innerHTML += `
-        <tr>
-            <td>${editAdmin.name}</td>
-            <td>${editAdmin.email}</td>
-            <td><button class="edit-button" onclick="editAdminAccount(${newAdmin.id})">Edit</button></td>
-            <td><button class="delete-button" onclick="deleteAdminAccount(${newAdmin.id})">Delete</button></td>
-        </tr>
-    `;
-}
+        // UPDATE ADMIN DATA
+        // Function to edit an admin account
+        function editAdminAccount(adminId) {
+            // Retrieve form data
+            const editName = document.getElementById('editAdminName').value;
+            const editEmail = document.getElementById('editAdminEmail').value;
+            const oldPass = document.getElementById('oldAdminPassword').value
+            const editPassword = document.getElementById('editAdminPass').value;
 
-// Function to add a newly added admin to the HTML table
-function addAdminToTable(newAdmin) {
-    // Update the HTML table with the new data
-    const tableBody = document.querySelector('.admin-table tbody');
-    tableBody.innerHTML += `
-        <tr>
-            <td>${newAdmin.name}</td>
-            <td>${newAdmin.email}</td>
-            <td><button class="edit-button" onclick="editAdminAccount(${newAdmin.id})">Edit</button></td>
-            <td><button class="delete-button" onclick="deleteAdminAccount(${newAdmin.id})">Delete</button></td>
-        </tr>
-    `;
-}
+            // Create a FormData object to send the data
+            const formData = new FormData();
+            formData.append('editAdminName', name);
+            formData.append('editAdminEmail', email);
+            formData.append('oldAdminPassword', oldpassword);
+            formData.append('editAdminPassword', editpassword);
 
-    
+            fetch('updateAdmin.php', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: adminId })
+            })
+        }
+
+        // GET ADMIN DATA
+        // READ ADMIN DATA
+        function readAdminData(adminId) {
+            fetch('readAdmin.php', {
+                    method: 'READ',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: adminId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the retrieved data here
+                if (data.name && data.email) {
+                    // Access the admin's name and email
+                    const adminName = data.name;
+                    const adminEmail = data.email;
+                    console.log(`Admin Name: ${adminName}`);
+                    console.log(`Admin Email: ${adminEmail}`);
+                } else {
+                    console.error('Error: Invalid data received from the server.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function deleteAdminAccount(adminId) {
+            if (confirm("Are you sure you want to delete this admin account?")) {
+                fetch('deleteAdmin.php', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: adminId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Declare row from the table to be deleted
+                    const rowToDelete = document.getElementById(adminId);
+                    if (data.success) {
+                        rowToDelete.remove(); // Delete the table row 
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+
+        // Function to add a newly added admin to the HTML table
+        function addAdminToTable(newAdmin) {
+            // Update the HTML table with the new data
+            const tableBody = document.querySelector('.admin-table tbody');
+            tableBody.innerHTML += `
+                <tr id="${newAdmin.id}">
+                    <td>${newAdmin.name}</td>
+                    <td>${newAdmin.email}</td>
+                    <td><button class="edit-button" onclick="openEditAdminModal(${newAdmin.id})">Edit</button></td>
+                    <td><button class="delete-button" onclick="deleteAdminAccount(${newAdmin.id})">Delete</button></td>
+                </tr>
+            `;
+        }
+
     </script>
 </body>
 </html>

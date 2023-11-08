@@ -73,13 +73,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     } elseif ($userType === 'Employer') {
-        $checkCompanyNameQuery = "SELECT * FROM employers WHERE company_name = ?";
+        $checkCompanyNameQuery = "SELECT * FROM employers WHERE employer_name = ?";
         $checkCompanyNameStmt = $conn->prepare($checkCompanyNameQuery);
         $checkCompanyNameStmt->execute([filter_input(INPUT_POST, 'empname', FILTER_SANITIZE_STRING)]);
         $checkCompanyNameResult = $checkCompanyNameStmt->fetch(PDO::FETCH_ASSOC);
 
         if ($checkCompanyNameResult) {
-            $companyNameError = "*Company Name already exists.*";
+            $companyNameError = "*Employer Name already exists.*";
         }
 
         $checkCompanyEmailQuery = "SELECT * FROM employers WHERE email = ?";
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $employerEmail = filter_input(INPUT_POST, 'empemail', FILTER_SANITIZE_EMAIL);
             $employerPassword = password_hash(filter_input(INPUT_POST, 'emppass', FILTER_SANITIZE_STRING), PASSWORD_BCRYPT);
 
-            $insertQuery = "INSERT INTO employers (company_name, email, password) VALUES (?, ?, ?)";
+            $insertQuery = "INSERT INTO employers (employer_name, email, password) VALUES (?, ?, ?)";
             $insertStmt = $conn->prepare($insertQuery);
             $insertStmt->execute([$employerName, $employerEmail, $employerPassword]);
 
