@@ -54,6 +54,8 @@ session_start(); // Start the session
             <div class="form-container" id="personalInfoForm">
                 <!-- Personal Information Form -->
                 <h2>PERSONAL INFORMATION</h2>
+                <p><b>INSTRUCTIONS: Please fill out the form legibly. Print in block letters. Check appropriate boxes. Please do not leave any items unanswered. Indicate "N/A"
+                                    if not applicable. Submit accomplished form after filling up.</b></p>
                 <form id="personalinfo" name="form1" class="form-step" data-form-type="personal_info">
                 
                     <table>
