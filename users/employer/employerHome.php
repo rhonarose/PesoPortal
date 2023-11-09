@@ -103,7 +103,7 @@ session_start(); // Start the session
                     </form>
                 </div>
             </div>
-
+ 
 
             <div class="form-container" id="createjob">
                 <!-- Job Posting Form -->
@@ -144,17 +144,48 @@ session_start(); // Start the session
                     </div>
                 </form>
             </div>
+         <div class="form-container" id="jobPost">
+               <!-- My Job Post Form -->
+               <h2>MY JOB POST</h2><br>
 
-            <div class="form-container" id="jobPost">
-                <!-- Eligibility Form -->
-                <h2>MY JOB POST</h2>
-               
-            </div>
+                    <!-- Job Title 1 with a button to show details -->
+                <div class="job-posting" onclick="showJobDetails('Job Title 1')">
+                    <div class="job-result-item">
+                          <img src="img/PesoLogo.png" alt="Company Logo">
+                        <div class="job-result">
+                            <h3 class="job-result-title">Software Engineer</h3>
+                            <p class="job-result-description">Join our team as a software engineer and work on exciting projects.</p>
+                            <p class="job-result-company">Company: TechCo</p>
+                        </div>
+                    </div>
+                 </div>
+            <div class="job-posting" onclick="showJobDetails('Job Title 2')">
+                    <div class="job-result-item">
+                          <img src="img/PesoLogo.png" alt="Company Logo">
+                        <div class="job-result">
+                            <h3 class="job-result-title">Chemistry Doctor</h3>
+                            <p class="job-result-description">For the better future outcomes led us your intelligence to create nad make easy way to live.</p>
+                            <p class="job-result-company">Company: MarcaLogistics</p>
+                        </div>
+                    </div>
+                 </div>
+     </div>
+     <div id="modalOverlay" class="overlay"></div>
+
+<!-- Modal for displaying job details -->
+<div id="jobDetailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeJobDetailsModal()">&times;</span>
+        <h2 id="jobDetailsTitle"></h2>
+        <div id="jobDetailsContent">
+            <!-- Job details will be displayed here -->
         </div>
     </div>
+</div>
 
     <script>
-        
+
+    
         // JavaScript code to handle form visibility
         function showForm(formId) {
             const forms = document.querySelectorAll('.form-container');
@@ -225,8 +256,55 @@ session_start(); // Start the session
             closeEditProfileModal();
 
             // You can also send the edited data to the server for saving (similar to previous examples)
-        }
 
+            
+        }
+          
+        function showJobDetails(jobTitle) {
+    const modal = document.getElementById('jobDetailsModal');
+    const overlay = document.getElementById('modalOverlay');
+    const title = document.getElementById('jobDetailsTitle');
+    const content = document.getElementById('jobDetailsContent');
+
+    // Set the title and content for the modal based on the job title
+    title.textContent = jobTitle;
+
+    // Here, you can fetch job details based on the job title and set the content dynamically
+    // For example:
+    if (jobTitle === 'Job Title 1') {
+        content.innerHTML = `
+            <p>Description: This is the job description for Job Title 1.</p>
+            <p>Location: Location 1</p>
+            <p>Job Type: Full Time</p>
+            <p>Salary: $50,000 - $60,000</p>
+            <p>Vacancies: 5 slots</p>
+        `;
+    } 
+    if (jobTitle === 'Job Title 2') {
+        content.innerHTML = `
+            <p>Description: This job is to create an environment wherein people can live safely.</p>
+            <p>Location: USA California 1</p>
+            <p>Job Type: Full Time</p>
+            <p>Salary: $70,000 - $80,000</p>
+            <p>Vacancies: 23 slots</p>
+        `;
+    }
+
+    // Show the modal and overlay
+    modal.style.display = 'block';
+    overlay.style.display = 'block';
+}
+
+// Close the modal and overlay
+function closeJobDetailsModal() {
+    const modal = document.getElementById('jobDetailsModal');
+    const overlay = document.getElementById('modalOverlay');
+    modal.style.display = 'none';
+    overlay.style.display = 'none';
+}
+
+              
+         
     </script>
 </body>
 </html>

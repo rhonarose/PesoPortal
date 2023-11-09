@@ -308,8 +308,8 @@ session_start(); // Start the session
                         <tr id="unemployedOpt" style="display: none;">
                             <td colspan="3">
                                 <!-- Additional options for Unemployed -->
-                                <input type="radio" id="new" name="unemployed" value="New Entrant/Fresh Gradate"> 
-                                <label for="new">New Entrant/Fresh Gradate</label><br>
+                                <input type="radio" id="new" name="unemployed" value="New Entrant/Fresh Graduate"> 
+                                <label for="new">New Entrant/Fresh Graduate</label><br>
                                 <input type="radio" id="finished" name="unemployed" value="Finished Contract"> 
                                 <label for="finished">Finished Contract</label><br>
                                 <input type="radio" id="resigned" name="unemployed" value="Resigned"> 

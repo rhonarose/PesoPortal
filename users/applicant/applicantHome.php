@@ -200,6 +200,17 @@ if(isset($_SESSION['applicant_id'])){
                 </table>
             </div>
 
+            <?php
+            // Define the formatDate function
+            function formatDate($date) {
+                if ($date == "0000-00-00") {
+                    return "";
+                } else {
+                    return date("m/d/Y", strtotime($date));
+                }
+            }
+            ?>
+
             <div class="form-container" id="nsrp">
                 <!-- Eligibility Form -->
                 <h2>NSRP FORM</h2>
@@ -249,7 +260,7 @@ if(isset($_SESSION['applicant_id'])){
                         <tr id="format">
                             <td colspan="2">
                                 <label for="bdate">BIRTHDATE:</label>
-                                <?= $fetch_personal_info["birthdate"]; ?>
+                                <?php echo formatDate($fetch_personal_info["birthdate"]); ?>
                             </td>
                             <td colspan="2">
                                 <label for="bplace">BIRTHPLACE:</label>
@@ -479,7 +490,7 @@ if(isset($_SESSION['applicant_id'])){
                             </td>
                             <td colspan="2">
                                 <label for="expiry">EXPIRY DATE:</label>
-                                <?= $fetch_preference["passport_expiry_date"]; ?>
+                                <?php echo formatDate($fetch_preference["passport_expiry_date"]); ?>
                             </td>
                         </tr>
                         
@@ -719,8 +730,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_training["course_name_1"]; ?>
                             </td>
                             <td id="format2">
-                                <?= $fetch_training["course_duration_start_1"]; ?> 
-                                <?= $fetch_training["course_duration_end_1"]; ?>
+                                <?php echo formatDate($fetch_training["course_duration_start_1"]); ?>
+                                <?php echo formatDate($fetch_training["course_duration_end_1"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_training["training_institution_1"]; ?>
@@ -737,8 +748,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_training["course_name_2"]; ?>
                             </td>
                             <td id="format2">
-                                <?= $fetch_training["course_duration_start_2"]; ?> 
-                                <?= $fetch_training["course_duration_end_2"]; ?>
+                                <?php echo formatDate($fetch_training["course_duration_start_2"]); ?>
+                                <?php echo formatDate($fetch_training["course_duration_end_2"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_training["training_institution_2"]; ?>
@@ -755,8 +766,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_training["course_name_3"]; ?>
                             </td>
                             <td id="format2">
-                                <?= $fetch_training["course_duration_start_3"]; ?> 
-                                <?= $fetch_training["course_duration_end_3"]; ?>
+                                <?php echo formatDate($fetch_training["course_duration_start_3"]); ?>
+                                <?php echo formatDate($fetch_training["course_duration_end_3"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_training["training_institution_3"]; ?>
@@ -804,7 +815,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_eligibility["rating1"]; ?>
                             </td>
                             <td> 
-                                <?= $fetch_eligibility["examdate1"]; ?>
+                                <?php echo formatDate($fetch_eligibility["examdate1"]); ?>
                             </td>
                             <td>
                                 <label for="profli1">1.</label>
@@ -813,7 +824,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_eligibility["professional_license1"]; ?>
                             </td>
                             <td>
-                                <?= $fetch_eligibility["valid1"]; ?>
+                                <?php echo formatDate($fetch_eligibility["valid1"]); ?>
                             </td>
                         </tr>
                         <tr>
@@ -827,7 +838,7 @@ if(isset($_SESSION['applicant_id'])){
                                <?= $fetch_eligibility["rating2"]; ?>
                             </td>
                             <td> 
-                                <?= $fetch_eligibility["examdate2"]; ?>
+                                <?php echo formatDate($fetch_eligibility["examdate2"]); ?>
                             </td>
                             <td>
                                 <label for="profli2">1.</label>
@@ -836,7 +847,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_eligibility["professional_license2"]; ?>
                             </td>
                             <td>
-                                <?= $fetch_eligibility["valid2"]; ?>
+                                <?php echo formatDate($fetch_eligibility["valid2"]); ?>
                             </td>
                         </tr>
                     </table>
