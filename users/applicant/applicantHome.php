@@ -1088,6 +1088,9 @@ if(isset($_SESSION['applicant_id'])){
             // Toggle edit mode
             isEditMode = !isEditMode;
 
+            // Close Side Panel
+            hideSidebar();
+
             // Make all form fields editable
             makeFieldsEditable();
         });
