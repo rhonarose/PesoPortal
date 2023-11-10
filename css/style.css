@@ -794,7 +794,7 @@ table td, th {
     background: white;
 }
 
-#nsrp label {
+#nsrp label, #infotable label {
     font-weight: bold;
 }
 

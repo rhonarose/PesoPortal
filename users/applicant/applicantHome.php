@@ -200,6 +200,17 @@ if(isset($_SESSION['applicant_id'])){
                 </table>
             </div>
 
+            <?php
+            // Define the formatDate function
+            function formatDate($date) {
+                if ($date == "0000-00-00") {
+                    return "";
+                } else {
+                    return date("m/d/Y", strtotime($date));
+                }
+            }
+            ?>
+
             <div class="form-container" id="nsrp">
                 <!-- Eligibility Form -->
                 <h2>NSRP FORM</h2>
@@ -231,7 +242,7 @@ if(isset($_SESSION['applicant_id'])){
                         <tr>
                             <td>
                                 <label for="sname">SURNAME:</label>
-                                <?= $fetch_personal_info["surname"]; ?>
+                                <span><?= $fetch_personal_info["surname"]; ?></span>
                             </td>
                             <td>
                                 <label for="fname">FIRST NAME:</label>
@@ -249,7 +260,7 @@ if(isset($_SESSION['applicant_id'])){
                         <tr id="format">
                             <td colspan="2">
                                 <label for="bdate">BIRTHDATE:</label>
-                                <?= $fetch_personal_info["birthdate"]; ?>
+                                <?php echo formatDate($fetch_personal_info["birthdate"]); ?>
                             </td>
                             <td colspan="2">
                                 <label for="bplace">BIRTHPLACE:</label>
@@ -400,11 +411,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_preference["preferred_occupation1"]; ?>
                             </td>
                             <td colspan="2">
-                                <input type="checkbox" <?= $fetch_preference["preferred_location1"] == 1 ? 'checked' : '' ?> value="1">   
+                                <input type="checkbox" <?= $fetch_preference["preferred_location1"] == 1 ? 'checked' : '' ?> value="1" disabled>   
                                 <label for="prefloclocal">LOCAL, specify cities/municipalities:</label>
                             </td>
                             <td colspan="2"> 
-                                <input type="checkbox" <?= $fetch_preference["preferred_location2"] == 1 ? 'checked' : '' ?> value="1">   
+                                <input type="checkbox" <?= $fetch_preference["preferred_location2"] == 1 ? 'checked' : '' ?> value="1" disabled>   
                                 <label for="preflocover">OVERSEAS, specify countries:</label>
                             </td>
                         </tr>
@@ -479,7 +490,7 @@ if(isset($_SESSION['applicant_id'])){
                             </td>
                             <td colspan="2">
                                 <label for="expiry">EXPIRY DATE:</label>
-                                <?= $fetch_preference["passport_expiry_date"]; ?>
+                                <?php echo formatDate($fetch_preference["passport_expiry_date"]); ?>
                             </td>
                         </tr>
                         
@@ -513,16 +524,16 @@ if(isset($_SESSION['applicant_id'])){
                             <label for="english">ENGLISH</label>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["english_read"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["english_read"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["english_write"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["english_write"] == 1 ? 'checked' : '' ?> value="1" disabled>
+                        </td>
+                        <td class="formlabel"> 
+                            <input type="checkbox" <?= $fetch_language["english_speak"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["english_speak"] == 1 ? 'checked' : '' ?> value="1">
-                        </td>
-                        <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["english_understand"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["english_understand"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                     </tr>
                     <tr>
@@ -530,16 +541,16 @@ if(isset($_SESSION['applicant_id'])){
                             <label for="filipino">FILIPINO</label>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["filipino_read"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["filipino_read"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["filipino_write"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["filipino_write"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["filipino_speak"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["filipino_speak"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["filipino_understand"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["filipino_understand"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                     </tr>
                     <tr>
@@ -548,16 +559,16 @@ if(isset($_SESSION['applicant_id'])){
                             <?= $fetch_language["other_language"]; ?>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["other_read"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["other_read"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["other_write"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["other_write"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["other_speak"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["other_speak"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                         <td class="formlabel">
-                            <input type="checkbox" <?= $fetch_language["other_understand"] == 1 ? 'checked' : '' ?> value="1">
+                            <input type="checkbox" <?= $fetch_language["other_understand"] == 1 ? 'checked' : '' ?> value="1" disabled>
                         </td>
                     </tr>
                    
@@ -719,8 +730,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_training["course_name_1"]; ?>
                             </td>
                             <td id="format2">
-                                <?= $fetch_training["course_duration_start_1"]; ?> 
-                                <?= $fetch_training["course_duration_end_1"]; ?>
+                                <?php echo formatDate($fetch_training["course_duration_start_1"]); ?>
+                                <?php echo formatDate($fetch_training["course_duration_end_1"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_training["training_institution_1"]; ?>
@@ -737,8 +748,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_training["course_name_2"]; ?>
                             </td>
                             <td id="format2">
-                                <?= $fetch_training["course_duration_start_2"]; ?> 
-                                <?= $fetch_training["course_duration_end_2"]; ?>
+                                <?php echo formatDate($fetch_training["course_duration_start_2"]); ?>
+                                <?php echo formatDate($fetch_training["course_duration_end_2"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_training["training_institution_2"]; ?>
@@ -755,8 +766,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_training["course_name_3"]; ?>
                             </td>
                             <td id="format2">
-                                <?= $fetch_training["course_duration_start_3"]; ?> 
-                                <?= $fetch_training["course_duration_end_3"]; ?>
+                                <?php echo formatDate($fetch_training["course_duration_start_3"]); ?>
+                                <?php echo formatDate($fetch_training["course_duration_end_3"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_training["training_institution_3"]; ?>
@@ -804,7 +815,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_eligibility["rating1"]; ?>
                             </td>
                             <td> 
-                                <?= $fetch_eligibility["examdate1"]; ?>
+                                <?php echo formatDate($fetch_eligibility["examdate1"]); ?>
                             </td>
                             <td>
                                 <label for="profli1">1.</label>
@@ -813,7 +824,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_eligibility["professional_license1"]; ?>
                             </td>
                             <td>
-                                <?= $fetch_eligibility["valid1"]; ?>
+                                <?php echo formatDate($fetch_eligibility["valid1"]); ?>
                             </td>
                         </tr>
                         <tr>
@@ -827,7 +838,7 @@ if(isset($_SESSION['applicant_id'])){
                                <?= $fetch_eligibility["rating2"]; ?>
                             </td>
                             <td> 
-                                <?= $fetch_eligibility["examdate2"]; ?>
+                                <?php echo formatDate($fetch_eligibility["examdate2"]); ?>
                             </td>
                             <td>
                                 <label for="profli2">1.</label>
@@ -836,7 +847,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_eligibility["professional_license2"]; ?>
                             </td>
                             <td>
-                                <?= $fetch_eligibility["valid2"]; ?>
+                                <?php echo formatDate($fetch_eligibility["valid2"]); ?>
                             </td>
                         </tr>
                     </table>
@@ -875,8 +886,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_work["position1"]; ?>
                             </td>
                             <td id="format2">
-                                <?= $fetch_work["inclusive_dates_start1"]; ?> 
-                                <?= $fetch_work["inclusive_dates_end1"]; ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_start1"]); ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_end1"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_work["status1"]; ?>
@@ -893,8 +904,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_work["position2"]; ?>
                             </td>
                             <td>
-                                <?= $fetch_work["inclusive_dates_start2"]; ?> 
-                                <?= $fetch_work["inclusive_dates_end2"]; ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_start2"]); ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_end2"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_work["status2"]; ?>
@@ -911,8 +922,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_work["position3"]; ?>
                             </td>
                             <td>
-                                <?= $fetch_work["inclusive_dates_start3"]; ?> 
-                                <?= $fetch_work["inclusive_dates_end3"]; ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_start3"]); ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_end3"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_work["status3"]; ?>
@@ -929,8 +940,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_work["position4"]; ?>
                             </td>
                             <td>
-                                <?= $fetch_work["inclusive_dates_start4"]; ?> 
-                                <?= $fetch_work["inclusive_dates_end4"]; ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_start4"]); ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_end4"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_work["status4"]; ?>
@@ -947,8 +958,8 @@ if(isset($_SESSION['applicant_id'])){
                                 <?= $fetch_work["position5"]; ?>
                             </td>
                             <td>
-                                <?= $fetch_work["inclusive_dates_start5"]; ?> 
-                                <?= $fetch_work["inclusive_dates_end5"]; ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_start5"]); ?>
+                                <?php echo formatDate($fetch_work["inclusive_dates_end5"]); ?>
                             </td>
                             <td> 
                                 <?= $fetch_work["status5"]; ?>
@@ -975,7 +986,7 @@ if(isset($_SESSION['applicant_id'])){
                     </table>
 
                 <div class="butcon">
-                    <input type="button" value="EDIT NSRP FORM" onclick="showNextForm('personalInfoForm', 'preferenceForm')">
+                    <input type="button" id="editButton" value="EDIT NSRP FORM">
                 </div>
             </div>
             
@@ -1067,9 +1078,41 @@ if(isset($_SESSION['applicant_id'])){
 
             // Close the modal
             closeEditProfileModal();
-
-            // You can also send the edited data to the server for saving (similar to previous examples)
         }
+
+        // Assuming you have a variable to store the edit mode status
+        var isEditMode = false;
+
+        // Add an event listener to the edit button
+        document.getElementById('editButton').addEventListener('click', function() {
+            // Toggle edit mode
+            isEditMode = !isEditMode;
+
+            // Make all form fields editable
+            makeFieldsEditable();
+        });
+
+        function makeFieldsEditable() {
+            // Get all span and input elements within the form container
+            var elements = document.querySelectorAll('.form-container span, .form-container input');
+
+            elements.forEach(function(element) {
+                if (element.tagName === 'SPAN') {
+                    // For spans, enable or disable content editing
+                    element.contentEditable = isEditMode;
+                } else if (element.tagName === 'INPUT' && element.type === 'checkbox') {
+                    // For checkboxes, enable or disable the checkbox
+                    element.disabled = !isEditMode;
+                }
+
+                // Add a border to indicate the editable state
+                element.style.border = isEditMode ? '1px solid #000' : 'none';
+            });
+        }
+
+
+
+
     </script>
 
 </body>
