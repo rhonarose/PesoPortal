@@ -274,14 +274,14 @@ if(isset($_SESSION['applicant_id'])){
                         </td>
                             <td colspan="2">
                                 <label for="religion">RELIGION:</label>
-                                <?= $fetch_personal_info["religion"]; ?>
+                                <span class="editable-select" data-field="religion"><?= $fetch_personal_info["religion"]; ?></span>
   
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2" id="format">
                                 <label for="civilstat">CIVIL STATUS:</label>
-                                <?= $fetch_personal_info["civil_status"]; ?>
+                                <span class="editable-select" data-field="civil_status"><?= $fetch_personal_info["civil_status"]; ?></span>
                             </td>
                             <td colspan="2">
                                 <p>PRESENT ADDRESS:</p>
@@ -302,7 +302,7 @@ if(isset($_SESSION['applicant_id'])){
                             </td>
                             <td>
                                 <label for="brgy">BARANGAY:</label>
-                                <?= $fetch_personal_info["barangay"]; ?>
+                                <span class="editable-select" data-field="barangay"><?= $fetch_personal_info["barangay"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -986,7 +986,7 @@ if(isset($_SESSION['applicant_id'])){
                     </table>
 
                 <div class="butcon">
-                    <input type="button" id="editButton" value="EDIT NSRP FORM">
+                    <input type="button" id="editButton" value="EDIT">
                 </div>
             </div>
             
@@ -1083,6 +1083,9 @@ if(isset($_SESSION['applicant_id'])){
         // Assuming you have a variable to store the edit mode status
         var isEditMode = false;
 
+        // Variable to store the edit button
+        var editButton = document.getElementById('editButton');
+
         // Function to scroll to the top of the form
         function scrollToTop() {
             // Assuming your form container has an ID, replace 'formContainerId' with the actual ID
@@ -1093,7 +1096,7 @@ if(isset($_SESSION['applicant_id'])){
         }
 
         // Add an event listener to the edit button
-        document.getElementById('editButton').addEventListener('click', function() {
+        editButton.addEventListener('click', function() {
             // Toggle edit mode
             isEditMode = !isEditMode;
 
@@ -1112,13 +1115,11 @@ if(isset($_SESSION['applicant_id'])){
 
         // Function to replace the Edit button with the Update button
         function replaceEditButton() {
-            var editButton = document.getElementById('editButton');
-
             // Create the Update button
             var updateButton = document.createElement('input');
             updateButton.type = 'button';
             updateButton.id = 'updateButton';
-            updateButton.value = 'UPDATE NSRP FORM';
+            updateButton.value = 'UPDATE';
             updateButton.addEventListener('click', function() {
                 // Call the updateForm function when the Update button is clicked
                 updateForm();
@@ -1150,26 +1151,28 @@ if(isset($_SESSION['applicant_id'])){
         function replaceUpdateButton() {
             var updateButton = document.getElementById('updateButton');
 
-            // Create the Edit button
-            var editButton = document.createElement('input');
-            editButton.type = 'button';
-            editButton.id = 'editButton';
-            editButton.value = 'EDIT NSRP FORM';
-            editButton.addEventListener('click', function() {
-                // Toggle edit mode
-                isEditMode = !isEditMode;
+            // Get all elements (both spans and inputs) within the form container
+            var formElements = document.querySelectorAll('.form-container span, .form-container input.editable-input, .form-container select.editable-input');
 
-                // Close Side Panel
-                hideSidebar();
+            formElements.forEach(function (element) {
+                if (element.tagName.toLowerCase() === 'input' && element.classList.contains('editable-input')) {
+                    // Replace the input element with a span
+                    var spanElement = document.createElement('span');
+                    spanElement.textContent = element.value;
 
-                // Replace the Edit button with the Update button
-                replaceEditButton();
+                    // Replace the input element with the span element
+                    element.parentNode.replaceChild(spanElement, element);
+                } else if (element.tagName.toLowerCase() === 'select' && element.classList.contains('editable-input')) {
+                    // Replace the select element with a span
+                    var spanElementSelect = document.createElement('span');
+                    spanElementSelect.textContent = element.options[element.selectedIndex].text;
 
-                // Make all form fields editable
-                makeFieldsEditable();
+                    // Replace the select element with the span element
+                    element.parentNode.replaceChild(spanElementSelect, element);
+                }
             });
 
-            // Replace the Update button with the Edit button
+            // Now, replace the Update button with the Edit button
             updateButton.parentNode.replaceChild(editButton, updateButton);
         }
 
@@ -1179,62 +1182,100 @@ if(isset($_SESSION['applicant_id'])){
             var updatedData = {};
 
             // Get all input elements within the form container
-            var inputElements = document.querySelectorAll('.form-container input.editable-input');
+            var inputElements = document.querySelectorAll('.form-container input.editable-input, .form-container select.editable-input');
 
-            inputElements.forEach(function(inputElement) {
+            inputElements.forEach(function (inputElement) {
                 // Extract the field name from the input element's ID or other attribute
                 var fieldName = inputElement.id; // Replace with the actual attribute used to identify the field
 
                 // Store the updated value in the object using the field name as the key
-                updatedData[fieldName] = inputElement.value;
+                updatedData[fieldName] = inputElement.tagName.toLowerCase() === 'select' ? inputElement.options[inputElement.selectedIndex].text : inputElement.value;
             });
 
             return updatedData;
         }
 
-
+        // Function to make fields editable or non-editable based on the current edit mode
         function makeFieldsEditable() {
-    // Get all elements (both spans and inputs) within the form container
-    var formElements = document.querySelectorAll('.form-container span, .form-container input.editable-input');
+            // Get all elements (both spans and inputs) within the form container
+            var formElements = document.querySelectorAll('.form-container span, .form-container input.editable-input');
 
-    formElements.forEach(function(element) {
-        if (element.tagName.toLowerCase() === 'span') {
-            // Create an input element based on the type of data
-            var inputElement;
+            formElements.forEach(function (element) {
+                if (element.tagName.toLowerCase() === 'span') {
+                    // Create an input element based on the type of data
+                    var inputElement;
 
-            if (element.classList.contains('editable-date')) {
-                // If it's a date field, create a date input
-                inputElement = document.createElement('input');
-                inputElement.type = 'date';
-                
-                // Assuming the span contains a valid date in 'MM/DD/YYYY' format
-                const dateParts = element.textContent.split('/');
-                const yyyyMMddDate = `${dateParts[2]}-${dateParts[0].padStart(2, '0')}-${dateParts[1].padStart(2, '0')}`;
-                inputElement.value = yyyyMMddDate;
-            } else {
-                // For other fields, create a text input
-                inputElement = document.createElement('input');
-                inputElement.type = 'text';
-                inputElement.value = element.textContent;
-            }
+                    if (element.classList.contains('editable-date')) {
+                        // If it's a date field, create a date input
+                        inputElement = document.createElement('input');
+                        inputElement.type = 'date';
 
-            // Set common attributes
-            inputElement.className = 'editable-input';
-            inputElement.readOnly = !isEditMode;
-            inputElement.style.border = isEditMode ? '1px solid #000' : 'none';
+                        // Assuming the span contains a valid date in 'MM/DD/YYYY' format
+                        const dateParts = element.textContent.split('/');
+                        const yyyyMMddDate = `${dateParts[2]}-${dateParts[0].padStart(2, '0')}-${dateParts[1].padStart(2, '0')}`;
+                        inputElement.value = yyyyMMddDate;
+                    } else if (element.classList.contains('editable-select')) {
+                        // If it's a select field, create a select input
+                        inputElement = document.createElement('select');
+                        inputElement.className = 'editable-input';
 
-            // Replace the span with the input element
-            element.parentNode.replaceChild(inputElement, element);
-        } else if (element.tagName.toLowerCase() === 'input' && element.classList.contains('editable-input')) {
-            // Replace the input element with a span
-            var spanElement = document.createElement('span');
-            spanElement.textContent = element.value;
+                        // Add options based on the field 
+                        if (element.dataset.field === 'civil_status') {
+                            addOptions(inputElement, ['Single', 'Married', 'Widowed','Separated', 'Live-In']); // Civil status options
+                        } else if (element.dataset.field === 'religion') {
+                            addOptions(inputElement, ['Roman Catholic', 'Born Again Christian', 'Iglesia Ni Cristo', 'Jehova\'s Witness', 'Islam', 'Latter-Day Saints', 'Protestant', 'Seventh-Day Adentist', 'Evangelical', 'Baptist', 'Buddhist', 'Hindu', 'Other']); // Religion options
+                        } else if (element.dataset.field === 'barangay') {
+                            addOptions(inputElement, [
+                                'Assumption', 'Bagong Buhay I', 'Bagong Buhay II', 'Bagong Buhay III', 'Citrus', 'Ciudad Real',
+                                'Dulong Bayan', 'Fatima', 'Fatima II', 'Fatima III', 'Fatima IV', 'Fatima V',
+                                'Francisco Homes - Guijo', 'Francisco Homes - Mulawin', 'Francisco Homes - Narra', 'Francisco Homes - Yakal',
+                                'Gaya-Gaya', 'Graceville', 'Gumaoc Central', 'Gumaoc East', 'Gumaoc West', 'Kaybanban',
+                                'Kaypian', 'Lawang Pari', 'Maharlika', 'Minuyan', 'Minuyan II', 'Minuyan III', 'Minuyan IV',
+                                'Minuyan Proper', 'Minuyan V', 'Muzon', 'Paradise III', 'Poblacion', 'Poblacion I',
+                                'Saint Martin de Porres', 'San Isidro', 'San Manuel', 'San Martin I', 'San Martin II',
+                                'San Martin III', 'San Martin IV', 'San Pedro', 'San Rafael I', 'San Rafael II', 'San Rafael III',
+                                'San Rafael IV', 'San Rafael V', 'San Roque', 'Santa Cruz I', 'Santa Cruz II', 'Santa Cruz III',
+                                'Santa Cruz IV', 'Santa Cruz V', 'Santo Cristo', 'Santo Niño I', 'Santo Niño II', 'Sapang Palay',
+                                'Tungkong Mangga'
+                            ]);
+                        }
 
-            // Replace the input element with the span element
-            element.parentNode.replaceChild(spanElement, element);
+                        // Set the selected option based on the span's text content
+                        inputElement.value = element.textContent;
+                    } else {
+                        // For other fields, create a text input
+                        inputElement = document.createElement('input');
+                        inputElement.type = 'text';
+                        inputElement.value = element.textContent;
+                    }
+
+                    // Set common attributes
+                    inputElement.className = 'editable-input';
+                    inputElement.readOnly = !isEditMode;
+                    inputElement.style.border = isEditMode ? '1px solid #000' : 'none';
+
+                    // Replace the span with the input element
+                    element.parentNode.replaceChild(inputElement, element);
+                } else if (element.tagName.toLowerCase() === 'input' && element.classList.contains('editable-input')) {
+                    // Replace the input element with a span
+                    var spanElement = document.createElement('span');
+                    spanElement.textContent = element.tagName.toLowerCase() === 'select' ? element.options[element.selectedIndex].text : element.value;
+
+                    // Replace the input element with the span element
+                    element.parentNode.replaceChild(spanElement, element);
+                }
+            });
         }
-    });
-}
+
+        // Function to add options to a select element
+        function addOptions(selectElement, options) {
+            options.forEach(function (optionText) {
+                var option = document.createElement('option');
+                option.value = optionText;
+                option.text = optionText;
+                selectElement.add(option);
+            });
+        }
 
 
 
