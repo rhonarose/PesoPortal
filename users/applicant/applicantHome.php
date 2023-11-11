@@ -1080,7 +1080,7 @@ if(isset($_SESSION['applicant_id'])){
             closeEditProfileModal();
         }
 
-        // Assuming you have a variable to store the edit mode status
+       // Assuming you have a variable to store the edit mode status
         var isEditMode = false;
 
         // Variable to store the edit button
@@ -1276,7 +1276,6 @@ if(isset($_SESSION['applicant_id'])){
                 selectElement.add(option);
             });
         }
-
 
 
 
