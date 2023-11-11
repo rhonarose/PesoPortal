@@ -242,7 +242,7 @@ if(isset($_SESSION['applicant_id'])){
                         <tr>
                             <td>
                                 <label for="sname">SURNAME:</label>
-                                <span><?= $fetch_personal_info["surname"]; ?></span>
+                                <?= $fetch_personal_info["surname"]; ?>
                             </td>
                             <td>
                                 <label for="fname">FIRST NAME:</label>
@@ -260,11 +260,11 @@ if(isset($_SESSION['applicant_id'])){
                         <tr id="format">
                             <td colspan="2">
                                 <label for="bdate">BIRTHDATE:</label>
-                                <?php echo formatDate($fetch_personal_info["birthdate"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_personal_info["birthdate"]); ?></span>
                             </td>
                             <td colspan="2">
                                 <label for="bplace">BIRTHPLACE:</label>
-                                <?= $fetch_personal_info["birthplace"]; ?>
+                                <span><?= $fetch_personal_info["birthplace"]; ?></span>
                             </td>
                         </tr>
                         <tr id="format">
@@ -290,7 +290,7 @@ if(isset($_SESSION['applicant_id'])){
                         <tr>
                             <td>
                                 <label for="height">HEIGHT (cm):</label>
-                                <?= $fetch_personal_info["height"]; ?>
+                                <span><?= $fetch_personal_info["height"]; ?></span>
                             </td>
                             <td>
                                 <label for="email">EMAIL ADDRESS:</label>
@@ -298,7 +298,7 @@ if(isset($_SESSION['applicant_id'])){
                             </td>
                             <td>
                                 <label for="houseno">HOUSE NO/STREET VILLAGE:</label><br>
-                                <?= $fetch_personal_info["house_no_street_village"]; ?>
+                                <span><?= $fetch_personal_info["house_no_street_village"]; ?></span>
                             </td>
                             <td>
                                 <label for="brgy">BARANGAY:</label>
@@ -308,11 +308,11 @@ if(isset($_SESSION['applicant_id'])){
                         <tr>
                             <td>
                                 <label for="landline">LANDLINE NUMBER:</label>
-                                <?= $fetch_personal_info["landline_number"]; ?>
+                                <span><?= $fetch_personal_info["landline_number"]; ?></span>
                             </td>
                             <td>
                                 <label for="cpno">CELLPHONE NUMBER:</label><br>
-                                <?= $fetch_personal_info["cellphone_number"]; ?>
+                                <span><?= $fetch_personal_info["cellphone_number"]; ?></span>
                             </td>
                             <td>
                                 <label for="city">MUNICIPALITY/CITY:</label><br>
@@ -1083,6 +1083,15 @@ if(isset($_SESSION['applicant_id'])){
         // Assuming you have a variable to store the edit mode status
         var isEditMode = false;
 
+        // Function to scroll to the top of the form
+        function scrollToTop() {
+            // Assuming your form container has an ID, replace 'formContainerId' with the actual ID
+            const formContainer = document.getElementById('nsrp');
+
+            // Scroll to the top of the form container
+            formContainer.scrollTop = 0;
+        }
+
         // Add an event listener to the edit button
         document.getElementById('editButton').addEventListener('click', function() {
             // Toggle edit mode
@@ -1093,25 +1102,140 @@ if(isset($_SESSION['applicant_id'])){
 
             // Make all form fields editable
             makeFieldsEditable();
+
+            // Scroll to the top of the form
+            scrollToTop();
+
+            // Replace the Edit button with the Update button
+            replaceEditButton();
         });
 
-        function makeFieldsEditable() {
-            // Get all span and input elements within the form container
-            var elements = document.querySelectorAll('.form-container span, .form-container input');
+        // Function to replace the Edit button with the Update button
+        function replaceEditButton() {
+            var editButton = document.getElementById('editButton');
 
-            elements.forEach(function(element) {
-                if (element.tagName === 'SPAN') {
-                    // For spans, enable or disable content editing
-                    element.contentEditable = isEditMode;
-                } else if (element.tagName === 'INPUT' && element.type === 'checkbox') {
-                    // For checkboxes, enable or disable the checkbox
-                    element.disabled = !isEditMode;
-                }
-
-                // Add a border to indicate the editable state
-                element.style.border = isEditMode ? '1px solid #000' : 'none';
+            // Create the Update button
+            var updateButton = document.createElement('input');
+            updateButton.type = 'button';
+            updateButton.id = 'updateButton';
+            updateButton.value = 'UPDATE NSRP FORM';
+            updateButton.addEventListener('click', function() {
+                // Call the updateForm function when the Update button is clicked
+                updateForm();
             });
+
+            // Replace the Edit button with the Update button
+            editButton.parentNode.replaceChild(updateButton, editButton);
         }
+
+        // Function to handle the update logic
+        function updateForm() {
+            // Collect updated data from the form fields
+            var updatedData = collectUpdatedData();
+
+            // Perform the update logic (e.g., send the updated data to the server)
+
+            // Optionally, you can toggle off the edit mode after updating
+            isEditMode = false;
+            makeFieldsEditable();
+
+            // Scroll to the top after updating
+            scrollToTop();
+
+            // Now, replace the Update button with the Edit button
+            replaceUpdateButton();
+        }
+
+        // Function to replace the Update button with the Edit button
+        function replaceUpdateButton() {
+            var updateButton = document.getElementById('updateButton');
+
+            // Create the Edit button
+            var editButton = document.createElement('input');
+            editButton.type = 'button';
+            editButton.id = 'editButton';
+            editButton.value = 'EDIT NSRP FORM';
+            editButton.addEventListener('click', function() {
+                // Toggle edit mode
+                isEditMode = !isEditMode;
+
+                // Close Side Panel
+                hideSidebar();
+
+                // Replace the Edit button with the Update button
+                replaceEditButton();
+
+                // Make all form fields editable
+                makeFieldsEditable();
+            });
+
+            // Replace the Update button with the Edit button
+            updateButton.parentNode.replaceChild(editButton, updateButton);
+        }
+
+        // Function to collect updated data from the form fields
+        function collectUpdatedData() {
+            // Initialize an object to store updated data
+            var updatedData = {};
+
+            // Get all input elements within the form container
+            var inputElements = document.querySelectorAll('.form-container input.editable-input');
+
+            inputElements.forEach(function(inputElement) {
+                // Extract the field name from the input element's ID or other attribute
+                var fieldName = inputElement.id; // Replace with the actual attribute used to identify the field
+
+                // Store the updated value in the object using the field name as the key
+                updatedData[fieldName] = inputElement.value;
+            });
+
+            return updatedData;
+        }
+
+
+        function makeFieldsEditable() {
+    // Get all elements (both spans and inputs) within the form container
+    var formElements = document.querySelectorAll('.form-container span, .form-container input.editable-input');
+
+    formElements.forEach(function(element) {
+        if (element.tagName.toLowerCase() === 'span') {
+            // Create an input element based on the type of data
+            var inputElement;
+
+            if (element.classList.contains('editable-date')) {
+                // If it's a date field, create a date input
+                inputElement = document.createElement('input');
+                inputElement.type = 'date';
+                
+                // Assuming the span contains a valid date in 'MM/DD/YYYY' format
+                const dateParts = element.textContent.split('/');
+                const yyyyMMddDate = `${dateParts[2]}-${dateParts[0].padStart(2, '0')}-${dateParts[1].padStart(2, '0')}`;
+                inputElement.value = yyyyMMddDate;
+            } else {
+                // For other fields, create a text input
+                inputElement = document.createElement('input');
+                inputElement.type = 'text';
+                inputElement.value = element.textContent;
+            }
+
+            // Set common attributes
+            inputElement.className = 'editable-input';
+            inputElement.readOnly = !isEditMode;
+            inputElement.style.border = isEditMode ? '1px solid #000' : 'none';
+
+            // Replace the span with the input element
+            element.parentNode.replaceChild(inputElement, element);
+        } else if (element.tagName.toLowerCase() === 'input' && element.classList.contains('editable-input')) {
+            // Replace the input element with a span
+            var spanElement = document.createElement('span');
+            spanElement.textContent = element.value;
+
+            // Replace the input element with the span element
+            element.parentNode.replaceChild(spanElement, element);
+        }
+    });
+}
+
 
 
 
