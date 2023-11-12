@@ -389,7 +389,7 @@ if(isset($_SESSION['applicant_id'])){
                     </table>
 
                
-                    <table>
+                    <table class="editable-table">
                         <tr>
                             <td colspan="6">
                                 <h3>II. PREFERENCE</h3>
@@ -408,7 +408,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="prefoccu1">1.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["preferred_occupation1"]; ?>
+                                <span><?= $fetch_preference["preferred_occupation1"]; ?></span>
                             </td>
                             <td colspan="2">
                                 <input type="checkbox" <?= $fetch_preference["preferred_location1"] == 1 ? 'checked' : '' ?> value="1" disabled>   
@@ -424,19 +424,19 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="prefoccu2">2.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["preferred_occupation2"]; ?>
+                                <span><?= $fetch_preference["preferred_occupation2"]; ?></span>
                             </td>
                             <td>
                                 <label for="prefloclocal1">1.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["local_location1"]; ?>
+                                <span><?= $fetch_preference["local_location1"]; ?></span>
                             </td>
                             <td>
                                 <label for="preflocover1">1.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["overseas_location1"]; ?>
+                                <span><?= $fetch_preference["overseas_location1"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -444,19 +444,19 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="prefoccu3">3.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["preferred_occupation3"]; ?>
+                                <span><?= $fetch_preference["preferred_occupation3"]; ?></span>
                             </td>
                             <td>
                                 <label for="prefloclocal2">2.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["local_location2"]; ?>
+                                <span><?= $fetch_preference["local_location2"]; ?></span>
                             </td>
                             <td>
                                 <label for="preflocover2">2.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["overseas_location2"]; ?>
+                                <span><?= $fetch_preference["overseas_location2"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -464,19 +464,19 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="prefoccu4">4.</label>
                             </td>
                             <td>
-                               <?= $fetch_preference["preferred_occupation4"]; ?>
+                                <span><?= $fetch_preference["preferred_occupation4"]; ?></span>
                             </td>
                             <td>
                                 <label for="prefloclocal3">3.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["local_location3"]; ?>
+                                <span><?= $fetch_preference["local_location3"]; ?></span>
                             </td>
                             <td>
                                 <label for="preflocover3">3.</label>
                             </td>
                             <td>
-                                <?= $fetch_preference["overseas_location3"]; ?>
+                                <span><?= $fetch_preference["overseas_location3"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -702,7 +702,7 @@ if(isset($_SESSION['applicant_id'])){
                         </tr>
                     </table>
              
-                    <table>
+                    <table class="editable-table">
                         <tr>
                             <td colspan="5">
                                 <h3>V. TECHNICAL/VOCATIONAL AND OTHER TRAINING</h3><p>(Include courses as part of college education)</p>
@@ -713,7 +713,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse">TRAINING/VOCATIONAL COURSE</label>
                             </td>
                             <td>
-                                <label for="duration">DURATION<br>(mm/dd/yyyy to mm/dd/yyyy)</label>
+                                <label for="duration">DURATION<br>(mm/dd/yyyy to mm/dd/yyyy)</label> 
                             </td>
                             <td>
                                 <label for="traininst">TRAINING INSTITUTION</label>
@@ -727,17 +727,17 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse1">1.</label>
                             </td>
                             <td>
-                                <?= $fetch_training["course_name_1"]; ?>
+                                <span><?= $fetch_training["course_name_1"]; ?></span>
                             </td>
                             <td id="format2">
-                                <?php echo formatDate($fetch_training["course_duration_start_1"]); ?>
-                                <?php echo formatDate($fetch_training["course_duration_end_1"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_1"]); ?></span>
+                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_1"]); ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_training["training_institution_1"]; ?>
+                                <span><?= $fetch_training["training_institution_1"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_training["certificates_received_1"]; ?>
+                                <span><?= $fetch_training["certificates_received_1"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -745,17 +745,17 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse2">2.</label>
                             </td>
                             <td>
-                                <?= $fetch_training["course_name_2"]; ?>
+                                <span><?= $fetch_training["course_name_2"]; ?></span>
                             </td>
                             <td id="format2">
-                                <?php echo formatDate($fetch_training["course_duration_start_2"]); ?>
-                                <?php echo formatDate($fetch_training["course_duration_end_2"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_2"]); ?></span>
+                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_2"]); ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_training["training_institution_2"]; ?>
+                                <span><?= $fetch_training["training_institution_2"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_training["certificates_received_2"]; ?>
+                                <span><?= $fetch_training["certificates_received_2"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -763,22 +763,22 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse3">3.</label>
                             </td>
                             <td>
-                                <?= $fetch_training["course_name_3"]; ?>
+                                <span><?= $fetch_training["course_name_3"]; ?></span>
                             </td>
                             <td id="format2">
-                                <?php echo formatDate($fetch_training["course_duration_start_3"]); ?>
-                                <?php echo formatDate($fetch_training["course_duration_end_3"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_3"]); ?></span>
+                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_3"]); ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_training["training_institution_3"]; ?>
+                                <span><?= $fetch_training["training_institution_3"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_training["certificates_received_3"]; ?>
+                                <span><?= $fetch_training["certificates_received_3"]; ?></span>
                             </td>
                         </tr>
                     </table>
                
-                    <table>
+                    <table class="editable-table">
                         <tr>
                             <td colspan="7">
                                 <h3>VI. ELIGIBILITY/PROFESSIONAL LICENSE</h3>
@@ -809,22 +809,22 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="eligibility1">1.</label>
                             </td>
                             <td>
-                                <?= $fetch_eligibility["eligibility1"]; ?>
+                                <span><?= $fetch_eligibility["eligibility1"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_eligibility["rating1"]; ?>
+                                <span><?= $fetch_eligibility["rating1"]; ?></span>
                             </td>
                             <td> 
-                                <?php echo formatDate($fetch_eligibility["examdate1"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_eligibility["examdate1"]); ?></span>
                             </td>
                             <td>
                                 <label for="profli1">1.</label>
                             </td>
                             <td> 
-                                <?= $fetch_eligibility["professional_license1"]; ?>
+                                <span><?= $fetch_eligibility["professional_license1"]; ?></span>
                             </td>
                             <td>
-                                <?php echo formatDate($fetch_eligibility["valid1"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_eligibility["valid1"]); ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -832,27 +832,27 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="eligibility2">2.</label>
                             </td>
                             <td>
-                                <?= $fetch_eligibility["eligibility2"]; ?>
+                                <span><?= $fetch_eligibility["eligibility2"]; ?></span>
                             </td>
                             <td>
-                               <?= $fetch_eligibility["rating2"]; ?>
+                                <span><?= $fetch_eligibility["rating2"]; ?></span>
                             </td>
                             <td> 
-                                <?php echo formatDate($fetch_eligibility["examdate2"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_eligibility["examdate2"]); ?></span>
                             </td>
                             <td>
                                 <label for="profli2">1.</label>
                             </td>
                             <td> 
-                                <?= $fetch_eligibility["professional_license2"]; ?>
+                                <span><?= $fetch_eligibility["professional_license2"]; ?></span>
                             </td>
                             <td>
-                                <?php echo formatDate($fetch_eligibility["valid2"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_eligibility["valid2"]); ?></span>
                             </td>
                         </tr>
                     </table>
               
-                    <table>
+                    <table class="editable-table">
                         <tr>
                             <td colspan="5">
                                 <h3>VII. WORK EXPERIENCE</h3><p>(Limit to 10 year period, start with the most recent employment)</p>
@@ -877,92 +877,92 @@ if(isset($_SESSION['applicant_id'])){
                         </tr>
                         <tr>
                             <td>
-                                <?= $fetch_work["company_name1"]; ?>
+                                <span><?= $fetch_work["company_name1"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_work["company_address1"]; ?>
+                                <span><?= $fetch_work["company_address1"]; ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["position1"]; ?>
+                                <span><?= $fetch_work["position1"]; ?></span>
                             </td>
                             <td id="format2">
-                                <?php echo formatDate($fetch_work["inclusive_dates_start1"]); ?>
-                                <?php echo formatDate($fetch_work["inclusive_dates_end1"]); ?>
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start1"]); ?></span>
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end1"]); ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["status1"]; ?>
+                                <span class="editable-select" data-field="status"><?= $fetch_work["status1"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?= $fetch_work["company_name2"]; ?>
+                                <span><?= $fetch_work["company_name2"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_work["company_address2"]; ?>
+                                <span><?= $fetch_work["company_address2"]; ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["position2"]; ?>
+                                <span><?= $fetch_work["position2"]; ?></span>
                             </td>
-                            <td>
-                                <?php echo formatDate($fetch_work["inclusive_dates_start2"]); ?>
-                                <?php echo formatDate($fetch_work["inclusive_dates_end2"]); ?>
+                            <td id="format2">
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start2"]); ?></span>
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end2"]); ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["status2"]; ?>
+                                <span class="editable-select" data-field="status"><?= $fetch_work["status2"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?= $fetch_work["company_name3"]; ?>
+                                <span><?= $fetch_work["company_name3"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_work["company_address3"]; ?>
+                                <span><?= $fetch_work["company_address3"]; ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["position3"]; ?>
+                                <span><?= $fetch_work["position3"]; ?></span>
                             </td>
-                            <td>
-                                <?php echo formatDate($fetch_work["inclusive_dates_start3"]); ?>
-                                <?php echo formatDate($fetch_work["inclusive_dates_end3"]); ?>
+                            <td id="format2">
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start3"]); ?></span>
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end3"]); ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["status3"]; ?>
+                                <span class="editable-select" data-field="status"><?= $fetch_work["status3"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?= $fetch_work["company_name4"]; ?>
+                                <span><?= $fetch_work["company_name4"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_work["company_address4"]; ?>
+                                <span><?= $fetch_work["company_address4"]; ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["position4"]; ?>
+                                <span><?= $fetch_work["position4"]; ?></span>
                             </td>
-                            <td>
-                                <?php echo formatDate($fetch_work["inclusive_dates_start4"]); ?>
-                                <?php echo formatDate($fetch_work["inclusive_dates_end4"]); ?>
+                            <td id="format2">
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start4"]); ?></span>
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end4"]); ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["status4"]; ?>
+                                <span class="editable-select" data-field="status"><?= $fetch_work["status4"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <?= $fetch_work["company_name5"]; ?>
+                                <span><?= $fetch_work["company_name5"]; ?></span>
                             </td>
                             <td>
-                                <?= $fetch_work["company_address5"]; ?>
+                                <span><?= $fetch_work["company_address5"]; ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["position5"]; ?>
+                                <span><?= $fetch_work["position5"]; ?></span>
                             </td>
-                            <td>
-                                <?php echo formatDate($fetch_work["inclusive_dates_start5"]); ?>
-                                <?php echo formatDate($fetch_work["inclusive_dates_end5"]); ?>
+                            <td id="format2">
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start5"]); ?></span>
+                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end5"]); ?></span>
                             </td>
                             <td> 
-                                <?= $fetch_work["status5"]; ?>
+                                <span class="editable-select" data-field="status"><?= $fetch_work["status5"]; ?></span>
                             </td>
                         </tr>
                     </table>
@@ -986,7 +986,7 @@ if(isset($_SESSION['applicant_id'])){
                     </table>
 
                 <div class="butcon">
-                    <input type="button" id="editButton" value="EDIT">
+                    <input type="button" id="editButton" value="UPDATE">
                 </div>
             </div>
             
@@ -1119,7 +1119,7 @@ if(isset($_SESSION['applicant_id'])){
             var updateButton = document.createElement('input');
             updateButton.type = 'button';
             updateButton.id = 'updateButton';
-            updateButton.value = 'UPDATE';
+            updateButton.value = 'SAVE';
             updateButton.addEventListener('click', function() {
                 // Call the updateForm function when the Update button is clicked
                 updateForm();
@@ -1202,67 +1202,87 @@ if(isset($_SESSION['applicant_id'])){
 
             formElements.forEach(function (element) {
                 if (element.tagName.toLowerCase() === 'span') {
-                    // Create an input element based on the type of data
-                    var inputElement;
+                    // Check if the span is inside the editable table
+                    var isEditableTable = element.closest('.editable-table');
 
-                    if (element.classList.contains('editable-date')) {
-                        // If it's a date field, create a date input
-                        inputElement = document.createElement('input');
-                        inputElement.type = 'date';
+                    // Check if the span is empty
+                    var isEmptySpan = element.textContent.trim() === '';
 
-                        // Assuming the span contains a valid date in 'MM/DD/YYYY' format
-                        const dateParts = element.textContent.split('/');
-                        const yyyyMMddDate = `${dateParts[2]}-${dateParts[0].padStart(2, '0')}-${dateParts[1].padStart(2, '0')}`;
-                        inputElement.value = yyyyMMddDate;
-                    } else if (element.classList.contains('editable-select')) {
-                        // If it's a select field, create a select input
-                        inputElement = document.createElement('select');
-                        inputElement.className = 'editable-input';
+                    // Only make the span editable if it's empty or it's outside the editable table
+                    if (isEmptySpan || !isEditableTable) {
+                        // Create an input element based on the type of data
+                        var inputElement;
 
-                        // Add options based on the field 
-                        if (element.dataset.field === 'civil_status') {
-                            addOptions(inputElement, ['Single', 'Married', 'Widowed','Separated', 'Live-In']); // Civil status options
-                        } else if (element.dataset.field === 'religion') {
-                            addOptions(inputElement, ['Roman Catholic', 'Born Again Christian', 'Iglesia Ni Cristo', 'Jehova\'s Witness', 'Islam', 'Latter-Day Saints', 'Protestant', 'Seventh-Day Adentist', 'Evangelical', 'Baptist', 'Buddhist', 'Hindu', 'Other']); // Religion options
-                        } else if (element.dataset.field === 'barangay') {
-                            addOptions(inputElement, [
-                                'Assumption', 'Bagong Buhay I', 'Bagong Buhay II', 'Bagong Buhay III', 'Citrus', 'Ciudad Real',
-                                'Dulong Bayan', 'Fatima', 'Fatima II', 'Fatima III', 'Fatima IV', 'Fatima V',
-                                'Francisco Homes - Guijo', 'Francisco Homes - Mulawin', 'Francisco Homes - Narra', 'Francisco Homes - Yakal',
-                                'Gaya-Gaya', 'Graceville', 'Gumaoc Central', 'Gumaoc East', 'Gumaoc West', 'Kaybanban',
-                                'Kaypian', 'Lawang Pari', 'Maharlika', 'Minuyan', 'Minuyan II', 'Minuyan III', 'Minuyan IV',
-                                'Minuyan Proper', 'Minuyan V', 'Muzon', 'Paradise III', 'Poblacion', 'Poblacion I',
-                                'Saint Martin de Porres', 'San Isidro', 'San Manuel', 'San Martin I', 'San Martin II',
-                                'San Martin III', 'San Martin IV', 'San Pedro', 'San Rafael I', 'San Rafael II', 'San Rafael III',
-                                'San Rafael IV', 'San Rafael V', 'San Roque', 'Santa Cruz I', 'Santa Cruz II', 'Santa Cruz III',
-                                'Santa Cruz IV', 'Santa Cruz V', 'Santo Cristo', 'Santo Niño I', 'Santo Niño II', 'Sapang Palay',
-                                'Tungkong Mangga'
-                            ]);
+                        if (element.classList.contains('editable-date')) {
+                            // If it's a date field, create a date input
+                            inputElement = document.createElement('input');
+                            inputElement.type = 'date';
+
+                            // Assuming the span contains a valid date in 'MM/DD/YYYY' format
+                            const dateParts = element.textContent.split('/');
+                            
+                            // Check if the dateParts array has three elements (month, day, and year)
+                            if (dateParts.length === 3) {
+                                const yyyyMMddDate = `${dateParts[2]}-${dateParts[0].padStart(2, '0')}-${dateParts[1].padStart(2, '0')}`;
+                                inputElement.value = yyyyMMddDate;
+                            }
+
+                        } else if (element.classList.contains('editable-select')) {
+                            // If it's a select field, create a select input
+                            inputElement = document.createElement('select');
+                            inputElement.className = 'editable-input';
+
+
+                                // Add options based on the field 
+                                if (element.dataset.field === 'civil_status') {
+                                    addOptions(inputElement, ['Single', 'Married', 'Widowed','Separated', 'Live-In']); // Civil status options
+                                } else if (element.dataset.field === 'religion') {
+                                    addOptions(inputElement, ['Roman Catholic', 'Born Again Christian', 'Iglesia Ni Cristo', 'Jehova\'s Witness', 'Islam', 'Latter-Day Saints', 'Protestant', 'Seventh-Day Adentist', 'Evangelical', 'Baptist', 'Buddhist', 'Hindu', 'Other']); // Religion options
+                                } else if (element.dataset.field === 'barangay') {
+                                    addOptions(inputElement, [
+                                        'Assumption', 'Bagong Buhay I', 'Bagong Buhay II', 'Bagong Buhay III', 'Citrus', 'Ciudad Real',
+                                        'Dulong Bayan', 'Fatima', 'Fatima II', 'Fatima III', 'Fatima IV', 'Fatima V',
+                                        'Francisco Homes - Guijo', 'Francisco Homes - Mulawin', 'Francisco Homes - Narra', 'Francisco Homes - Yakal',
+                                        'Gaya-Gaya', 'Graceville', 'Gumaoc Central', 'Gumaoc East', 'Gumaoc West', 'Kaybanban',
+                                        'Kaypian', 'Lawang Pari', 'Maharlika', 'Minuyan', 'Minuyan II', 'Minuyan III', 'Minuyan IV',
+                                        'Minuyan Proper', 'Minuyan V', 'Muzon', 'Paradise III', 'Poblacion', 'Poblacion I',
+                                        'Saint Martin de Porres', 'San Isidro', 'San Manuel', 'San Martin I', 'San Martin II',
+                                        'San Martin III', 'San Martin IV', 'San Pedro', 'San Rafael I', 'San Rafael II', 'San Rafael III',
+                                        'San Rafael IV', 'San Rafael V', 'San Roque', 'Santa Cruz I', 'Santa Cruz II', 'Santa Cruz III',
+                                        'Santa Cruz IV', 'Santa Cruz V', 'Santo Cristo', 'Santo Niño I', 'Santo Niño II', 'Sapang Palay',
+                                        'Tungkong Mangga'
+                                    ]);
+                                } else if (element.dataset.field === 'status') {
+                                    // Include an empty string as an option and set it as the default
+                                    addOptions(inputElement, ['', 'Permanent', 'Contractual', 'Part-Time', 'Probationary']);
+                                    inputElement.value = ''; // Set the default value to an empty string
+                                }
+
+                                // Set the selected option based on the span's text content
+                                inputElement.value = element.textContent;
+    
+                        } else {
+                            // For other fields, create a text input
+                            inputElement = document.createElement('input');
+                            inputElement.type = 'text';
+                            inputElement.value = element.textContent;
                         }
 
-                        // Set the selected option based on the span's text content
-                        inputElement.value = element.textContent;
-                    } else {
-                        // For other fields, create a text input
-                        inputElement = document.createElement('input');
-                        inputElement.type = 'text';
-                        inputElement.value = element.textContent;
+                        // Set common attributes
+                        inputElement.className = 'editable-input';
+                        inputElement.readOnly = !isEditMode;
+                        inputElement.style.border = isEditMode ? '1px solid #000' : 'none';
+
+                        // Replace the span with the input element
+                        element.parentNode.replaceChild(inputElement, element);
+                    } else if (element.tagName.toLowerCase() === 'input' && element.classList.contains('editable-input')) {
+                        // Replace the input element with a span
+                        var spanElement = document.createElement('span');
+                        spanElement.textContent = element.tagName.toLowerCase() === 'select' ? element.options[element.selectedIndex].text : element.value;
+
+                        // Replace the input element with the span element
+                        element.parentNode.replaceChild(spanElement, element);
                     }
-
-                    // Set common attributes
-                    inputElement.className = 'editable-input';
-                    inputElement.readOnly = !isEditMode;
-                    inputElement.style.border = isEditMode ? '1px solid #000' : 'none';
-
-                    // Replace the span with the input element
-                    element.parentNode.replaceChild(inputElement, element);
-                } else if (element.tagName.toLowerCase() === 'input' && element.classList.contains('editable-input')) {
-                    // Replace the input element with a span
-                    var spanElement = document.createElement('span');
-                    spanElement.textContent = element.tagName.toLowerCase() === 'select' ? element.options[element.selectedIndex].text : element.value;
-
-                    // Replace the input element with the span element
-                    element.parentNode.replaceChild(spanElement, element);
                 }
             });
         }

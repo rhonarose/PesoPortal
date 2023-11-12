@@ -979,8 +979,8 @@ session_start(); // Start the session
                             <td>
                                 <input type="text" id="tvcourse1" name="tvcourse1" placeholder="TRAINING/VOCATIONAL COURSE">
                             </td>
-                            <td>
-                                <input type="date" id="duration1" name="duration1" placeholder="DURATION">
+                            <td id="format1">
+                                <input type="date" id="duration1" name="duration1" placeholder="DURATION"> -
                                 <input type="date" id="duration.1" name="duration.1" placeholder="DURATION">
                             </td>
                             <td> 
@@ -997,8 +997,8 @@ session_start(); // Start the session
                             <td>
                                 <input type="text" id="tvcourse2" name="tvcourse2" placeholder="TRAINING/VOCATIONAL COURSE">
                             </td>
-                            <td>
-                                <input type="date" id="duration2" name="duration2" placeholder="DURATION">
+                            <td id="format1">
+                                <input type="date" id="duration2" name="duration2" placeholder="DURATION"> -
                                 <input type="date" id="duration.2" name="duration.2" placeholder="DURATION">
                             </td>
                             <td> 
@@ -1015,8 +1015,8 @@ session_start(); // Start the session
                             <td>
                                 <input type="text" id="tvcourse3" name="tvcourse3" placeholder="TRAINING/VOCATIONAL COURSE">
                             </td>
-                            <td>
-                                <input type="date" id="duration3" name="duration3" placeholder="DURATION">
+                            <td id="format1">
+                                <input type="date" id="duration3" name="duration3" placeholder="DURATION"> -
                                 <input type="date" id="duration.3" name="duration.3" placeholder="DURATION">
                             </td>
                             <td> 
@@ -1151,17 +1151,17 @@ session_start(); // Start the session
                             <td> 
                                 <input type="text" id="position1" name="position1" placeholder="POSITION">
                             </td>
-                            <td>
-                                <input type="date" id="indates1" name="indates1" placeholder="INCLUSIVE DATES">
+                            <td id="format1">
+                                <input type="date" id="indates1" name="indates1" placeholder="INCLUSIVE DATES"> -
                                 <input type="date" id="indates.1" name="indates.1" placeholder="INCLUSIVE DATES">
                             </td>
                             <td> 
                                 <select id="workstat1" name="workstat1">
                                     <option value="" disabled selected hidden>STATUS</option>
-                                    <option value="Permanent">PERMANENT</option>
-                                    <option value="Contractual">CONTRACTUAL</option>
-                                    <option value="Part-time">PART-TIME</option>
-                                    <option value="Probationary">PROBATIONARY</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Contractual">Contractual</option>
+                                    <option value="Part-Time">Part-Time</option>
+                                    <option value="Probationary">Probationary</option>
                                 </select>
                             </td>
                         </tr>
@@ -1175,17 +1175,17 @@ session_start(); // Start the session
                             <td> 
                                 <input type="text" id="position2" name="position2" placeholder="POSITION">
                             </td>
-                            <td>
-                                <input type="date" id="indates2" name="indates2" placeholder="INCLUSIVE DATES">
+                            <td id="format1">
+                                <input type="date" id="indates2" name="indates2" placeholder="INCLUSIVE DATES"> -
                                 <input type="date" id="indates.2" name="indates.2" placeholder="INCLUSIVE DATES">
                             </td>
                             <td> 
                                 <select id="workstat2" name="workstat2">
                                     <option value="" disabled selected hidden>STATUS</option>
-                                    <option value="Permanent">PERMANENT</option>
-                                    <option value="Contractual">CONTRACTUAL</option>
-                                    <option value="Part-time">PART-TIME</option>
-                                    <option value="Probationary">PROBATIONARY</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Contractual">Contractual</option>
+                                    <option value="Part-Time">Part-Time</option>
+                                    <option value="Probationary">Probationary</option>
                                 </select>
                             </td>
                         </tr>
@@ -1199,17 +1199,17 @@ session_start(); // Start the session
                             <td> 
                                 <input type="text" id="position3" name="position3" placeholder="POSITION">
                             </td>
-                            <td>
-                                <input type="date" id="indates3" name="indates3" placeholder="INCLUSIVE DATES">
+                            <td id="format1">
+                                <input type="date" id="indates3" name="indates3" placeholder="INCLUSIVE DATES"> -
                                 <input type="date" id="indates.3" name="indates.3" placeholder="INCLUSIVE DATES">
                             </td>
                             <td> 
                                 <select id="workstat3" name="workstat3">
                                     <option value="" disabled selected hidden>STATUS</option>
-                                    <option value="Permanent">PERMANENT</option>
-                                    <option value="Contractual">CONTRACTUAL</option>
-                                    <option value="Part-time">PART-TIME</option>
-                                    <option value="Probationary">PROBATIONARY</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Contractual">Contractual</option>
+                                    <option value="Part-Time">Part-Time</option>
+                                    <option value="Probationary">Probationary</option>
                                 </select>
                             </td>
                         </tr>
@@ -1223,17 +1223,17 @@ session_start(); // Start the session
                             <td> 
                                 <input type="text" id="position4" name="position4" placeholder="POSITION">
                             </td>
-                            <td>
-                                <input type="date" id="indates4" name="indates4" placeholder="INCLUSIVE DATES">
+                            <td id="format1">
+                                <input type="date" id="indates4" name="indates4" placeholder="INCLUSIVE DATES"> -
                                 <input type="date" id="indates.4" name="indates.4" placeholder="INCLUSIVE DATES">
                             </td>
                             <td> 
                                 <select id="workstat4" name="workstat4">
                                     <option value="" disabled selected hidden>STATUS</option>
-                                    <option value="Permanent">PERMANENT</option>
-                                    <option value="Contractual">CONTRACTUAL</option>
-                                    <option value="Part-time">PART-TIME</option>
-                                    <option value="Probationary">PROBATIONARY</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Contractual">Contractual</option>
+                                    <option value="Part-Time">Part-Time</option>
+                                    <option value="Probationary">Probationary</option>
                                 </select>
                             </td>
                         </tr>
@@ -1247,17 +1247,17 @@ session_start(); // Start the session
                             <td> 
                                 <input type="text" id="position5" name="position5" placeholder="POSITION">
                             </td>
-                            <td>
-                                <input type="date" id="indates5" name="indates5" placeholder="INCLUSIVE DATES">
+                            <td id="format1">
+                                <input type="date" id="indates5" name="indates5" placeholder="INCLUSIVE DATES"> -
                                 <input type="date" id="indates.5" name="indates.5" placeholder="INCLUSIVE DATES">
                             </td>
                             <td> 
                                 <select id="workstat5" name="workstat5">
                                     <option value="" disabled selected hidden>STATUS</option>
-                                    <option value="Permanent">PERMANENT</option>
-                                    <option value="Contractual">CONTRACTUAL</option>
-                                    <option value="Part-time">PART-TIME</option>
-                                    <option value="Probationary">PROBATIONARY</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Contractual">Contractual</option>
+                                    <option value="Part-Time">Part-Time</option>
+                                    <option value="Probationary">Probationary</option>
                                 </select>
                             </td>
                         </tr>
