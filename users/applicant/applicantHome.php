@@ -260,11 +260,13 @@ if(isset($_SESSION['applicant_id'])){
                         <tr id="format">
                             <td colspan="2">
                                 <label for="bdate">BIRTHDATE:</label>
-                                <span class="editable-date"><?php echo formatDate($fetch_personal_info["birthdate"]); ?></span>
+                                <span id="bdate" class="editable-date"><?php echo formatDate($fetch_personal_info["birthdate"]); ?></span>
                             </td>
                             <td colspan="2">
                                 <label for="bplace">BIRTHPLACE:</label>
-                                <span><?= $fetch_personal_info["birthplace"]; ?></span>
+                                <span id="bplace"><?= $fetch_personal_info["birthplace"]; ?></span>
+
+
                             </td>
                         </tr>
                         <tr id="format">
@@ -274,14 +276,14 @@ if(isset($_SESSION['applicant_id'])){
                         </td>
                             <td colspan="2">
                                 <label for="religion">RELIGION:</label>
-                                <span class="editable-select" data-field="religion"><?= $fetch_personal_info["religion"]; ?></span>
+                                <span id="religion" class="editable-select" data-field="religion"><?= $fetch_personal_info["religion"]; ?></span>
   
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2" id="format">
                                 <label for="civilstat">CIVIL STATUS:</label>
-                                <span class="editable-select" data-field="civil_status"><?= $fetch_personal_info["civil_status"]; ?></span>
+                                <span id="civilstat" class="editable-select" data-field="civil_status"><?= $fetch_personal_info["civil_status"]; ?></span>
                             </td>
                             <td colspan="2">
                                 <p>PRESENT ADDRESS:</p>
@@ -290,7 +292,7 @@ if(isset($_SESSION['applicant_id'])){
                         <tr>
                             <td>
                                 <label for="height">HEIGHT (cm):</label>
-                                <span><?= $fetch_personal_info["height"]; ?></span>
+                                <span id="height"><?= $fetch_personal_info["height"]; ?></span>
                             </td>
                             <td>
                                 <label for="email">EMAIL ADDRESS:</label>
@@ -298,21 +300,21 @@ if(isset($_SESSION['applicant_id'])){
                             </td>
                             <td>
                                 <label for="houseno">HOUSE NO/STREET VILLAGE:</label><br>
-                                <span><?= $fetch_personal_info["house_no_street_village"]; ?></span>
+                                <span id="houseno"><?= $fetch_personal_info["house_no_street_village"]; ?></span>
                             </td>
                             <td>
                                 <label for="brgy">BARANGAY:</label>
-                                <span class="editable-select" data-field="barangay"><?= $fetch_personal_info["barangay"]; ?></span>
+                                <span id="brgy" class="editable-select" data-field="barangay"><?= $fetch_personal_info["barangay"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <label for="landline">LANDLINE NUMBER:</label>
-                                <span><?= $fetch_personal_info["landline_number"]; ?></span>
+                                <span id="landline"><?= $fetch_personal_info["landline_number"]; ?></span>
                             </td>
                             <td>
                                 <label for="cpno">CELLPHONE NUMBER:</label><br>
-                                <span><?= $fetch_personal_info["cellphone_number"]; ?></span>
+                                <span id="cpno"><?= $fetch_personal_info["cellphone_number"]; ?></span>
                             </td>
                             <td>
                                 <label for="city">MUNICIPALITY/CITY:</label><br>
@@ -408,7 +410,7 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="prefoccu1">1.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["preferred_occupation1"]; ?></span>
+                                <span id="prefoccu1"><?= $fetch_preference["preferred_occupation1"]; ?></span>
                             </td>
                             <td colspan="2">
                                 <input type="checkbox" <?= $fetch_preference["preferred_location1"] == 1 ? 'checked' : '' ?> value="1" disabled>   
@@ -424,19 +426,19 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="prefoccu2">2.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["preferred_occupation2"]; ?></span>
+                                <span id="prefoccu2"><?= $fetch_preference["preferred_occupation2"]; ?></span>
                             </td>
                             <td>
                                 <label for="prefloclocal1">1.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["local_location1"]; ?></span>
+                                <span id="prefloclocal1"><?= $fetch_preference["local_location1"]; ?></span>
                             </td>
                             <td>
                                 <label for="preflocover1">1.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["overseas_location1"]; ?></span>
+                                <span id="preflocover1"><?= $fetch_preference["overseas_location1"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -444,19 +446,19 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="prefoccu3">3.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["preferred_occupation3"]; ?></span>
+                                <span id="prefoccu3"><?= $fetch_preference["preferred_occupation3"]; ?></span>
                             </td>
                             <td>
                                 <label for="prefloclocal2">2.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["local_location2"]; ?></span>
+                                <span id="prefloclocal2"><?= $fetch_preference["local_location2"]; ?></span>
                             </td>
                             <td>
                                 <label for="preflocover2">2.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["overseas_location2"]; ?></span>
+                                <span id="preflocover2"><?= $fetch_preference["overseas_location2"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -464,19 +466,19 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="prefoccu4">4.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["preferred_occupation4"]; ?></span>
+                                <span id="prefoccu4"><?= $fetch_preference["preferred_occupation4"]; ?></span>
                             </td>
                             <td>
                                 <label for="prefloclocal3">3.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["local_location3"]; ?></span>
+                                <span id="prefloclocal3"><?= $fetch_preference["local_location3"]; ?></span>
                             </td>
                             <td>
                                 <label for="preflocover3">3.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_preference["overseas_location3"]; ?></span>
+                                <span id="preflocover3"><?= $fetch_preference["overseas_location3"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -727,17 +729,17 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse1">1.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_training["course_name_1"]; ?></span>
+                                <span id="cname1"><?= $fetch_training["course_name_1"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_1"]); ?></span>
-                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_1"]); ?></span>
+                                <span id="start1" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_1"]); ?></span>
+                                <span id="end1" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_1"]); ?></span>
                             </td>
                             <td> 
-                                <span><?= $fetch_training["training_institution_1"]; ?></span>
+                                <span id="traininst1"><?= $fetch_training["training_institution_1"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_training["certificates_received_1"]; ?></span>
+                                <span id="cert1"><?= $fetch_training["certificates_received_1"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -745,17 +747,17 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse2">2.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_training["course_name_2"]; ?></span>
+                                <span id="cname2"><?= $fetch_training["course_name_2"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_2"]); ?></span>
-                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_2"]); ?></span>
+                                <span id="start2" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_2"]); ?></span>
+                                <span id="end2" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_2"]); ?></span>
                             </td>
                             <td> 
-                                <span><?= $fetch_training["training_institution_2"]; ?></span>
+                                <span id="traininst2"><?= $fetch_training["training_institution_2"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_training["certificates_received_2"]; ?></span>
+                                <span id="cert2"><?= $fetch_training["certificates_received_2"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -763,17 +765,17 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse3">3.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_training["course_name_3"]; ?></span>
+                                <span id="cname3"><?= $fetch_training["course_name_3"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_3"]); ?></span>
-                                <span class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_3"]); ?></span>
+                                <span id="start3" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_3"]); ?></span>
+                                <span id="end3" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_3"]); ?></span>
                             </td>
                             <td> 
-                                <span><?= $fetch_training["training_institution_3"]; ?></span>
+                                <span id="traininst3"><?= $fetch_training["training_institution_3"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_training["certificates_received_3"]; ?></span>
+                                <span id="cert3"><?= $fetch_training["certificates_received_3"]; ?></span>
                             </td>
                         </tr>
                     </table>
@@ -809,22 +811,22 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="eligibility1">1.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_eligibility["eligibility1"]; ?></span>
+                                <span id="eligibility1"><?= $fetch_eligibility["eligibility1"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_eligibility["rating1"]; ?></span>
+                                <span id="rating1"><?= $fetch_eligibility["rating1"]; ?></span>
                             </td>
                             <td> 
-                                <span class="editable-date"><?php echo formatDate($fetch_eligibility["examdate1"]); ?></span>
+                                <span id="examdate1" class="editable-date"><?php echo formatDate($fetch_eligibility["examdate1"]); ?></span>
                             </td>
                             <td>
                                 <label for="profli1">1.</label>
                             </td>
                             <td> 
-                                <span><?= $fetch_eligibility["professional_license1"]; ?></span>
+                                <span id="profli1"><?= $fetch_eligibility["professional_license1"]; ?></span>
                             </td>
                             <td>
-                                <span class="editable-date"><?php echo formatDate($fetch_eligibility["valid1"]); ?></span>
+                                <span id="valid1" class="editable-date"><?php echo formatDate($fetch_eligibility["valid1"]); ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -832,22 +834,22 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="eligibility2">2.</label>
                             </td>
                             <td>
-                                <span><?= $fetch_eligibility["eligibility2"]; ?></span>
+                                <span id="eligibility2" ><?= $fetch_eligibility["eligibility2"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_eligibility["rating2"]; ?></span>
+                                <span id="rating2"><?= $fetch_eligibility["rating2"]; ?></span>
                             </td>
                             <td> 
-                                <span class="editable-date"><?php echo formatDate($fetch_eligibility["examdate2"]); ?></span>
+                                <span id="examdate2" class="editable-date"><?php echo formatDate($fetch_eligibility["examdate2"]); ?></span>
                             </td>
                             <td>
                                 <label for="profli2">1.</label>
                             </td>
                             <td> 
-                                <span><?= $fetch_eligibility["professional_license2"]; ?></span>
+                                <span id="profli2" ><?= $fetch_eligibility["professional_license2"]; ?></span>
                             </td>
                             <td>
-                                <span class="editable-date"><?php echo formatDate($fetch_eligibility["valid2"]); ?></span>
+                                <span id="valid2" class="editable-date"><?php echo formatDate($fetch_eligibility["valid2"]); ?></span>
                             </td>
                         </tr>
                     </table>
@@ -877,92 +879,92 @@ if(isset($_SESSION['applicant_id'])){
                         </tr>
                         <tr>
                             <td>
-                                <span><?= $fetch_work["company_name1"]; ?></span>
+                                <span id="comname1"><?= $fetch_work["company_name1"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_work["company_address1"]; ?></span>
+                                <span id="comadd1"><?= $fetch_work["company_address1"]; ?></span>
                             </td>
                             <td> 
-                                <span><?= $fetch_work["position1"]; ?></span>
+                                <span id="position1"><?= $fetch_work["position1"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start1"]); ?></span>
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end1"]); ?></span>
+                                <span id="instart1" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start1"]); ?></span>
+                                <span id="inend1" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end1"]); ?></span>
                             </td>
                             <td> 
-                                <span class="editable-select" data-field="status"><?= $fetch_work["status1"]; ?></span>
+                                <span id="stat1" class="editable-select" data-field="status"><?= $fetch_work["status1"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <span><?= $fetch_work["company_name2"]; ?></span>
+                                <span id="comname2"><?= $fetch_work["company_name2"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_work["company_address2"]; ?></span>
+                                <span id="comadd2"><?= $fetch_work["company_address2"]; ?></span>
                             </td>
                             <td> 
-                                <span><?= $fetch_work["position2"]; ?></span>
+                                <span id="position2"><?= $fetch_work["position2"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start2"]); ?></span>
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end2"]); ?></span>
+                                <span id="instart2" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start2"]); ?></span>
+                                <span id="inend2" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end2"]); ?></span>
                             </td>
                             <td> 
-                                <span class="editable-select" data-field="status"><?= $fetch_work["status2"]; ?></span>
+                                <span id="stat2" class="editable-select" data-field="status"><?= $fetch_work["status2"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <span><?= $fetch_work["company_name3"]; ?></span>
+                                <span id="comname3"><?= $fetch_work["company_name3"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_work["company_address3"]; ?></span>
+                                <span id="comadd3"><?= $fetch_work["company_address3"]; ?></span>
                             </td>
                             <td> 
-                                <span><?= $fetch_work["position3"]; ?></span>
+                                <span id="position3"><?= $fetch_work["position3"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start3"]); ?></span>
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end3"]); ?></span>
+                                <span id="instart3" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start3"]); ?></span>
+                                <span id="inend3" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end3"]); ?></span>
                             </td>
                             <td> 
-                                <span class="editable-select" data-field="status"><?= $fetch_work["status3"]; ?></span>
+                                <span id="stat3" class="editable-select" data-field="status"><?= $fetch_work["status3"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <span><?= $fetch_work["company_name4"]; ?></span>
+                                <span id="comname4"><?= $fetch_work["company_name4"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_work["company_address4"]; ?></span>
+                                <span id="comadd4"><?= $fetch_work["company_address4"]; ?></span>
                             </td>
                             <td> 
-                                <span><?= $fetch_work["position4"]; ?></span>
+                                <span id="position4"><?= $fetch_work["position4"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start4"]); ?></span>
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end4"]); ?></span>
+                                <span id="instart4" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start4"]); ?></span>
+                                <span id="inend4" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end4"]); ?></span>
                             </td>
                             <td> 
-                                <span class="editable-select" data-field="status"><?= $fetch_work["status4"]; ?></span>
+                                <span id="stat4" class="editable-select" data-field="status"><?= $fetch_work["status4"]; ?></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <span><?= $fetch_work["company_name5"]; ?></span>
+                                <span id="comname5"><?= $fetch_work["company_name5"]; ?></span>
                             </td>
                             <td>
-                                <span><?= $fetch_work["company_address5"]; ?></span>
+                                <span id="comadd5"><?= $fetch_work["company_address5"]; ?></span>
                             </td>
                             <td> 
-                                <span><?= $fetch_work["position5"]; ?></span>
+                                <span id="position5"><?= $fetch_work["position5"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start5"]); ?></span>
-                                <span class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end5"]); ?></span>
+                                <span id="instart5" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start5"]); ?></span>
+                                <span id="inend5" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end5"]); ?></span>
                             </td>
                             <td> 
-                                <span class="editable-select" data-field="status"><?= $fetch_work["status5"]; ?></span>
+                                <span id="stat5" class="editable-select" data-field="status"><?= $fetch_work["status5"]; ?></span>
                             </td>
                         </tr>
                     </table>
@@ -1131,21 +1133,46 @@ if(isset($_SESSION['applicant_id'])){
 
         // Function to handle the update logic
         function updateForm() {
-            // Collect updated data from the form fields
-            var updatedData = collectUpdatedData();
+            // Ask for confirmation
+            var isConfirmed = window.confirm('Are you sure you want to update your data?');
 
-            // Perform the update logic (e.g., send the updated data to the server)
-
-            // Optionally, you can toggle off the edit mode after updating
-            isEditMode = false;
-            makeFieldsEditable();
-
-            // Scroll to the top after updating
-            scrollToTop();
-
-            // Now, replace the Update button with the Edit button
-            replaceUpdateButton();
+            if (isConfirmed) {
+                var updatedData = collectUpdatedData();
+                console.log('Updated Data:', updatedData);
+                sendUpdateRequest(updatedData);
+                isEditMode = false;
+                makeFieldsEditable();
+                scrollToTop();
+                replaceUpdateButton();
+            } else {
+                // If the user clicks 'Cancel' in the confirmation pop-up, you can choose to handle it accordingly
+                console.log('Update cancelled by user');
+            }
         }
+
+
+        // Function to send the update request to the server
+        function sendUpdateRequest(updatedData) {
+        
+            // Example using fetch API:
+            fetch('updateApplicantInfo.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+        })
+        .then(response => response.text())  // Change this line
+        .then(data => {
+            console.log('Response:', data);  // Log the raw response
+            // Handle the response from the server if needed
+        })
+        .catch(error => {
+            // Handle errors if the update fails
+            console.error('Error updating data:', error);
+        });
+        }
+
 
         // Function to replace the Update button with the Edit button
         function replaceUpdateButton() {
@@ -1176,24 +1203,36 @@ if(isset($_SESSION['applicant_id'])){
             updateButton.parentNode.replaceChild(editButton, updateButton);
         }
 
-        // Function to collect updated data from the form fields
         function collectUpdatedData() {
-            // Initialize an object to store updated data
             var updatedData = {};
 
-            // Get all input elements within the form container
-            var inputElements = document.querySelectorAll('.form-container input.editable-input, .form-container select.editable-input');
+            // Get all elements within the form container
+            var formElements = document.querySelectorAll('.form-container *');
 
-            inputElements.forEach(function (inputElement) {
-                // Extract the field name from the input element's ID or other attribute
-                var fieldName = inputElement.id; // Replace with the actual attribute used to identify the field
+            formElements.forEach(function (element) {
+                // Check if the element is inside the editable table
+                var isEditableTableElement = element.closest('.editable-table');
 
-                // Store the updated value in the object using the field name as the key
-                updatedData[fieldName] = inputElement.tagName.toLowerCase() === 'select' ? inputElement.options[inputElement.selectedIndex].text : inputElement.value;
+                if (isEditableTableElement || element.classList.contains('editable-input')) {
+                    // Extract the field name from the element's id and remove the "edit_" prefix
+                    var fieldName = element.id.startsWith('edit_') ? element.id.slice('edit_'.length) : element.id;
+
+                    // Extract data based on the element type
+                    if (element.tagName.toLowerCase() === 'input') {
+                        updatedData[fieldName] = element.value;
+                    } else if (element.tagName.toLowerCase() === 'span') {
+                        updatedData[fieldName] = element.textContent;
+                    } else if (element.tagName.toLowerCase() === 'select') {
+                        updatedData[fieldName] = element.options[element.selectedIndex].text;
+                    }
+                }
             });
+
+            console.log('Updated Data:', updatedData);
 
             return updatedData;
         }
+
 
         // Function to make fields editable or non-editable based on the current edit mode
         function makeFieldsEditable() {
@@ -1272,6 +1311,9 @@ if(isset($_SESSION['applicant_id'])){
                         inputElement.className = 'editable-input';
                         inputElement.readOnly = !isEditMode;
                         inputElement.style.border = isEditMode ? '1px solid #000' : 'none';
+
+                        // Set a unique identifier (id) for the input field
+                        inputElement.id = 'edit_' + element.id;
 
                         // Replace the span with the input element
                         element.parentNode.replaceChild(inputElement, element);
