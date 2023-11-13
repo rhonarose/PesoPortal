@@ -110,12 +110,12 @@ if(isset($_SESSION['applicant_id'])){
                     }
                 ?>    
 
-                <div class="butcon">
+                <!-- <div class="butcon">
                     <input type="button" value="EDIT PROFILE" onclick="openEditProfileModal()">
-                </div>
+                </div> -->
             </div>
 
-            <div id="editProfileModal" class="modal">
+            <!-- <div id="editProfileModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeEditProfileModal()">&times;</span>
                     <h2>Edit Profile</h2>
@@ -149,12 +149,12 @@ if(isset($_SESSION['applicant_id'])){
                             <input type="file" id="Resume" placeholder="Enter your skill">
                         </div>
                         <!-- Add other fields as needed -->
-                        <div class="butcon">
+                        <!-- <div class="butcon">
                             <button type="button" onclick="saveEditedProfile()">Save</button>
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>  -->
 
         
             <div class="form-container" id="referral">
@@ -729,11 +729,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse1">1.</label>
                             </td>
                             <td>
-                                <span id="cname1"><?= $fetch_training["course_name_1"]; ?></span>
+                                <span id="tvcourse1"><?= $fetch_training["course_name_1"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span id="start1" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_1"]); ?></span>
-                                <span id="end1" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_1"]); ?></span>
+                                <span id="duration1" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_1"]); ?></span>
+                                <span id="duration.1" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_1"]); ?></span>
                             </td>
                             <td> 
                                 <span id="traininst1"><?= $fetch_training["training_institution_1"]; ?></span>
@@ -747,11 +747,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse2">2.</label>
                             </td>
                             <td>
-                                <span id="cname2"><?= $fetch_training["course_name_2"]; ?></span>
+                                <span id="tvcourse2"><?= $fetch_training["course_name_2"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span id="start2" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_2"]); ?></span>
-                                <span id="end2" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_2"]); ?></span>
+                                <span id="duration2" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_2"]); ?></span>
+                                <span id="duration.2" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_2"]); ?></span>
                             </td>
                             <td> 
                                 <span id="traininst2"><?= $fetch_training["training_institution_2"]; ?></span>
@@ -765,11 +765,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <label for="tvcourse3">3.</label>
                             </td>
                             <td>
-                                <span id="cname3"><?= $fetch_training["course_name_3"]; ?></span>
+                                <span id="tvcourse3"><?= $fetch_training["course_name_3"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span id="start3" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_3"]); ?></span>
-                                <span id="end3" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_3"]); ?></span>
+                                <span id="duration3" class="editable-date"><?php echo formatDate($fetch_training["course_duration_start_3"]); ?></span>
+                                <span id="duration.3" class="editable-date"><?php echo formatDate($fetch_training["course_duration_end_3"]); ?></span>
                             </td>
                             <td> 
                                 <span id="traininst3"><?= $fetch_training["training_institution_3"]; ?></span>
@@ -888,11 +888,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <span id="position1"><?= $fetch_work["position1"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span id="instart1" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start1"]); ?></span>
-                                <span id="inend1" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end1"]); ?></span>
+                                <span id="indates1" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start1"]); ?></span>
+                                <span id="indates.1" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end1"]); ?></span>
                             </td>
                             <td> 
-                                <span id="stat1" class="editable-select" data-field="status"><?= $fetch_work["status1"]; ?></span>
+                                <span id="workstat1" class="editable-select" data-field="status"><?= $fetch_work["status1"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -906,11 +906,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <span id="position2"><?= $fetch_work["position2"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span id="instart2" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start2"]); ?></span>
-                                <span id="inend2" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end2"]); ?></span>
+                                <span id="indates2" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start2"]); ?></span>
+                                <span id="indates.2" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end2"]); ?></span>
                             </td>
                             <td> 
-                                <span id="stat2" class="editable-select" data-field="status"><?= $fetch_work["status2"]; ?></span>
+                                <span id="workstat2" class="editable-select" data-field="status"><?= $fetch_work["status2"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -924,11 +924,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <span id="position3"><?= $fetch_work["position3"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span id="instart3" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start3"]); ?></span>
-                                <span id="inend3" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end3"]); ?></span>
+                                <span id="indates3" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start3"]); ?></span>
+                                <span id="indates.3" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end3"]); ?></span>
                             </td>
                             <td> 
-                                <span id="stat3" class="editable-select" data-field="status"><?= $fetch_work["status3"]; ?></span>
+                                <span id="workstat3" class="editable-select" data-field="status"><?= $fetch_work["status3"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -942,11 +942,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <span id="position4"><?= $fetch_work["position4"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span id="instart4" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start4"]); ?></span>
-                                <span id="inend4" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end4"]); ?></span>
+                                <span id="indates4" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start4"]); ?></span>
+                                <span id="indates.4" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end4"]); ?></span>
                             </td>
                             <td> 
-                                <span id="stat4" class="editable-select" data-field="status"><?= $fetch_work["status4"]; ?></span>
+                                <span id="workstat4" class="editable-select" data-field="status"><?= $fetch_work["status4"]; ?></span>
                             </td>
                         </tr>
                         <tr>
@@ -960,11 +960,11 @@ if(isset($_SESSION['applicant_id'])){
                                 <span id="position5"><?= $fetch_work["position5"]; ?></span>
                             </td>
                             <td id="format2">
-                                <span id="instart5" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start5"]); ?></span>
-                                <span id="inend5" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end5"]); ?></span>
+                                <span id="indates5" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_start5"]); ?></span>
+                                <span id="indates.5" class="editable-date"><?php echo formatDate($fetch_work["inclusive_dates_end5"]); ?></span>
                             </td>
                             <td> 
-                                <span id="stat5" class="editable-select" data-field="status"><?= $fetch_work["status5"]; ?></span>
+                                <span id="workstat5" class="editable-select" data-field="status"><?= $fetch_work["status5"]; ?></span>
                             </td>
                         </tr>
                     </table>
@@ -1053,7 +1053,7 @@ if(isset($_SESSION['applicant_id'])){
             updateSidebarSelection(previousFormId);
         }
 
-        function openEditProfileModal() {
+        /* function openEditProfileModal() {
             const modal = document.getElementById('editProfileModal');
             modal.style.display = 'block';
         }
@@ -1081,7 +1081,7 @@ if(isset($_SESSION['applicant_id'])){
             // Close the modal
             closeEditProfileModal();
         }
-
+ */
        // Assuming you have a variable to store the edit mode status
         var isEditMode = false;
 
@@ -1131,6 +1131,35 @@ if(isset($_SESSION['applicant_id'])){
             editButton.parentNode.replaceChild(updateButton, editButton);
         }
 
+        // Function to replace the Update button with the Edit button
+        function replaceUpdateButton() {
+            var updateButton = document.getElementById('updateButton');
+
+            // Get all elements (both spans and inputs) within the form container
+            var formElements = document.querySelectorAll('.form-container span, .form-container input.editable-input, .form-container select.editable-input');
+
+            formElements.forEach(function (element) {
+                if (element.tagName.toLowerCase() === 'input' && element.classList.contains('editable-input')) {
+                    // Replace the input element with a span
+                    var spanElement = document.createElement('span');
+                    spanElement.textContent = element.value;
+
+                    // Replace the input element with the span element
+                    element.parentNode.replaceChild(spanElement, element);
+                } else if (element.tagName.toLowerCase() === 'select' && element.classList.contains('editable-input')) {
+                    // Replace the select element with a span
+                    var spanElementSelect = document.createElement('span');
+                    spanElementSelect.textContent = element.options[element.selectedIndex].text;
+
+                    // Replace the select element with the span element
+                    element.parentNode.replaceChild(spanElementSelect, element);
+                }
+            });
+
+            // Now, replace the Update button with the Edit button
+            updateButton.parentNode.replaceChild(editButton, updateButton);
+        }
+
         // Function to handle the update logic
         function updateForm() {
             // Ask for confirmation
@@ -1173,36 +1202,6 @@ if(isset($_SESSION['applicant_id'])){
         });
         }
 
-
-        // Function to replace the Update button with the Edit button
-        function replaceUpdateButton() {
-            var updateButton = document.getElementById('updateButton');
-
-            // Get all elements (both spans and inputs) within the form container
-            var formElements = document.querySelectorAll('.form-container span, .form-container input.editable-input, .form-container select.editable-input');
-
-            formElements.forEach(function (element) {
-                if (element.tagName.toLowerCase() === 'input' && element.classList.contains('editable-input')) {
-                    // Replace the input element with a span
-                    var spanElement = document.createElement('span');
-                    spanElement.textContent = element.value;
-
-                    // Replace the input element with the span element
-                    element.parentNode.replaceChild(spanElement, element);
-                } else if (element.tagName.toLowerCase() === 'select' && element.classList.contains('editable-input')) {
-                    // Replace the select element with a span
-                    var spanElementSelect = document.createElement('span');
-                    spanElementSelect.textContent = element.options[element.selectedIndex].text;
-
-                    // Replace the select element with the span element
-                    element.parentNode.replaceChild(spanElementSelect, element);
-                }
-            });
-
-            // Now, replace the Update button with the Edit button
-            updateButton.parentNode.replaceChild(editButton, updateButton);
-        }
-
         function collectUpdatedData() {
             var updatedData = {};
 
@@ -1221,7 +1220,12 @@ if(isset($_SESSION['applicant_id'])){
                     if (element.tagName.toLowerCase() === 'input') {
                         updatedData[fieldName] = element.value;
                     } else if (element.tagName.toLowerCase() === 'span') {
-                        updatedData[fieldName] = element.textContent;
+                        if (element.classList.contains('editable-date')) {
+                            // If it's an uneditable date field, extract the date from the text content
+                            updatedData[fieldName] = extractDateFromSpan(element);
+                        } else {
+                            updatedData[fieldName] = element.textContent;
+                        }
                     } else if (element.tagName.toLowerCase() === 'select') {
                         updatedData[fieldName] = element.options[element.selectedIndex].text;
                     }
@@ -1231,6 +1235,21 @@ if(isset($_SESSION['applicant_id'])){
             console.log('Updated Data:', updatedData);
 
             return updatedData;
+        }
+
+        // Helper function to extract date from span element
+        function extractDateFromSpan(spanElement) {
+            // Assuming the span contains a valid date in 'MM/DD/YYYY' format
+            const dateParts = spanElement.textContent.split('/');
+
+            // Check if the dateParts array has three elements (month, day, and year)
+            if (dateParts.length === 3) {
+                const yyyyMMddDate = `${dateParts[2]}-${dateParts[0].padStart(2, '0')}-${dateParts[1].padStart(2, '0')}`;
+                return yyyyMMddDate;
+            } else {
+                // Return empty string or handle invalid date format accordingly
+                return '';
+            }
         }
 
 

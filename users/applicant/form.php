@@ -411,17 +411,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     $eligibility1 = filter_var($jsonData['eligibility1'], FILTER_SANITIZE_STRING);
                                     $rating1 = filter_var($jsonData['rating1'], FILTER_SANITIZE_STRING);
                                     $examdate1 = filter_var($jsonData['examdate1'], FILTER_SANITIZE_STRING);
-                                    $professional_license1 = filter_var($jsonData['professional_license1'], FILTER_SANITIZE_STRING);
+                                    $professional_license1 = filter_var($jsonData['profli1'], FILTER_SANITIZE_STRING);
                                     $valid1 = filter_var($jsonData['valid1'], FILTER_SANITIZE_STRING);
 
                                     // Retrieve form data for eligibility2
                                     $eligibility2 = filter_var($jsonData['eligibility2'], FILTER_SANITIZE_STRING);
                                     $rating2 = filter_var($jsonData['rating2'], FILTER_SANITIZE_STRING);
                                     $examdate2 = filter_var($jsonData['examdate2'], FILTER_SANITIZE_STRING);
-                                    $professional_license2 = filter_var($jsonData['professional_license2'], FILTER_SANITIZE_STRING);
+                                    $professional_license2 = filter_var($jsonData['profli2'], FILTER_SANITIZE_STRING);
                                     $valid2 = filter_var($jsonData['valid2'], FILTER_SANITIZE_STRING);
             
-                                    // Insert data into the preference table
                                     // Prepare SQL statement
                                     $stmt = $conn->prepare("INSERT INTO eligibility (applicant_id, eligibility1, rating1, examdate1, professional_license1, valid1, eligibility2, rating2, examdate2, professional_license2, valid2)
                                     VALUES (:applicant_id, :eligibility1, :rating1, :examdate1, :professional_license1, :valid1, :eligibility2, :rating2, :examdate2, :professional_license2, :valid2)");
