@@ -60,6 +60,11 @@ if(isset($_SESSION['applicant_id'])){
                     <i class="fas fa-file-signature"></i> <span class="icon-text"> NSRP Form </span>
                 </a>
             </div>
+            <div class="sidebar-item">
+                <a href="#jobpost" data-form-id="post" onclick="showForm('post'); updateSidebarSelection('post');">
+                    <i class="fas fa-file-alt"></i></i> <span class="icon-text"> Job Posts </span>
+                </a>
+            </div>
         </div>
     </div>
 

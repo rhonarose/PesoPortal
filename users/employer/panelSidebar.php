@@ -1,3 +1,12 @@
+<?php
+include '../../config/dbconnect.php';
+
+if(isset($_SESSION['employer_id'])){
+    $employer_id = $_SESSION['employer_id'];
+}
+
+
+?>
 <!DOCTYPE html> 
 <html>
 <head>
@@ -22,7 +31,22 @@
             <a href="#" onclick="uploadProfilePicture()">
                  <img src="../../img/ProfileIcon.png" alt="Company Logo" id="profile-picture-display">
             </a>
-            <h2>WELCOME, <br><b style="color: #2B65E2;"><?php echo $_SESSION['employer_name']; ?></b></h2>
+
+            <?php          
+                    $select_name = $conn->prepare("SELECT * FROM `employers` WHERE id = ?");
+                    $select_name->execute([$employer_id]);
+                    if ($select_name->rowCount() > 0) {
+                    $fetch_name = $select_name->fetch(PDO::FETCH_ASSOC);
+                ?>
+            <h2>WELCOME, <br><b style="color: #2B65E2;"><?= $fetch_name["employer_name"]; ?></b></h2>
+
+            <?php
+                    }else{
+                ?>
+                    <p>please login or register first!</p>
+                <?php
+                    }
+                ?> 
         </div>
         <div>
       <div class="sidebar-item">

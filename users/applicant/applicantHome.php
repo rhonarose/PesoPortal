@@ -148,7 +148,7 @@ if(isset($_SESSION['applicant_id'])){
                             <label for="Resume">Resume:</label>
                             <input type="file" id="Resume" placeholder="Enter your skill">
                         </div>
-                        <!-- Add other fields as needed -->
+                         Add other fields as needed -->
                         <!-- <div class="butcon">
                             <button type="button" onclick="saveEditedProfile()">Save</button>
                         </div>
@@ -991,6 +991,112 @@ if(isset($_SESSION['applicant_id'])){
                     <input type="button" id="editButton" value="UPDATE">
                 </div>
             </div>
+
+            <div class="form-container" id="post">
+                <!-- My Profile Section -->
+                <h2>JOB POST</h2><br>
+
+                <?php
+                    $select_personal_info = $conn->prepare("SELECT * FROM `personal_info` WHERE applicant_id = ?");
+                    $select_preference = $conn->prepare("SELECT * FROM `preference` WHERE applicant_id = ?");
+                    $select_language = $conn->prepare("SELECT * FROM `language` WHERE applicant_id = ?");
+                    $select_education = $conn->prepare("SELECT * FROM `educational_background` WHERE applicant_id = ?");
+                    $select_training = $conn->prepare("SELECT * FROM `training` WHERE applicant_id = ?");
+                    $select_eligibility = $conn->prepare("SELECT * FROM `eligibility` WHERE applicant_id = ?");
+                    $select_work = $conn->prepare("SELECT * FROM `work_experience` WHERE applicant_id = ?");
+                    $select_skills = $conn->prepare("SELECT skills FROM `skills` WHERE applicant_id = ?");
+                    // Add similar prepared statements for other tables
+
+                    $select_personal_info->execute([$applicant_id]);
+                    $select_preference->execute([$applicant_id]);
+                    $select_language->execute([$applicant_id]);
+                    $select_education->execute([$applicant_id]);
+                    $select_training->execute([$applicant_id]);
+                    $select_eligibility->execute([$applicant_id]);
+                    $select_work->execute([$applicant_id]);
+                    $select_skills->execute([$applicant_id]);
+                    // Execute other prepared statements for the remaining tables
+
+                    if (
+                        $select_personal_info->rowCount() > 0 && 
+                        $select_preference->rowCount() > 0 &&
+                        $select_language->rowCount() > 0 && 
+                        $select_education->rowCount() > 0 &&
+                        $select_training->rowCount() > 0 && 
+                        $select_eligibility->rowCount() > 0 &&
+                        $select_work->rowCount() > 0 
+                        // Check other prepared statements for data availability
+                    ) {
+                        $fetch_personal_info = $select_personal_info->fetch(PDO::FETCH_ASSOC);
+                        $fetch_preference = $select_preference->fetch(PDO::FETCH_ASSOC);
+                        $fetch_language = $select_language->fetch(PDO::FETCH_ASSOC);
+                        $fetch_education = $select_education->fetch(PDO::FETCH_ASSOC);
+                        $fetch_training = $select_training->fetch(PDO::FETCH_ASSOC);
+                        $fetch_eligibility = $select_eligibility->fetch(PDO::FETCH_ASSOC);
+                        $fetch_work = $select_work->fetch(PDO::FETCH_ASSOC);
+
+                        // Fetch and store the skills in an array
+                        $skills = [];
+                        while ($row = $select_skills->fetch(PDO::FETCH_ASSOC)) {
+                            $skills[] = $row['skills'];
+                        }
+                        
+                        // You can similarly fetch data from other tables
+
+                ?>
+
+
+                <!-- Container for job postings -->
+                <div class="job-postings-container">
+
+                    <!-- Job Title 1 with a button to show details -->
+                    <div class="job-posting" onclick="showJobDetails('Job Title 1')">
+                        <div class="job-result-item">
+                            <img src="img/PesoLogo.png" alt="Company Logo">
+                            <div class="job-result">
+                                <h3 class="job-result-title">Software Engineer</h3>
+                                <p class="job-result-description">Join our team as a software engineer and work on exciting projects.</p>
+                                <p class="job-result-company">Company: TechCo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Title 2 with a button to show details -->
+                    <div class="job-posting" onclick="showJobDetails('Job Title 2')">
+                        <div class="job-result-item">
+                            <img src="img/PesoLogo.png" alt="Company Logo">
+                            <div class="job-result">
+                                <h3 class="job-result-title">Chemistry Doctor</h3>
+                                <p class="job-result-description">For the better future outcomes lead us with your intelligence to create and make an easy way to live.</p>
+                                <p class="job-result-company">Company: MarcaLogistics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div id="modalOverlay" class="overlay"></div>
+
+            <!-- Modal for displaying job details -->
+            <div id="jobDetailsModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeJobDetailsModal()">&times;</span>
+                    <h2 id="jobDetailsTitle"></h2>
+                    <div id="jobDetailsContent">
+                        <!-- Job details will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+                <?php
+                    }else{
+                ?>
+                    <p>please login or register first!</p>
+                <?php
+                    }
+                ?>    
+
             
         </div>
     </div>
@@ -1360,6 +1466,48 @@ if(isset($_SESSION['applicant_id'])){
 
 
 
+        function showJobDetails(jobTitle) {
+            const modal = document.getElementById('jobDetailsModal');
+            const overlay = document.getElementById('modalOverlay');
+            const title = document.getElementById('jobDetailsTitle');
+            const content = document.getElementById('jobDetailsContent');
+
+            // Set the title and content for the modal based on the job title
+            title.textContent = jobTitle;
+
+            // Here, you can fetch job details based on the job title and set the content dynamically
+            // For example:
+            if (jobTitle === 'Job Title 1') {
+                content.innerHTML = `
+                    <p>Description: This is the job description for Job Title 1.</p>
+                    <p>Location: Location 1</p>
+                    <p>Job Type: Full Time</p>
+                    <p>Salary: $50,000 - $60,000</p>
+                    <p>Vacancies: 5 slots</p>
+                `;
+            } 
+            if (jobTitle === 'Job Title 2') {
+                content.innerHTML = `
+                    <p>Description: This job is to create an environment wherein people can live safely.</p>
+                    <p>Location: USA California 1</p>
+                    <p>Job Type: Full Time</p>
+                    <p>Salary: $70,000 - $80,000</p>
+                    <p>Vacancies: 23 slots</p>
+                `;
+            }
+
+            // Show the modal and overlay
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        // Close the modal and overlay
+        function closeJobDetailsModal() {
+            const modal = document.getElementById('jobDetailsModal');
+            const overlay = document.getElementById('modalOverlay');
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
 
     </script>
 

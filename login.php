@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $employerResult['password'])) {
                 $_SESSION['user_type'] = 'employer';
                 $_SESSION['employer_id'] = $employerResult['id'];
-                $_SESSION['employer_name'] = $employerResult['company_name']; // Store the employer's name
+                $_SESSION['employer_name'] = $employerResult['employer_name']; // Store the employer's name
                 
 
                 // Redirect to employer panel

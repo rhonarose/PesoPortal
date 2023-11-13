@@ -61,31 +61,42 @@
                         </div>
                         <div class="results" id="Results">
                             <!-- Simulated Job Search Results -->
-                            <div class="job-result-item">
-                                <img src="img/PesoLogo.png" alt="Company Logo">
-                                <div class="job-result">
-                                    <h3 class="job-result-title">Software Engineer</h3>
-                                    <p class="job-result-description">Join our team as a software engineer and work on exciting projects.</p>
-                                    <p class="job-result-company">Company: TechCo</p>
+                            <!-- Container for job postings -->
+                            <div class="job-postings-container">
+                                <div class="job-result-item">
+                                    <img src="img/PesoLogo.png" alt="Company Logo">
+                                    <div class="job-result">
+                                        <h3 class="job-result-title">Software Engineer</h3>
+                                        <p class="job-result-description">Join our team as a software engineer and work on exciting projects.</p>
+                                        <p class="job-result-company">Company: TechCo</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="job-result-item">
-                                <img src="img/PesoIcon.png" alt="Company Logo">
-                                <div class="job-result">
-                                    <h3 class="job-result-title">Marketing Specialist</h3>
-                                    <p class="job-result-description">We are looking for a marketing specialist to promote our products.</p>
-                                    <p class="job-result-company">Company: MarketingPro</p>
+                                <div class="job-result-item">
+                                    <img src="img/PesoIcon.png" alt="Company Logo">
+                                    <div class="job-result">
+                                        <h3 class="job-result-title">Marketing Specialist</h3>
+                                        <p class="job-result-description">We are looking for a marketing specialist to promote our products.</p>
+                                        <p class="job-result-company">Company: MarketingPro</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="job-result-item">
-                                <img src="img/Pesopic.jpg" alt="Company Logo">
-                                <div class="job-result">
-                                    <h3 class="job-result-title">Data Analyst</h3>
-                                    <p class="job-result-description">We are looking for a data analyst to promote our products.</p>
-                                    <p class="job-result-company">Company: AnalyticsCorp.</p>
+                                <div class="job-result-item">
+                                    <img src="img/Pesopic.jpg" alt="Company Logo">
+                                    <div class="job-result">
+                                        <h3 class="job-result-title">Data Analyst</h3>
+                                        <p class="job-result-description">We are looking for a data analyst to promote our products.</p>
+                                        <p class="job-result-company">Company: AnalyticsCorp.</p>
+                                    </div>
                                 </div>
+                                <div class="job-result-item">
+                                    <img src="img/Pesopic.jpg" alt="Company Logo">
+                                    <div class="job-result">
+                                        <h3 class="job-result-title">Data Analyst</h3>
+                                        <p class="job-result-description">We are looking for a data analyst to promote our products.</p>
+                                        <p class="job-result-company">Company: AnalyticsCorp.</p>
+                                    </div>
+                                </div>
+                                <!-- Add more job search results here -->
                             </div>
-                            <!-- Add more job search results here -->
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,13 @@ session_start(); // Start the session
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
 
+    <style>
+        
+
+
+
+
+    </style>
 </head>
 <body>
     <?php require_once '../userNavbar.php'; ?>
@@ -67,7 +74,7 @@ session_start(); // Start the session
                 </div>
             </div>
 
-            <div id="editProfileModal" class="modal">
+            <!-- <div id="editProfileModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeEditProfileModal()">&times;</span>
                     <h2>Edit Profile</h2>
@@ -96,92 +103,132 @@ session_start(); // Start the session
                             <label for="editedDescription">Description:</label>
                             <textarea id="editedDescription" placeholder="Enter a brief description of your company" rows="4"></textarea>
                         </div>
-                        <!-- Add other fields as needed -->
-                        <div class="butcon">
+                         Add other fields as needed -->
+                        <!-- <div class="butcon">
                             <button type="button" onclick="saveEditedProfile()">Save</button>
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> -->
  
 
             <div class="form-container" id="createjob">
-                <!-- Job Posting Form -->
-                <h2>CREATE JOB POST</h2>
-                <form id="jobPostForm">
-                    <div class="form-field">
-                        <label for="jobTitle">Job Title:</label>
-                        <input type="text" id="jobTitle" name="jobTitle" required>
-                    </div>
-                    <div class="form-field">
-                        <label for="jobDescription">Job Description:</label>
-                        <textarea id="jobDescription" name="jobDescription" rows="4" required></textarea>
-                    </div>
-                    <div class="form-field">
-                        <label for="jobLocation">Job Location:</label>
-                        <input type="text" id="jobLocation" name="jobLocation" required>
-                    </div>
-                    <div class="form-field">
-                        <label for="jobType">Job Type:</label>
-                        <select id="jobType" name="jobType" required>
-                            <option value="fulltime">Full-Time</option>
-                            <option value="parttime">Part-Time</option>
-                            <option value="contract">Contract</option>
-                            <option value="freelance">Freelance</option>
-                        </select>
-                    </div>
-                    <div class="form-field">
-                        <label for="jobSalary">Salary:</label>
-                        <input type="text" id="jobSalary" name="jobSalary">
-                    </div>
-                    <div class="form-field">
-                                    <label for="numberOfVacancies">Number of Vacancies:</label>
-                                    <input type="number" id="numberOfVacancies" name="numberOfVacancies" min="1" placeholder="Enter number of vacancies" required>
-                                </div>
-
-                    <div class="butcon">
-                        <button type="submit">Post Job</button>
-                    </div>
-                </form>
+                <div class="post-container">
+                    <!-- Job Posting Form -->
+                    <h2>CREATE JOB POST</h2>
+                    <form id="jobPostForm" action="jobPost.php" method="post">
+                        <div class="form-group">
+                            <div>
+                                <label for="jobTitle">Job Title:</label>
+                                <input type="text" id="jobTitle" name="jobTitle" required>
+                            </div>
+                            <div>
+                                <label for="jobLocation">Job Location:</label>
+                                <input type="text" id="jobLocation" name="jobLocation" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label for="jobType">Job Type:</label>
+                                <select id="jobType" name="jobType" required>
+                                    <option value="fulltime">Full-Time</option>
+                                    <option value="parttime">Part-Time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="freelance">Freelance</option>
+                                    <option value="temporary">Temporary</option>
+                                    <option value="internship">Internship</option>
+                                    <option value="remote">Remote/Telecommute</option>
+                                    <option value="volunteer">Volunteer</option>
+                                    <option value="seasonal">Seasonal</option>
+                                    <option value="projectbased">Project-Based</option>
+                                    <option value="commission">Commission</option>
+                                    <option value="apprenticeship">Apprenticeship</option>
+                                    <option value="entrylevel">Entry-Level</option>
+                                    <option value="midlevel">Mid-Level</option>
+                                    <option value="seniorlevel">Senior-Level</option>
+                                    <option value="executive">Executive</option>
+                                    <option value="consultant">Consultant</option>
+                                    <option value="perdiem">Per Diem</option>
+                                    <option value="jobshare">Job Share</option>
+                                    <option value="flextime">Flextime</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="jobSalary">Salary:</label>
+                                <input type="text" id="jobSalary" name="jobSalary" oninput="validateSalary(this)" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description:</label>
+                            <textarea id="jobDescription" name="jobDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="qualifications">Qualifications/Requirements:</label>
+                            <textarea id="qualifications" name="qualifications" rows="3" onkeydown="addBulletPoints(event, this)" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tasks">Tasks/Responsibilities:</label>
+                            <textarea id="tasks" name="tasks" rows="3" onkeydown="addBulletPoints(event, this)" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="numberOfVacancies">Number of Vacancies:</label>
+                            <input type="number" id="numberOfVacancies" name="numberOfVacancies" min="1" placeholder="Enter number of vacancies" required>
+                        </div>
+                        <div class="butcon">
+                            <button type="submit">Post Job</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-         <div class="form-container" id="jobPost">
-               <!-- My Job Post Form -->
-               <h2>MY JOB POST</h2><br>
+
+
+            <div class="form-container" id="jobPost">
+                <!-- My Job Post Form -->
+                <h2>MY JOB POST</h2><br>
+
+                <!-- Container for job postings -->
+                <div class="job-postings-container">
 
                     <!-- Job Title 1 with a button to show details -->
-                <div class="job-posting" onclick="showJobDetails('Job Title 1')">
-                    <div class="job-result-item">
-                          <img src="img/PesoLogo.png" alt="Company Logo">
-                        <div class="job-result">
-                            <h3 class="job-result-title">Software Engineer</h3>
-                            <p class="job-result-description">Join our team as a software engineer and work on exciting projects.</p>
-                            <p class="job-result-company">Company: TechCo</p>
+                    <div class="job-posting" onclick="showJobDetails('Job Title 1')">
+                        <div class="job-result-item">
+                            <img src="img/PesoLogo.png" alt="Company Logo">
+                            <div class="job-result">
+                                <h3 class="job-result-title">Software Engineer</h3>
+                                <p class="job-result-description">Join our team as a software engineer and work on exciting projects.</p>
+                                <p class="job-result-company">Company: TechCo</p>
+                            </div>
                         </div>
                     </div>
-                 </div>
-            <div class="job-posting" onclick="showJobDetails('Job Title 2')">
-                    <div class="job-result-item">
-                          <img src="img/PesoLogo.png" alt="Company Logo">
-                        <div class="job-result">
-                            <h3 class="job-result-title">Chemistry Doctor</h3>
-                            <p class="job-result-description">For the better future outcomes led us your intelligence to create nad make easy way to live.</p>
-                            <p class="job-result-company">Company: MarcaLogistics</p>
-                        </div>
-                    </div>
-                 </div>
-     </div>
-     <div id="modalOverlay" class="overlay"></div>
 
-<!-- Modal for displaying job details -->
-<div id="jobDetailsModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeJobDetailsModal()">&times;</span>
-        <h2 id="jobDetailsTitle"></h2>
-        <div id="jobDetailsContent">
-            <!-- Job details will be displayed here -->
-        </div>
+                    <!-- Job Title 2 with a button to show details -->
+                    <div class="job-posting" onclick="showJobDetails('Job Title 2')">
+                        <div class="job-result-item">
+                            <img src="img/PesoLogo.png" alt="Company Logo">
+                            <div class="job-result">
+                                <h3 class="job-result-title">Chemistry Doctor</h3>
+                                <p class="job-result-description">For the better future outcomes lead us with your intelligence to create and make an easy way to live.</p>
+                                <p class="job-result-company">Company: MarcaLogistics</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div id="modalOverlay" class="overlay"></div>
+
+            <!-- Modal for displaying job details -->
+            <div id="jobDetailsModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeJobDetailsModal()">&times;</span>
+                    <h2 id="jobDetailsTitle"></h2>
+                    <div id="jobDetailsContent">
+                        <!-- Job details will be displayed here -->
+                    </div>
+                </div>
+            </div>
     </div>
-</div>
 
     <script>
 
@@ -218,7 +265,40 @@ session_start(); // Start the session
             }
         }
 
-        function openEditProfileModal() {
+        function validateSalary(input) {
+            // Allow only numbers, hyphen, comma, and dollar signs
+            input.value = input.value.replace(/[^0-9$,-.]/g, '');
+        }
+
+        function addBulletPoints(event, textarea) {
+            // Get the current value of the textarea
+            let currentValue = textarea.value;
+
+            // Get the position of the cursor
+            let cursorPosition = textarea.selectionStart;
+
+            // Find the beginning of the current line
+            let lineStart = currentValue.lastIndexOf('\n', cursorPosition - 1) + 1;
+
+            // Check if the line is empty
+            let isLineEmpty = currentValue.slice(lineStart, cursorPosition).trim() === '';
+
+            // Insert a bullet point at the beginning of the line if the line is empty
+            if (isLineEmpty) {
+                let newValue = currentValue.slice(0, lineStart) + '• ' + currentValue.slice(lineStart);
+
+                // Update the textarea value
+                textarea.value = newValue;
+
+                // Move the cursor position after the inserted bullet point
+                textarea.setSelectionRange(cursorPosition + 2, cursorPosition + 2);
+
+                // Prevent the default behavior to avoid creating an additional line break
+                event.preventDefault();
+            }
+        }
+
+        /* function openEditProfileModal() {
             const modal = document.getElementById('editProfileModal');
             modal.style.display = 'block';
 
@@ -258,50 +338,50 @@ session_start(); // Start the session
             // You can also send the edited data to the server for saving (similar to previous examples)
 
             
-        }
+        } */
           
         function showJobDetails(jobTitle) {
-    const modal = document.getElementById('jobDetailsModal');
-    const overlay = document.getElementById('modalOverlay');
-    const title = document.getElementById('jobDetailsTitle');
-    const content = document.getElementById('jobDetailsContent');
+            const modal = document.getElementById('jobDetailsModal');
+            const overlay = document.getElementById('modalOverlay');
+            const title = document.getElementById('jobDetailsTitle');
+            const content = document.getElementById('jobDetailsContent');
 
-    // Set the title and content for the modal based on the job title
-    title.textContent = jobTitle;
+            // Set the title and content for the modal based on the job title
+            title.textContent = jobTitle;
 
-    // Here, you can fetch job details based on the job title and set the content dynamically
-    // For example:
-    if (jobTitle === 'Job Title 1') {
-        content.innerHTML = `
-            <p>Description: This is the job description for Job Title 1.</p>
-            <p>Location: Location 1</p>
-            <p>Job Type: Full Time</p>
-            <p>Salary: $50,000 - $60,000</p>
-            <p>Vacancies: 5 slots</p>
-        `;
-    } 
-    if (jobTitle === 'Job Title 2') {
-        content.innerHTML = `
-            <p>Description: This job is to create an environment wherein people can live safely.</p>
-            <p>Location: USA California 1</p>
-            <p>Job Type: Full Time</p>
-            <p>Salary: $70,000 - $80,000</p>
-            <p>Vacancies: 23 slots</p>
-        `;
-    }
+            // Here, you can fetch job details based on the job title and set the content dynamically
+            // For example:
+            if (jobTitle === 'Job Title 1') {
+                content.innerHTML = `
+                    <p>Description: This is the job description for Job Title 1.</p>
+                    <p>Location: Location 1</p>
+                    <p>Job Type: Full Time</p>
+                    <p>Salary: $50,000 - $60,000</p>
+                    <p>Vacancies: 5 slots</p>
+                `;
+            } 
+            if (jobTitle === 'Job Title 2') {
+                content.innerHTML = `
+                    <p>Description: This job is to create an environment wherein people can live safely.</p>
+                    <p>Location: USA California 1</p>
+                    <p>Job Type: Full Time</p>
+                    <p>Salary: $70,000 - $80,000</p>
+                    <p>Vacancies: 23 slots</p>
+                `;
+            }
 
-    // Show the modal and overlay
-    modal.style.display = 'block';
-    overlay.style.display = 'block';
-}
+            // Show the modal and overlay
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+        }
 
-// Close the modal and overlay
-function closeJobDetailsModal() {
-    const modal = document.getElementById('jobDetailsModal');
-    const overlay = document.getElementById('modalOverlay');
-    modal.style.display = 'none';
-    overlay.style.display = 'none';
-}
+        // Close the modal and overlay
+        function closeJobDetailsModal() {
+            const modal = document.getElementById('jobDetailsModal');
+            const overlay = document.getElementById('modalOverlay');
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
 
               
          
