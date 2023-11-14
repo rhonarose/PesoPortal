@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['employer_email'] = $employerEmail;
 
             session_write_close();
-            header('Location: users/employer/employerReq.php');
+            header('Location: users/employer/employerInfo.php');
             exit();
         }
     } else {

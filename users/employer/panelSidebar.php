@@ -27,16 +27,22 @@ if(isset($_SESSION['employer_id'])){
   <div class="sidebar" id="mySidebar">
         <div class="side-header">
             <!-- Input for profile picture upload -->
+            <?php
+                $select_employer_info = $conn->prepare("SELECT * FROM `employer_info` WHERE employer_id = ?");
+                $select_employer_info->execute([$employer_id]);
+                if ($select_employer_info->rowCount() > 0) 
+                $fetch_employer_info = $select_employer_info->fetch(PDO::FETCH_ASSOC);
+            ?>
             <input type="file" id="profile-picture" accept="image/*" style="display: none;">
-            <a href="#" onclick="uploadProfilePicture()">
-                 <img src="../../img/ProfileIcon.png" alt="Company Logo" id="profile-picture-display">
+            <!-- <a href="#" onclick="uploadProfilePicture()"> -->
+              <img src="<?php echo $fetch_employer_info["company_logo"]; ?>" alt="Company Logo" id="logoPreview">
             </a>
 
             <?php          
-                    $select_name = $conn->prepare("SELECT * FROM `employers` WHERE id = ?");
-                    $select_name->execute([$employer_id]);
-                    if ($select_name->rowCount() > 0) {
-                    $fetch_name = $select_name->fetch(PDO::FETCH_ASSOC);
+                $select_name = $conn->prepare("SELECT * FROM `employers` WHERE id = ?");
+                $select_name->execute([$employer_id]);
+                if ($select_name->rowCount() > 0) {
+                $fetch_name = $select_name->fetch(PDO::FETCH_ASSOC);
                 ?>
             <h2>WELCOME, <br><b style="color: #2B65E2;"><?= $fetch_name["employer_name"]; ?></b></h2>
 
@@ -79,7 +85,7 @@ if(isset($_SESSION['employer_id'])){
   </div>
 
   <script>
-    function uploadProfilePicture() {
+    /* function uploadProfilePicture() {
             // Trigger the hidden file input element
             const profilePictureInput = document.getElementById("profile-picture");
             profilePictureInput.click();
@@ -94,7 +100,7 @@ if(isset($_SESSION['employer_id'])){
                 }
             });
         }
-
+ */
         // JavaScript to toggle the sidebar and h2 element
         const toggleButton = document.getElementById('toggle-sidebar');
         const sidebar = document.getElementById('mySidebar');

@@ -1091,6 +1091,7 @@ margin-top: 10px;
 
     #emp-form input[type="text"],
     #emp-form input[type="email"],
+    #emp-form input[type="file"],
     #emp-form select, 
     #emp-form textarea  {
         padding: 8px 25px;
@@ -1125,7 +1126,7 @@ margin-top: 10px;
         font-weight: bold;
     }
 
-    #emp-form {
+    #emp-form, #req-list {
         display: block;
     }
 

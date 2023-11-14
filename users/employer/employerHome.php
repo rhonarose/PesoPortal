@@ -1,6 +1,13 @@
 <?php
+include '../../config/dbconnect.php';
 session_start(); // Start the session
+
+if(isset($_SESSION['employer_id'])){
+    $employer_id = $_SESSION['employer_id'];
+}
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +22,6 @@ session_start(); // Start the session
 
     <style>
         
-
-
-
 
     </style>
 </head>
@@ -48,30 +52,59 @@ session_start(); // Start the session
             <div class="form-container" id="profile">
                 <!-- Language Form -->
                 <h2>MY PROFILE</h2>
+                <?php
+                    $select_employer = $conn->prepare("SELECT * FROM `employers` WHERE id = ?");
+                    $select_employer_info = $conn->prepare("SELECT * FROM `employer_info` WHERE employer_id = ?");
+                    // Add similar prepared statements for other tables
+
+                    $select_employer->execute([$employer_id]);
+                    $select_employer_info->execute([$employer_id]);
+                    // Execute other prepared statements for the remaining tables
+
+                    if (
+                        $select_employer->rowCount() > 0 && 
+                        $select_employer_info->rowCount() > 0
+                        // Check other prepared statements for data availability
+                    ) {
+                        $fetch_employer = $select_employer->fetch(PDO::FETCH_ASSOC);
+                        $fetch_employer_info = $select_employer_info->fetch(PDO::FETCH_ASSOC);
+                        // You can similarly fetch data from other tables
+                ?>
+
+
                 <div class="profile-info">
                     <div class="profile-info-item">
-                        <h2>CORPORATION</h2>
+                        <h2><?= $fetch_employer_info["company_name"]; ?></h2>
                     </div>
                     <div class="profile-info-item">
-                        <i class="fas fa-phone"></i> 0912-345-6789
+                        <i class="fas fa-phone"></i><?= $fetch_employer_info["contact_no"]; ?>
                     </div>
                     <div class="profile-info-item">
-                        <i class="fas fa-envelope"></i> corp@gmail.com
+                        <i class="fas fa-envelope"></i> <?= $fetch_employer["email"]; ?>
                     </div>
                     <div class="profile-info-item">
-                        <i class="fas fa-map-marker-alt"></i> San Jose Del Monte Bulacan
+                        <i class="fas fa-map-marker-alt"></i> <?= $fetch_employer_info["city"]; ?>, <?=$fetch_employer_info["province"]; ?>
                     </div>
                     <div class="profile-info-item">
-                        <i class="fas fa-globe"></i> <a href="path_to_resume.pdf" target="_blank">corp.url.com</a>
+                        <i class="fas fa-user"></i> <?= $fetch_employer["employer_name"]; ?>
                     </div>
                     <div class="profile-info-item">
-                        <i class="fas fa-file-alt"></i>Corp is a leading technology company specializing in software development and IT consulting services. Established in 2005, we have a proven track record of delivering innovative solutions to businesses of all sizes, from startups to Fortune 500 companies.
+                        <i class="fas fa-file-pdf"></i> <?= $fetch_employer_info["description"]; ?>
                     </div>
                 </div>
 
-                <div class="butcon">
+                <?php
+                    }else{
+                ?>
+                    <p>please login or register first!</p>
+                <?php
+                    }
+                ?>    
+
+
+                <!-- <div class="butcon">
                     <input type="button" value="EDIT PROFILE" onclick="openEditProfileModal()">
-                </div>
+                </div> -->
             </div>
 
             <!-- <div id="editProfileModal" class="modal">
@@ -131,26 +164,26 @@ session_start(); // Start the session
                             <div>
                                 <label for="jobType">Job Type:</label>
                                 <select id="jobType" name="jobType" required>
-                                    <option value="fulltime">Full-Time</option>
-                                    <option value="parttime">Part-Time</option>
-                                    <option value="contract">Contract</option>
-                                    <option value="freelance">Freelance</option>
-                                    <option value="temporary">Temporary</option>
-                                    <option value="internship">Internship</option>
-                                    <option value="remote">Remote/Telecommute</option>
-                                    <option value="volunteer">Volunteer</option>
-                                    <option value="seasonal">Seasonal</option>
-                                    <option value="projectbased">Project-Based</option>
-                                    <option value="commission">Commission</option>
-                                    <option value="apprenticeship">Apprenticeship</option>
-                                    <option value="entrylevel">Entry-Level</option>
-                                    <option value="midlevel">Mid-Level</option>
-                                    <option value="seniorlevel">Senior-Level</option>
-                                    <option value="executive">Executive</option>
-                                    <option value="consultant">Consultant</option>
-                                    <option value="perdiem">Per Diem</option>
-                                    <option value="jobshare">Job Share</option>
-                                    <option value="flextime">Flextime</option>
+                                    <option value="Fulltime">Full-Time</option>
+                                    <option value="Parttime">Part-Time</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="Freelance">Freelance</option>
+                                    <option value="Temporary">Temporary</option>
+                                    <option value="Internship">Internship</option>
+                                    <option value="Remote">Remote/Telecommute</option>
+                                    <option value="Volunteer">Volunteer</option>
+                                    <option value="Seasonal">Seasonal</option>
+                                    <option value="Projectbased">Project-Based</option>
+                                    <option value="Commission">Commission</option>
+                                    <option value="Apprenticeship">Apprenticeship</option>
+                                    <option value="Entrylevel">Entry-Level</option>
+                                    <option value="Midlevel">Mid-Level</option>
+                                    <option value="Seniorlevel">Senior-Level</option>
+                                    <option value="Executive">Executive</option>
+                                    <option value="Consultant">Consultant</option>
+                                    <option value="Perdiem">Per Diem</option>
+                                    <option value="Jobshare">Job Share</option>
+                                    <option value="Flextime">Flextime</option>
                                 </select>
                             </div>
                             <div>
@@ -182,39 +215,53 @@ session_start(); // Start the session
             </div>
 
 
-            <div class="form-container" id="jobPost">
-                <!-- My Job Post Form -->
-                <h2>MY JOB POST</h2><br>
+            <?php
+            // Include the PDO database connection
+            require '../../config/dbconnect.php';
 
-                <!-- Container for job postings -->
-                <div class="job-postings-container">
+            try {
+                // Fetch job postings for the specific employer with approved statuses (1 and 2)
+                $employer_id = $_SESSION['employer_id']; // Assuming you have the employer ID in a session variable
 
-                    <!-- Job Title 1 with a button to show details -->
-                    <div class="job-posting" onclick="showJobDetails('Job Title 1')">
-                        <div class="job-result-item">
-                            <img src="img/PesoLogo.png" alt="Company Logo">
-                            <div class="job-result">
-                                <h3 class="job-result-title">Software Engineer</h3>
-                                <p class="job-result-description">Join our team as a software engineer and work on exciting projects.</p>
-                                <p class="job-result-company">Company: TechCo</p>
-                            </div>
-                        </div>
-                    </div>
+                $stmt = $conn->prepare("SELECT job_posts.id, job_posts.job_title, job_posts.job_location, job_posts.job_description, employer_info.company_name, employer_info.company_logo
+                                        FROM job_posts
+                                        JOIN employer_info ON job_posts.employer_id = employer_info.employer_id
+                                        WHERE job_posts.employer_id = :employer_id");
 
-                    <!-- Job Title 2 with a button to show details -->
-                    <div class="job-posting" onclick="showJobDetails('Job Title 2')">
-                        <div class="job-result-item">
-                            <img src="img/PesoLogo.png" alt="Company Logo">
-                            <div class="job-result">
-                                <h3 class="job-result-title">Chemistry Doctor</h3>
-                                <p class="job-result-description">For the better future outcomes lead us with your intelligence to create and make an easy way to live.</p>
-                                <p class="job-result-company">Company: MarcaLogistics</p>
-                            </div>
-                        </div>
-                    </div>
+                $stmt->bindParam(':employer_id', $employer_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                </div>
-            </div>
+                echo '<div class="form-container" id="jobPost">
+                        <h2>JOB POST</h2><br>
+                        <div class="job-postings-container">';
+
+                if ($result) {
+                    foreach ($result as $job) {
+                        echo '<div class="job-posting" onclick="showJobDetails(\'' . $job["job_title"] . '\')">
+                                <div class="job-result-item">
+                                    <img src="' . $job["company_logo"] . '" alt="Company Logo">
+                                    <div class="job-result">
+                                        <h3 class="job-result-title">' . $job["job_title"] . '</h3>
+                                        <p class="job-result-description">' . $job["job_description"] . '</p>
+                                        <p class="job-result-company">Company: ' . $job["company_name"] . '</p>
+                                    </div>
+                                </div>
+                            </div>';
+                    }
+                } else {
+                    echo '<p>No approved ongoing job posts found for this employer.</p>';
+                }
+
+                echo '</div></div>';
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+
+            // Close the database connection
+            $conn = null;
+            ?>
+
             
             <div id="modalOverlay" class="overlay"></div>
 
@@ -346,33 +393,37 @@ session_start(); // Start the session
             const title = document.getElementById('jobDetailsTitle');
             const content = document.getElementById('jobDetailsContent');
 
-            // Set the title and content for the modal based on the job title
+            // Set the title for the modal based on the job title
             title.textContent = jobTitle;
 
-            // Here, you can fetch job details based on the job title and set the content dynamically
-            // For example:
-            if (jobTitle === 'Job Title 1') {
+            // Make an asynchronous request to fetch job details
+            fetch('../../users/applicant/getJobDetails.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ jobTitle: jobTitle }),
+            })
+            .then(response => response.json())
+            .then(jobDetails => {
+                // Set the content for the modal dynamically based on the fetched details
                 content.innerHTML = `
-                    <p>Description: This is the job description for Job Title 1.</p>
-                    <p>Location: Location 1</p>
-                    <p>Job Type: Full Time</p>
-                    <p>Salary: $50,000 - $60,000</p>
-                    <p>Vacancies: 5 slots</p>
+                    <p>Location: ${jobDetails.job_location}</p>
+                    <p>Type: ${jobDetails.job_type}</p>
+                    <p>Salary: ${jobDetails.job_salary}</p>
+                    <p>Job Description: ${jobDetails.job_description}</p>
+                    <p>Qualifications: ${jobDetails.qualifications}</p>
+                    <p>Tasks: ${jobDetails.tasks}</p>
+                    <p>Vacancies: ${jobDetails.number_of_vacancies}</p>
                 `;
-            } 
-            if (jobTitle === 'Job Title 2') {
-                content.innerHTML = `
-                    <p>Description: This job is to create an environment wherein people can live safely.</p>
-                    <p>Location: USA California 1</p>
-                    <p>Job Type: Full Time</p>
-                    <p>Salary: $70,000 - $80,000</p>
-                    <p>Vacancies: 23 slots</p>
-                `;
-            }
 
-            // Show the modal and overlay
-            modal.style.display = 'block';
-            overlay.style.display = 'block';
+                // Show the modal and overlay
+                modal.style.display = 'block';
+                overlay.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching job details:', error);
+            });
         }
 
         // Close the modal and overlay
@@ -382,6 +433,7 @@ session_start(); // Start the session
             modal.style.display = 'none';
             overlay.style.display = 'none';
         }
+
 
               
          
