@@ -1,27 +1,36 @@
 <?php
-include('../../config/dbconnect.php'); // Include the database connection details
+include('../../config/dbconnect.php');
 session_start();
 
-// Load the JSON data from your file
 $jsonData = file_get_contents('data.json');
-$options = json_decode($jsonData, true); // Convert JSON to associative array
-
+$options = json_decode($jsonData, true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate and sanitize input data
     $empcontact = filter_input(INPUT_POST, 'empcontact', FILTER_SANITIZE_STRING);
-    $website = filter_input(INPUT_POST, 'website', FILTER_SANITIZE_URL);
-    $regionCode = filter_input(INPUT_POST, 'region', FILTER_SANITIZE_STRING); // Get the region code
-    $regionName = $options[$regionCode]['region_name']; // Get the corresponding region name from the options
-    $province = filter_input(INPUT_POST, 'selectedProvince', FILTER_SANITIZE_STRING); // Retrieve from hidden field
-    $city = filter_input(INPUT_POST, 'selectedCity', FILTER_SANITIZE_STRING); // Retrieve from hidden field
-    $barangay = filter_input(INPUT_POST, 'selectedBarangay', FILTER_SANITIZE_STRING); // Retrieve from hidden field
+    $comname = filter_input(INPUT_POST, 'comname', FILTER_SANITIZE_URL);
+    $regionCode = filter_input(INPUT_POST, 'region', FILTER_SANITIZE_STRING);
+    $regionName = $options[$regionCode]['region_name'];
+    $province = filter_input(INPUT_POST, 'selectedProvince', FILTER_SANITIZE_STRING);
+    $city = filter_input(INPUT_POST, 'selectedCity', FILTER_SANITIZE_STRING);
+    $barangay = filter_input(INPUT_POST, 'selectedBarangay', FILTER_SANITIZE_STRING);
     $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
 
-    // Assuming you have authenticated the user and stored relevant session data
     $employer_id = $_SESSION['employer_id'];
 
-    // Check if the data already exists in the database for the employer_id
+    $company_logo = ''; // Initialize variable to store the path of the uploaded logo
+
+    if (!empty($_FILES['logo']['name'])) {
+        $targetDirectory = 'img/uploads/';
+        $company_logo = $targetDirectory . basename($_FILES['logo']['name']);
+
+        if (move_uploaded_file($_FILES['logo']['tmp_name'], $company_logo)) {
+            // File uploaded successfully
+        } else {
+            echo "Error uploading file.";
+            // You may want to handle the error more gracefully in a production environment
+        }
+    }
+
     $existingDataQuery = "SELECT * FROM employer_info WHERE employer_id = :employer_id";
     $stmt = $conn->prepare($existingDataQuery);
     $stmt->bindParam(':employer_id', $employer_id);
@@ -29,20 +38,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $existingData = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$existingData) {
-        // Data does not exist, insert it
-        $sql = "INSERT INTO employer_info (employer_id, contact_no, employer_website, region, province, city, barangay, description)
-                VALUES (:employer_id, :contact_no, :employer_website, :region, :province, :city, :barangay, :description)";
+        $sql = "INSERT INTO employer_info (employer_id, contact_no, company_name, region, province, city, barangay, description, company_logo)
+                VALUES (:employer_id, :contact_no, :company_name, :region, :province, :city, :barangay, :description, :company_logo)";
 
         try {
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':employer_id', $employer_id);
             $stmt->bindParam(':contact_no', $empcontact);
-            $stmt->bindParam(':employer_website', $website);
+            $stmt->bindParam(':company_name', $comname);
             $stmt->bindParam(':region', $regionName);
             $stmt->bindParam(':province', $province);
             $stmt->bindParam(':city', $city);
             $stmt->bindParam(':barangay', $barangay);
             $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':company_logo', $company_logo);
             $stmt->execute();
 
         } catch (PDOException $e) {
@@ -53,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,38 +80,115 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <div class="background-container"></div>
             <?php require_once 'panelsidebar.php'; ?>
-            
+
             <div class="form-container" id="emp-form">
+                <!-- Your content goes here -->
+                <h1>Welcome to the Employer Requirements Page</h1>
+
+                <h2>Employer Information</h2>
+                <form action="" method="POST">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="empname">Employer Name:</label><br>
+                                <input type="text" id="empnameInput" name="empname" placeholder="Employer Name" value="<?php echo $_SESSION['employer_name']; ?>" readonly> 
+                            </td>
+                            <td>
+                                <label for="region">Region:</label><br>
+                                <select id="region" name="region" required>
+                                    <option value="" disabled selected hidden>REGION</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="empemail">Employer Email:</label><br>
+                                <input type="email" id="empemailInput" name="empemail" placeholder="Email" value="<?php echo $_SESSION['employer_email']; ?>" readonly> 
+                            </td>
+                            <td>
+                                <label for="province">Province:</label><br>
+                                <select id="province" name="province" required>
+                                    <option value="" disabled selected hidden>PROVINCE</option>
+                                </select> <input type="hidden" id="selectedProvince" name="selectedProvince">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="empcontact">Contact Number:</label><br>
+                                <input type="text" id="empcontactInput" name="empcontact" placeholder="Contact Number" required> 
+                            </td>
+                            <td>
+                                <label for="city">City:</label><br>
+                                <select id="city" name="city" required>
+                                    <option value="" disabled selected hidden>CITY</option>
+                                </select><input type="hidden" id="selectedCity" name="selectedCity">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="website">Company Name:</label><br>
+                                <input type="text" id="comNameInput" name="comname" placeholder="URL"> 
+                            </td>
+                            <td>
+                                <label for="barangay">Barangay:</label><br>
+                                <select id="barangay" name="barangay" required>
+                                    <option value="" disabled selected hidden>BARANGAY</option>
+                                </select><input type="hidden" id="selectedBarangay" name="selectedBarangay">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="comLogo">Company Logo:</label><br>
+                                <input type="file" id="logoInput" name="logo" accept="image/*"> <!-- This allows only image files to be selected -->
+                            </td>
+                            <td>
+                                <label for="description">Description:</label><br>
+                                <textarea id="descriptionInput" name="description" rows="4" cols="100"></textarea>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="butcon">
+                                    <input type="submit" id="submitButton" value="SUBMIT">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+                <div  id="emp-form">
                 <!-- Your content goes here -->
                 <h2>Welcome to the Employer Requirements Page</h2>
 
                 <h4 class="direction">*Please note that the following requirements must be submitted in person at the PESO office.*</h4>
 
-                <div class="reqDiv">
-                    <div class="requirements-box">
-                        <div class="requirements">
-                            <h3>Requirements from the Employers / Agencies</h3>
-                            <ul>
-                                <li>Letter of intent addressed to Mayor</li>
-                                <li>Thru Mr. Perfecto Jaime L. Tagalog (OIC)</li>
-                                <li>Company Profile</li>
-                                <li>Business Permit</li>
-                                <li>Certficate of Registration</li>
-                                <li>POEA permit to operate (for overseas employment agencies)</li>
-                                <li>Listing of job vacancies or opening with job description and vacancy counts</li>
-                                <li>Philjobnet registration no pending</li>
-                                <li>No pending case certificate</li>
-                                <!-- Add your requirements here -->
-                            </ul>
-                            <h4>Contact Person : Melissa L. Villena</h4>
-                            <h4>Phone Number : 0926 674 2728</h4>
-                            <h4>Email : peso2016csjdm@gmail.com</h4>
-                            <h4>FB Account : pesocsjdm@yahoo.com</h4>
+                    <div class="reqDiv">
+                        <div class="requirements-box">
+                            <div class="requirements">
+                                <h3>Requirements from the Employers / Agencies</h3>
+                                <ul>
+                                    <li>Letter of intent addressed to Mayor</li>
+                                    <li>Thru Mr. Perfecto Jaime L. Tagalog (OIC)</li>
+                                    <li>Company Profile</li>
+                                    <li>Business Permit</li>
+                                    <li>Certficate of Registration</li>
+                                    <li>POEA permit to operate (for overseas employment agencies)</li>
+                                    <li>Listing of job vacancies or opening with job description and vacancy counts</li>
+                                    <li>Philjobnet registration no pending</li>
+                                    <li>No pending case certificate</li>
+                                    <!-- Add your requirements here -->
+                                </ul>
+                                <h4>Contact Person : Melissa L. Villena</h4>
+                                <h4>Phone Number : 0926 674 2728</h4>
+                                <h4>Email : peso2016csjdm@gmail.com</h4>
+                                <h4>FB Account : pesocsjdm@yahoo.com</h4>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>    
-        </div> 
+                </div>    
+            </div>     
+        </div>
     </div>
 
 
@@ -196,7 +283,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     });
 
 
+    function previewImage() {
+        var fileInput = document.getElementById('comLogo');
+        var imagePreview = document.getElementById('imagePreview');
 
+        // Ensure a file is selected
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            };
+
+            // Read the image file as a data URL
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
 </script>
 </body>
 </html>

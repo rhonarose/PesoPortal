@@ -19,7 +19,47 @@ if(isset($_SESSION['applicant_id'])){
     <link rel="shortcut icon" href="../../img/PESOIcon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    
+    <style>
+        /* Add more styles for the modal contents */
+        #jobDetailsContent {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #jobDetailsContent p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* Style for the vacancies paragraph */
+        #jobDetailsContent p.vacancies {
+            font-weight: bold;
+            color: #3498db; /* Blue color */
+        }
+
+       /* Style for the "Request Referral Letter" button */
+        #requestReferralButton {
+            background-color: #4CAF50; /* Green background color */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Padding around the text */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Cursor style on hover */
+            margin: 10px auto; /* Center the button horizontally */
+            display: block; /* Ensure the button is treated as a block element */
+        }
+
+        /* Hover effect for the button */
+        #requestReferralButton:hover {
+            background-color: #45a049; /* Darker green background color on hover */
+        }
+
+</style>
+
 </head>
 <body>
     <?php require_once '../userNavbar.php'; ?>
@@ -992,89 +1032,49 @@ if(isset($_SESSION['applicant_id'])){
                 </div>
             </div>
 
-            <div class="form-container" id="post">
-                <!-- My Profile Section -->
-                <h2>JOB POST</h2><br>
+            <?php
+            // Include the PDO database connection
+            require '../../config/dbconnect.php';
 
-                <?php
-                    $select_personal_info = $conn->prepare("SELECT * FROM `personal_info` WHERE applicant_id = ?");
-                    $select_preference = $conn->prepare("SELECT * FROM `preference` WHERE applicant_id = ?");
-                    $select_language = $conn->prepare("SELECT * FROM `language` WHERE applicant_id = ?");
-                    $select_education = $conn->prepare("SELECT * FROM `educational_background` WHERE applicant_id = ?");
-                    $select_training = $conn->prepare("SELECT * FROM `training` WHERE applicant_id = ?");
-                    $select_eligibility = $conn->prepare("SELECT * FROM `eligibility` WHERE applicant_id = ?");
-                    $select_work = $conn->prepare("SELECT * FROM `work_experience` WHERE applicant_id = ?");
-                    $select_skills = $conn->prepare("SELECT skills FROM `skills` WHERE applicant_id = ?");
-                    // Add similar prepared statements for other tables
+            try {
+                // Fetch approved job postings with status 'Ongoing' and join with the 'employer_info' table
+                $stmt = $conn->prepare("SELECT job_posts.id, job_posts.job_title, job_posts.job_location, job_posts.job_description, employer_info.company_name, employer_info.company_logo
+                                        FROM job_posts
+                                        JOIN employer_info ON job_posts.employer_id = employer_info.employer_id
+                                        WHERE job_posts.is_approved = 1 AND job_posts.status = 'Ongoing'");
 
-                    $select_personal_info->execute([$applicant_id]);
-                    $select_preference->execute([$applicant_id]);
-                    $select_language->execute([$applicant_id]);
-                    $select_education->execute([$applicant_id]);
-                    $select_training->execute([$applicant_id]);
-                    $select_eligibility->execute([$applicant_id]);
-                    $select_work->execute([$applicant_id]);
-                    $select_skills->execute([$applicant_id]);
-                    // Execute other prepared statements for the remaining tables
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    if (
-                        $select_personal_info->rowCount() > 0 && 
-                        $select_preference->rowCount() > 0 &&
-                        $select_language->rowCount() > 0 && 
-                        $select_education->rowCount() > 0 &&
-                        $select_training->rowCount() > 0 && 
-                        $select_eligibility->rowCount() > 0 &&
-                        $select_work->rowCount() > 0 
-                        // Check other prepared statements for data availability
-                    ) {
-                        $fetch_personal_info = $select_personal_info->fetch(PDO::FETCH_ASSOC);
-                        $fetch_preference = $select_preference->fetch(PDO::FETCH_ASSOC);
-                        $fetch_language = $select_language->fetch(PDO::FETCH_ASSOC);
-                        $fetch_education = $select_education->fetch(PDO::FETCH_ASSOC);
-                        $fetch_training = $select_training->fetch(PDO::FETCH_ASSOC);
-                        $fetch_eligibility = $select_eligibility->fetch(PDO::FETCH_ASSOC);
-                        $fetch_work = $select_work->fetch(PDO::FETCH_ASSOC);
+                echo '<div class="form-container" id="post">
+                        <h2>JOB POST</h2><br>
+                        <div class="job-postings-container">';
 
-                        // Fetch and store the skills in an array
-                        $skills = [];
-                        while ($row = $select_skills->fetch(PDO::FETCH_ASSOC)) {
-                            $skills[] = $row['skills'];
-                        }
-                        
-                        // You can similarly fetch data from other tables
+                if ($result) {
+                    foreach ($result as $job) {
+                        echo '<div class="job-posting" onclick="showJobDetails(\'' . $job["job_title"] . '\')">
+                                <div class="job-result-item">
+                                    <img src="' . $job["company_logo"] . '" alt="Company Logo">
+                                    <div class="job-result">
+                                        <h3 class="job-result-title">' . $job["job_title"] . '</h3>
+                                        <p class="job-result-description">' . $job["job_description"] . '</p>
+                                        <p class="job-result-company">Company: ' . $job["company_name"] . '</p>
+                                    </div>
+                                </div>
+                            </div>';
+                    }
+                } else {
+                    echo '<p>No approved ongoing job posts found.</p>';
+                }
 
-                ?>
+                echo '</div></div>';
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
 
-
-                <!-- Container for job postings -->
-                <div class="job-postings-container">
-
-                    <!-- Job Title 1 with a button to show details -->
-                    <div class="job-posting" onclick="showJobDetails('Job Title 1')">
-                        <div class="job-result-item">
-                            <img src="img/PesoLogo.png" alt="Company Logo">
-                            <div class="job-result">
-                                <h3 class="job-result-title">Software Engineer</h3>
-                                <p class="job-result-description">Join our team as a software engineer and work on exciting projects.</p>
-                                <p class="job-result-company">Company: TechCo</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Job Title 2 with a button to show details -->
-                    <div class="job-posting" onclick="showJobDetails('Job Title 2')">
-                        <div class="job-result-item">
-                            <img src="img/PesoLogo.png" alt="Company Logo">
-                            <div class="job-result">
-                                <h3 class="job-result-title">Chemistry Doctor</h3>
-                                <p class="job-result-description">For the better future outcomes lead us with your intelligence to create and make an easy way to live.</p>
-                                <p class="job-result-company">Company: MarcaLogistics</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            // Close the database connection
+            $conn = null;
+            ?>
             
             <div id="modalOverlay" class="overlay"></div>
 
@@ -1086,18 +1086,10 @@ if(isset($_SESSION['applicant_id'])){
                     <div id="jobDetailsContent">
                         <!-- Job details will be displayed here -->
                     </div>
+                    <!-- Add a button with an onclick event for requesting a referral letter -->
+                    <button id="requestReferralButton" onclick="requestReferral()">Request Referral Letter</button>
                 </div>
             </div>
-
-                <?php
-                    }else{
-                ?>
-                    <p>please login or register first!</p>
-                <?php
-                    }
-                ?>    
-
-            
         </div>
     </div>
 
@@ -1472,33 +1464,37 @@ if(isset($_SESSION['applicant_id'])){
             const title = document.getElementById('jobDetailsTitle');
             const content = document.getElementById('jobDetailsContent');
 
-            // Set the title and content for the modal based on the job title
+            // Set the title for the modal based on the job title
             title.textContent = jobTitle;
 
-            // Here, you can fetch job details based on the job title and set the content dynamically
-            // For example:
-            if (jobTitle === 'Job Title 1') {
+            // Make an asynchronous request to fetch job details
+            fetch('getJobDetails.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ jobTitle: jobTitle }),
+            })
+            .then(response => response.json())
+            .then(jobDetails => {
+                // Set the content for the modal dynamically based on the fetched details
                 content.innerHTML = `
-                    <p>Description: This is the job description for Job Title 1.</p>
-                    <p>Location: Location 1</p>
-                    <p>Job Type: Full Time</p>
-                    <p>Salary: $50,000 - $60,000</p>
-                    <p>Vacancies: 5 slots</p>
+                    <p>Location: ${jobDetails.job_location}</p>
+                    <p>Type: ${jobDetails.job_type}</p>
+                    <p>Salary: ${jobDetails.job_salary}</p>
+                    <p>Job Description: ${jobDetails.job_description}</p>
+                    <p>Qualifications: ${jobDetails.qualifications}</p>
+                    <p>Tasks: ${jobDetails.tasks}</p>
+                    <p>Vacancies: ${jobDetails.number_of_vacancies}</p>
                 `;
-            } 
-            if (jobTitle === 'Job Title 2') {
-                content.innerHTML = `
-                    <p>Description: This job is to create an environment wherein people can live safely.</p>
-                    <p>Location: USA California 1</p>
-                    <p>Job Type: Full Time</p>
-                    <p>Salary: $70,000 - $80,000</p>
-                    <p>Vacancies: 23 slots</p>
-                `;
-            }
 
-            // Show the modal and overlay
-            modal.style.display = 'block';
-            overlay.style.display = 'block';
+                // Show the modal and overlay
+                modal.style.display = 'block';
+                overlay.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching job details:', error);
+            });
         }
 
         // Close the modal and overlay
@@ -1509,6 +1505,14 @@ if(isset($_SESSION['applicant_id'])){
             overlay.style.display = 'none';
         }
 
+        // Function to handle the "Request Referral Letter" button click event
+        function requestReferral() {
+            // Add your logic for requesting a referral letter here
+            // For example, you might want to display a confirmation message
+            alert('Referral letter requested!');
+            // You can also make an AJAX request to the server to handle the referral request
+            // and update the UI accordingly.
+        }
     </script>
 
 </body>

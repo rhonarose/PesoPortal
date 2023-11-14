@@ -1087,7 +1087,7 @@ margin-top: 10px;
       }
     }
 
-    /*applicantReq.php*/
+    /*employerReq.php*/
 
     #emp-form input[type="text"],
     #emp-form input[type="email"],
@@ -1123,7 +1123,7 @@ margin-top: 10px;
 
     #emp-form label {
         font-weight: bold;
-    }*/
+    }
 
     #emp-form {
         display: block;
@@ -1224,7 +1224,7 @@ margin-top: 10px;
         color: #333;
         margin-bottom: 30px;
         padding: 20px 0;
-        background-color: skyblue;
+        background-color:  #3498db;
         color: #fff;
         border-radius: 8px 8px 0 0;
     }
