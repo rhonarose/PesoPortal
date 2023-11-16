@@ -33,7 +33,13 @@
 
       <div class="sidebar-item">
         <a href="#myprofile" data-form-id="profile" onclick="showForm('profile'); updateSidebarSelection('profile');">
-          <i class="fas fa-user"></i> <span class="icon-text"> My Profile </span>
+          <i class="fas fa-user"></i> <span class="icon-text"> Admin Accounts </span>
+        </a>
+      </div>
+
+      <div class="sidebar-item">
+        <a href="#createmyJobpost" data-form-id="createjob" onclick="showForm('createjob'); updateSidebarSelection('createjob')">
+          <i class="fas fa-plus"></i> <span class="icon-text"> Create Job Post </span>
         </a>
       </div>
       
@@ -56,8 +62,8 @@
       </div>
 
       <div class="sidebar-item">
-        <a href="#reports" data-form-id="report" onclick="showForm('report'); updateSidebarSelection('report')">
-          <i class="fas fa-file-alt"></i> <span class="icon-text"> Report </span>
+        <a href="#feedback" data-form-id="feedbacks" onclick="showForm('feedbacks'); updateSidebarSelection('feedbacks')">
+          <i class="fas fa-file-alt"></i> <span class="icon-text"> Feedbacks </span>
         </a>
       </div>
     </div>

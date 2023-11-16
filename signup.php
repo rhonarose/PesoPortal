@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PESO SJDM Portal | Signup</title>
+    <title>PESO SJDM Portal | Signin</title>
     
     
     <link rel="shortcut icon" href="img/PESOIcon.png">
@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="left-section">             
                     <form action="" method="POST" onsubmit="return validateForm();">
                         <div class="input-box">
-                        <h1>SIGNUP</h1>
+                        <h1>SIGN IN</h1>
                             <div>
                                 <input type="radio" id="applicantRadio" name="userType" value="Applicant" checked onchange="showForm('applicant')">
                                 <label style="margin-right: 25px;" for="applicantRadio">Applicant</label>

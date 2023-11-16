@@ -434,6 +434,28 @@ if(isset($_SESSION['employer_id'])){
             overlay.style.display = 'none';
         }
 
+        document.getElementById('jobPostForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+
+            fetch('jobPost.php', {
+                method: 'POST',
+                body: new FormData(this),
+            })
+            .then(response => response.text())
+            .then(message => {
+                // Display the message
+                alert(message);
+
+                // Reset the form fields
+                document.getElementById('jobPostForm').reset();
+
+                // Optionally, you can redirect the user or perform other actions based on the response
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
 
               
          

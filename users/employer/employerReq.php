@@ -1,8 +1,48 @@
 <?php
+
+// Function to check if the employer is approved
+function isEmployerApproved($employer_id, $conn) {
+    try {
+        $stmt = $conn->prepare("SELECT is_approve FROM employer_info WHERE employer_id = :employer_id");
+        $stmt->bindParam(':employer_id', $employer_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['is_approve'] == 1;
+        } else {
+            // Handle the case when the employer_id is not found in the database
+            return false; // Or any other value that indicates not approved
+        }
+    } catch (PDOException $e) {
+        // Handle the exception, e.g., log the error or return not approved
+        return false; // Or any other value that indicates not approved
+    }
+}
+
+// Example usage in your employerReq.php
 include('../../config/dbconnect.php');
 session_start();
 
+if (isset($_SESSION['employer_id'])) {
+    $employer_id = $_SESSION['employer_id'];
+
+    // Assuming $conn is your PDO database connection
+    if (isEmployerApproved($employer_id, $conn)) {
+        // Redirect to employerHome.php if approved
+        header("Location: employerHome.php");
+        exit();
+    }
+} else {
+    // Handle the case when employer_id is not set in the session
+    // You might want to redirect to a login page or display an error message
+    // header("Location: login.php");
+    // exit();
+}
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html>

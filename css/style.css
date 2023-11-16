@@ -1341,6 +1341,13 @@ margin-top: 10px;
     background-color: #cc0000; /* Darker red color on hover */
 }
 
+.status-button {
+    padding: 5px 10px;
+    color: #fff; /* White text color */
+    border: none;
+    cursor: pointer;
+}
+
 /* Add this CSS class definition */
 .hidden-success-message {
     display: none;

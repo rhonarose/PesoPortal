@@ -59,12 +59,10 @@ if(isset($_SESSION['employer_id'])){
         <a href="#mydashboard" data-form-id="dashboard" onclick="showForm('dashboard'); updateSidebarSelection('dashboard');" class="selected-item">
           <i class="fas fa-chart-line"></i> <span class="icon-text"> Dashboard </span>
         </a>
-        </a>
       </div>
       <div class="sidebar-item">
         <a href="#myprofile" data-form-id="profile" onclick="showForm('profile'); updateSidebarSelection('profile');">
           <i class="fas fa-user"></i> <span class="icon-text"> My Profile </span>
-        </a>
         </a>
       </div>
 
@@ -72,13 +70,11 @@ if(isset($_SESSION['employer_id'])){
         <a href="#createmyJobpost" data-form-id="createjob" onclick="showForm('createjob'); updateSidebarSelection('createjob')">
           <i class="fas fa-plus"></i> <span class="icon-text"> Create Job Post </span>
         </a>
-        </a>
       </div>
 
       <div class="sidebar-item">
         <a href="#myjobPost" data-form-id="jobPost" onclick="showForm('jobPost'); updateSidebarSelection('jobPost')">
           <i class="fas fa-file-alt"></i> <span class="icon-text"> My Job Posts </span>
-        </a>
         </a>
       </div>
     </div>

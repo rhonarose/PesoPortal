@@ -1505,14 +1505,7 @@ if(isset($_SESSION['applicant_id'])){
             overlay.style.display = 'none';
         }
 
-        // Function to handle the "Request Referral Letter" button click event
-        function requestReferral() {
-            // Add your logic for requesting a referral letter here
-            // For example, you might want to display a confirmation message
-            alert('Referral letter requested!');
-            // You can also make an AJAX request to the server to handle the referral request
-            // and update the UI accordingly.
-        }
+
     </script>
 
 </body>
