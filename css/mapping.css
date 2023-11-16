@@ -2,10 +2,14 @@ body{
     background-color: rgb(255, 255, 255);
 }
    
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .mapdiv{
-    width: 70%;
-    margin: auto;
-    margin-left: 10px;
+    width: 65%;
 }
 
 .mapdiv a {
@@ -21,6 +25,13 @@ body{
 .mapdiv polygon:hover {
     fill: rgb(67, 95, 255);
     }
+
+.data-container {
+    width: 300px;
+    height: 400px;
+    margin-right: 50px;
+    background-color: rgb(2, 0, 114);
+}
 
 
 .cls-1 {

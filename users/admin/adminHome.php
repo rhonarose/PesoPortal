@@ -40,6 +40,9 @@ session_start(); // Start the session
                         <div class="stat-value">50</div>
                         <div class="stat-label">Pending Job Posts</div>
                     </div>
+                    
+                    <a class="btn-mapping" role="button" href="mapping.php" > Mapping </a>
+
                 </div>
                 </form>
             </div>
@@ -325,7 +328,7 @@ session_start(); // Start the session
     <script src="../../js/script.js"></script>
 
     <script>
-        
+
         // JavaScript code to handle form visibility
         function showForm(formId) {
             const forms = document.querySelectorAll('.form-container');
