@@ -1,0 +1,487 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+   
+.mapdiv{
+    width: 70%;
+    margin: auto;
+    margin-left: 10px;
+}
+
+.mapdiv a {
+    cursor: pointer;
+}
+
+.mapdiv Polygon{
+    fill:rgb(180, 220, 255);
+    stroke: midnightblue;
+    stroke-width: 2px;
+    transition: fill 0.3s;
+} 
+.mapdiv polygon:hover {
+    fill: rgb(67, 95, 255);
+    }
+
+
+.cls-1 {
+  fill: none;
+
+}
+
+.cls-1,
+.cls-10,
+.cls-3,
+.cls-5,
+.cls-6,
+.cls-7,
+.cls-8,
+.cls-9 {
+    fill-rule: evenodd;
+}
+
+.cls-2,
+.cls-4 {
+    fill: none;
+}
+
+.cls-2 {
+    stroke: none;
+    stroke-width: 0.74px;
+}
+
+.cls-11,
+.cls-12,
+.cls-13,
+.cls-2,
+.cls-4 {
+    stroke-linecap: square;
+    stroke-linejoin: bevel;
+}
+
+.cls-3 {
+    fill: none;
+}
+
+.cls-11,
+.cls-12,
+.cls-13,
+.cls-4 {
+    stroke: none;
+    stroke-width: 0.28px;
+}
+
+.cls-5 {
+    fill: none;
+}
+
+.cls-13,
+.cls-6 {
+    fill: none;
+}
+
+.cls-12,
+.cls-7 {
+    fill: none;
+}
+
+.cls-8 {
+    fill: none;
+}
+
+.cls-11,
+.cls-9 {
+    fill: none;
+}
+
+.cls-10 {
+    fill:none;
+}
+
+.cls-14 {
+    font-size: 4px;
+}
+
+.cls-14,
+.cls-22,
+.cls-52 {
+    font-family: OfficinaSanITC-ExtraBold, OfficinaSanITCMedium;
+    font-weight: 700;
+}
+
+.cls-15 {
+    letter-spacing: 0em;
+}
+
+.cls-16 {
+    letter-spacing: -0.02em;
+}
+
+.cls-17 {
+    letter-spacing: 0.03em;
+}
+
+.cls-18 {
+    letter-spacing: 0.01em;
+}
+
+.cls-19 {
+    letter-spacing: -0.01em;
+}
+
+.cls-20 {
+    letter-spacing: -0.05em;
+}
+
+.cls-21 {
+    letter-spacing: -0.02em;
+}
+
+.cls-22 {
+    font-size: 8px;
+}
+
+.cls-23 {
+    letter-spacing: -0.02em;
+}
+
+.cls-24 {
+    letter-spacing: 0.01em;
+}
+
+.cls-25 {
+    letter-spacing: 0.01em;
+}
+
+.cls-26 {
+    letter-spacing: -0.05em;
+}
+
+.cls-27 {
+    letter-spacing: -0.04em;
+}
+
+.cls-28 {
+    letter-spacing: 0em;
+}
+
+.cls-29 {
+    letter-spacing: -0.05em;
+}
+
+.cls-30 {
+    letter-spacing: -0.01em;
+}
+
+.cls-31 {
+    letter-spacing: -0.01em;
+}
+
+.cls-32 {
+    letter-spacing: 0em;
+}
+
+.cls-33 {
+    letter-spacing: 0.01em;
+}
+
+.cls-34 {
+    letter-spacing: -0.01em;
+}
+
+.cls-35 {
+    letter-spacing: -0.04em;
+}
+
+.cls-36 {
+    letter-spacing: 0em;
+}
+
+.cls-37 {
+    letter-spacing: 0em;
+}
+
+.cls-38 {
+    letter-spacing: -0.01em;
+}
+
+.cls-39 {
+    letter-spacing: -0.01em;
+}
+
+.cls-40 {
+    letter-spacing: -0.01em;
+}
+
+.cls-41 {
+    letter-spacing: -0.01em;
+}
+
+.cls-42 {
+    letter-spacing: 0em;
+}
+
+.cls-43 {
+    letter-spacing: 0.01em;
+}
+
+.cls-44 {
+    letter-spacing: -0.02em;
+}
+
+.cls-45 {
+    letter-spacing: -0.04em;
+}
+
+.cls-46 {
+    letter-spacing: 0.01em;
+}
+
+.cls-47 {
+    letter-spacing: -0.01em;
+}
+
+.cls-48 {
+    letter-spacing: -0.01em;
+}
+
+.cls-49 {
+    letter-spacing: 0.02em;
+}
+
+.cls-50 {
+    letter-spacing: -0.03em;
+}
+
+.cls-51 {
+    letter-spacing: 0.02em;
+}
+
+.cls-52 {
+    font-size: 6px;
+}
+
+.cls-53 {
+    letter-spacing: 0em;
+}
+
+.cls-54 {
+    letter-spacing: -0.01em;
+}
+
+.cls-55 {
+    letter-spacing: -0.03em;
+}
+
+.cls-56 {
+    letter-spacing: -0.05em;
+}
+
+.cls-57 {
+    letter-spacing: -0.02em;
+}
+
+.cls-58 {
+    letter-spacing: 0.03em;
+}
+
+.cls-59 {
+    letter-spacing: -0.01em;
+}
+
+.cls-60 {
+    letter-spacing: -0.01em;
+}
+
+.cls-61 {
+    letter-spacing: -0.02em;
+}
+
+.cls-62 {
+    letter-spacing: -0.04em;
+}
+
+/*
+.cls-30{
+    fill: #7CB9E8;
+    
+}         
+.cls-14{
+    fill:#F0F8FF;
+}   
+.cls-11{
+    fill: #6CB4EE;
+}   
+.cls-18{
+    fill: #89CFF0;
+}  
+.cls-21{
+    fill: #A3C1AD;
+} 
+.cls-25{
+    fill: #B2FFFF;
+}
+.cls-23{
+    fill: #0CAFFF;
+}
+.cls-1{
+    fill:#B9D9EB;
+}
+.cls-21{
+    fill: #1E90FF;
+}
+.cls-49{
+    fill: #007791;
+}
+.cls-13{
+    fill: #7DF9FF;
+}
+.cls-47{
+    fill: #87CEFA;
+}
+.cls-33{
+    fill: #0093AF;
+}
+.cls-37{
+    fill:#A4DDED;
+}
+.cls-42{
+    fill:#AFEEEE;
+}
+.cls-48{
+    fill:#00CCCC;
+}
+.cls-55{
+    fill:#76ABDF;
+}
+.cls-52{
+    fill:#87CEEB;
+}
+.cls-51{
+    fill:#AFDBF5;
+}
+.cls-31{
+    fill:#00CCFF;
+}
+.cls-32{
+    fill:#00FFFF;
+}
+.cls-15{
+    fill:#5072A7;
+}
+.cls-43{
+    fill:#00BFFF;
+}
+.cls-44{
+    fill:#6495ED;
+}
+.cls-45{
+    fill:#00FFFF;
+}
+.cls-46{
+    fill:#00CED1;
+}
+.cls-6{
+    fill:#15f4ee;
+}
+.cls-4{
+    fill:#6082B6;
+}
+.cls-3{
+    fill:#99FFFF;
+}
+.cls-5{
+    fill:#ADD8E6;
+}
+.cls-10{
+    fill:#B0C4DE;
+}
+.cls-9{
+    fill:#73C2FB;
+}
+.cls-7{
+    fill:#48D1CC;
+}
+.cls-8{
+    fill:#5D8AA8;
+}
+.cls-54{
+    fill:#4682B4;
+}
+.cls-16{
+    fill:#81D8D0;
+}
+.cls-26{
+    fill:#72A0C1;
+}
+.cls-27{
+    fill:#7FFFD4;
+}
+.cls-28{
+    fill:#6699CC;
+}
+.cls-29{
+    fill:#5F9EA0;
+}
+.cls-24{
+    fill:#4B9CD3;
+}
+.cls-22{
+    fill:#00BFFF;
+}
+.cls-2{
+    fill:#008E97;
+}
+.cls-19{
+    fill:#E1EBEE;
+}
+.cls-17{
+    fill:#E0FFFF;
+}
+.cls-34{
+    fill:#8DA399;
+}
+.cls-35{
+    fill:#1ca9c9;
+}
+.cls-36{
+    fill:#CCCCFF;
+}
+.cls-56{
+    fill:#B0E0E6;
+}
+.cls-57{
+    fill:#008080;
+}
+.cls-58{
+    fill:#40E0D0;
+}
+.cls-59{
+    fill:#007FFF;
+}
+.cls-20{
+    fill:#0000FF;
+}
+.cls-38{
+    fill:#5072A7;
+}
+.cls-39{
+    fill:#3457D5;
+}
+.cls-40{
+    fill:#6F00FF;
+}
+.cls-41{
+    fill:#1877F2;
+}
+.cls-53{
+    fill:#0071c5;
+}
+.cls-50{
+    fill:#5A4FCF;
+}
+.cls-12{
+    fill:#324AB2;
+}
+
+
+
